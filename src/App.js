@@ -11,6 +11,7 @@ import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
+import CreateListing from "./pages/CreateListing";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -76,6 +77,13 @@ export default function App() {
           exact
           path={PATHS.PROTECTEDPAGE}
           component={ProtectedPage}
+          user={user}
+        />
+        <NormalRoute
+          // Needs to become ProtectedRoute!
+          exact
+          path={PATHS.CREATE_LISTING}
+          component={CreateListing}
           user={user}
         />
       </Switch>
