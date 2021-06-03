@@ -7,9 +7,10 @@ import * as PATHS from "../utils/paths";
 export default function Signup({ authenticate, history }) {
   const [form, setForm] = useState({
     username: "",
+    email: "",
     password: "",
   });
-  const { username, password } = form;
+  const { username, email, password } = form;
   const [error, setError] = useState(null);
 
   function handleInputChange(event) {
@@ -21,14 +22,16 @@ export default function Signup({ authenticate, history }) {
     event.preventDefault();
     const credentials = {
       username,
+      email,
       password,
     };
     signup(credentials).then((res) => {
+      console.log(res);
       if (!res.status) {
         // unsuccessful signup
         console.error("Signup was unsuccessful: ", res);
         return setError({
-          message: "Signup was unsuccessful! Please check the console.",
+          message: res.errorMessage,
         });
       }
       // successful signup
@@ -40,15 +43,26 @@ export default function Signup({ authenticate, history }) {
 
   return (
     <div>
-      <h1>Sign Up</h1>
+      <h1>Sign up</h1>
       <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-username">Username</label>
         <input
           id="input-username"
           type="text"
           name="username"
-          placeholder="Text"
+          placeholder="Your username"
           value={username}
+          onChange={handleInputChange}
+          required
+        />
+
+        <label htmlFor="input-email">Email</label>
+        <input
+          id="input-email"
+          type="email"
+          name="email"
+          placeholder="Your email"
+          value={email}
           onChange={handleInputChange}
           required
         />
@@ -58,7 +72,7 @@ export default function Signup({ authenticate, history }) {
           id="input-password"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="Your password (min. 8 characters)"
           value={password}
           onChange={handleInputChange}
           required
@@ -67,13 +81,13 @@ export default function Signup({ authenticate, history }) {
 
         {error && (
           <div className="error-block">
-            <p>There was an error submiting the form:</p>
+            <p>Ooooops!</p>
             <p>{error.message}</p>
           </div>
         )}
 
         <button className="button__submit" type="submit">
-          Submit
+          Create account
         </button>
       </form>
     </div>
