@@ -14,32 +14,36 @@ export default function CreateListing(props) {
     type: "",
     numberOfSleepingSpots: "",
     generalDescription: "",
-    kitchenEquipment: "",
-    bathroomEquipment: "",
-    workSetup: "",
-    accessability: "",
-    forSmokers: "",
-    kidsWelcome: "",
-    petsWelcome: "",
-    spaceOutside: "",
+    kitchenEquipment: [],
+    bathroomEquipment: [],
+    workSetup: [],
+    accessability: [],
+    smokersWelcome: true,
+    kidsWelcome: true,
+    petsWelcome: true,
+    spaceOutside: true,
     extraRemarks: "",
     ambienceDescription: "",
     imagesGallery: "",
-    availability: "",
+    availability: true,
   });
 
   const [error, setError] = React.useState(null);
 
   const onSubmit = handleSubmit((formValues) => {
-    LISTING_SERVICE.CREATE_LISTING(formValues).then((response) => {
-      if (!response.status) {
-        setError(response);
-        return;
-      }
-      props.authenticate(response.data.user);
-      localStorage.setItem(CONSTS.ACCESS_TOKEN, response.data.accessToken);
-      props.history.push(PATHS.SINGLE_LISTING);
-    });
+    const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+    const userId = props.user._id;
+
+    return console.log("This is kitchen equipment: ", form.kitchenEquipment);
+
+    LISTING_SERVICE.CREATE_LISTING({ formValues, userId }, accessToken)
+      .then((response) => {
+        console.log("This is the response: ", response);
+        props.history.push(PATHS.HOMEPAGE);
+      })
+      .catch((err) => {
+        console.error("This is the error: ", err.response);
+      });
   });
 
   const style = {
@@ -114,7 +118,28 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Kitchen equipment (to be fixed: checkbox)</label>
+          <p>Kitchen equipment</p>
+
+          <label>
+            <input
+              type="checkbox"
+              id="kitchenEquipmentOven"
+              name="kitchenEquipment"
+              className="checkbox"
+              onChange={handleChange}
+              value="oven"
+            />
+            Oven
+            <input
+              type="checkbox"
+              id="kitchenEquipmentBlender"
+              name="kitchenEquipment"
+              className="checkbox"
+              onChange={handleChange}
+              value="blender"
+            />
+            Blender
+          </label>
         </div>
 
         <div>
@@ -130,20 +155,109 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Is smoking allowed? (to be fixed: toggle yes/no)</label>
-        </div>
+          <p>Is smoking allowed?</p>
 
-        <div>
-          <label>Are kids welcome? (to be fixed: toggle yes/no)</label>
-        </div>
-
-        <div>
-          <label>Are pets welcome? (to be fixed: toggle yes/no)</label>
-        </div>
-
-        <div>
           <label>
-            Is there any space outside? (to be fixed: toggle yes/no)
+            <input
+              type="radio"
+              id="smokersWelcomeYes"
+              name="smokersWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={form.smokersWelcome}
+              value={true}
+            />
+            Yes
+            <input
+              type="radio"
+              id="smokersWelcomeNo"
+              name="smokersWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={!form.smokersWelcome}
+              value={false}
+            />
+            No
+          </label>
+        </div>
+
+        <div>
+          <p>Are kids welcome?</p>
+
+          <label>
+            <input
+              type="radio"
+              id="kidsWelcomeYes"
+              name="kidsWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={form.kidsWelcome}
+              value={true}
+            />
+            Yes
+            <input
+              type="radio"
+              id="kidsWelcomeNo"
+              name="kidsWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={!form.kidsWelcome}
+              value={false}
+            />
+            No
+          </label>
+        </div>
+        <div>
+          <p>Are pets welcome?</p>
+
+          <label>
+            <input
+              type="radio"
+              id="petsWelcomeYes"
+              name="petsWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={form.petsWelcome}
+              value={true}
+            />
+            Yes
+            <input
+              type="radio"
+              id="petsWelcomeNo"
+              name="petsWelcome"
+              className="radio"
+              onChange={handleChange}
+              checked={!form.petsWelcome}
+              value={false}
+            />
+            No
+          </label>
+        </div>
+
+        <div>
+          <p>Is there outside space available?</p>
+
+          <label>
+            <input
+              type="radio"
+              id="spaceOutsideYes"
+              name="spaceOutside"
+              className="radio"
+              onChange={handleChange}
+              checked={form.spaceOutside}
+              value={true}
+            />
+            Yes
+            <input
+              type="radio"
+              id="spaceOutsideNo"
+              name="spaceOutside"
+              className="radio"
+              onChange={handleChange}
+              checked={!form.spaceOutside}
+              value={false}
+            />
+            No
           </label>
         </div>
 
@@ -178,7 +292,30 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Is is available now? (to be fixed: toggle yes/no)</label>
+          <p>Is the place available now?</p>
+
+          <label>
+            <input
+              type="radio"
+              id="availabilityYes"
+              name="availability"
+              className="radio"
+              onChange={handleChange}
+              checked={form.availability}
+              value={true}
+            />
+            Yes
+            <input
+              type="radio"
+              id="availabilityNo"
+              name="availability"
+              className="radio"
+              onChange={handleChange}
+              checked={!form.availability}
+              value={false}
+            />
+            No
+          </label>
         </div>
 
         <button>Submit the listing!</button>

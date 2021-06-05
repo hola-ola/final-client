@@ -79,8 +79,7 @@ export default function App() {
           component={ProtectedPage}
           user={user}
         />
-        <NormalRoute
-          // Needs to become ProtectedRoute!
+        <ProtectedRoute
           exact
           path={PATHS.CREATE_LISTING}
           component={CreateListing}
