@@ -14,7 +14,7 @@ const Navbar = (props) => {
       <div className="nav__authLinks">
         {props.user ? (
           <>
-            <p style={{ color: "white" }}>Hey, {props.user.username}!</p>
+            <div style={{ color: "white" }}>Hey, {props.user.username}!</div>
             <Link to={PATHS.PROTECTEDPAGE} className="authLink">
               Protected Page
             </Link>
