@@ -128,6 +128,7 @@ export default function CreateListing(props) {
               className="checkbox"
               onChange={handleChange}
               value="oven"
+              checked={form.kitchenEquipment.includes("oven")}
             />
             Oven
             <input
@@ -137,6 +138,7 @@ export default function CreateListing(props) {
               className="checkbox"
               onChange={handleChange}
               value="blender"
+              checked={form.kitchenEquipment.includes("blender")}
             />
             Blender
           </label>
