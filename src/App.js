@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/HomePage";

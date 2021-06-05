@@ -3,13 +3,14 @@ import { login } from "../services/auth";
 import "./Signup";
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
+import { Redirect } from "react-router";
 
 export default function LogIn({ authenticate, history }) {
   const [form, setForm] = useState({
-    username: "",
+    usernameOrEmail: "",
     password: "",
   });
-  const { username, password } = form;
+  const { usernameOrEmail, password } = form;
   const [error, setError] = useState(null);
 
   function handleInputChange(event) {
@@ -22,12 +23,14 @@ export default function LogIn({ authenticate, history }) {
     event.preventDefault();
 
     const credentials = {
-      username,
+      usernameOrEmail,
       password,
     };
     login(credentials).then((res) => {
       if (!res.status) {
-        return setError({ message: "Invalid credentials" });
+        return setError({
+          message: "Wrong credentials. Please try once again.",
+        });
       }
       localStorage.setItem(CONSTS.ACCESS_TOKEN, res.data.accessToken);
       authenticate(res.data.user);
@@ -37,15 +40,15 @@ export default function LogIn({ authenticate, history }) {
 
   return (
     <div>
-      <h1>Log In</h1>
+      <h1>Log in</h1>
       <form onSubmit={handleFormSubmission} className="signup__form">
-        <label htmlFor="input-username">Username</label>
+        <label htmlFor="input-usernameOrEmail">Username or email</label>
         <input
-          id="input-username"
+          id="input-usernameOrEmail"
           type="text"
-          name="username"
-          placeholder="username"
-          value={username}
+          name="usernameOrEmail"
+          placeholder="Username or email"
+          value={usernameOrEmail}
           onChange={handleInputChange}
           required
         />
@@ -64,13 +67,12 @@ export default function LogIn({ authenticate, history }) {
 
         {error && (
           <div className="error-block">
-            <p>There was an error submiting the form:</p>
             <p>{error.message}</p>
           </div>
         )}
 
         <button className="button__submit" type="submit">
-          Submit
+          Log in
         </button>
       </form>
     </div>
