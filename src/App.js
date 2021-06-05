@@ -7,6 +7,7 @@ import LogIn from "./pages/LogIn";
 import ProtectedPage from "./pages/ProtectedPage";
 import Signup from "./pages/Signup";
 import NormalRoute from "./routing-components/NormalRoute";
+import LoggedOutRoute from "./routing-components/LoggedOutRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
@@ -60,14 +61,16 @@ export default function App() {
       <Navbar handleLogout={handleLogout} user={user} />
       <Switch>
         <NormalRoute exact path={PATHS.HOMEPAGE} component={HomePage} />
-        <NormalRoute
+        <LoggedOutRoute
           exact
+          user={user}
           path={PATHS.SIGNUPPAGE}
           authenticate={authenticate}
           component={Signup}
         />
-        <NormalRoute
+        <LoggedOutRoute
           exact
+          user={user}
           path={PATHS.LOGINPAGE}
           authenticate={authenticate}
           component={LogIn}
