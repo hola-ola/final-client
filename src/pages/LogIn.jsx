@@ -3,7 +3,6 @@ import { login } from "../services/auth";
 import "./Signup";
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
-import { Redirect } from "react-router";
 
 export default function LogIn({ authenticate, history }) {
   const [form, setForm] = useState({

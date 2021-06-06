@@ -5,6 +5,7 @@ export default function useForm(formObj) {
 
   function handleChange(e) {
     const { target } = e;
+    console.log(target.type);
 
     if (target.type === "radio") {
       const isTrue = target.value === "true";

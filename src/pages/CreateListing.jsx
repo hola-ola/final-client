@@ -2,7 +2,10 @@ import React from "react";
 import * as LISTING_SERVICE from "../services/listing.service";
 import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
+import * as AMENITIES from "../utils/amenities";
 import useForm from "../hooks/useForm";
+
+import "./CreateListing.css";
 
 export default function CreateListing(props) {
   const [form, handleChange, handleSubmit] = useForm({
@@ -10,19 +13,20 @@ export default function CreateListing(props) {
     owner: "",
     country: "",
     city: "",
-    lengthOfStay: "",
+    lengthOfStay: [],
     type: "",
     numberOfSleepingSpots: "",
     generalDescription: "",
     kitchenEquipment: [],
     bathroomEquipment: [],
     workSetup: [],
-    accessability: [],
+    accessibility: [],
     smokersWelcome: true,
     kidsWelcome: true,
     petsWelcome: true,
     spaceOutside: true,
     extraRemarks: "",
+    ambienceLabels: [],
     ambienceDescription: "",
     imagesGallery: "",
     availability: true,
@@ -34,7 +38,7 @@ export default function CreateListing(props) {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
     const userId = props.user._id;
 
-    return console.log("This is kitchen equipment: ", form.kitchenEquipment);
+    return console.log(formValues);
 
     LISTING_SERVICE.CREATE_LISTING({ formValues, userId }, accessToken)
       .then((response) => {
@@ -53,11 +57,11 @@ export default function CreateListing(props) {
   };
 
   return (
-    <div style={style}>
+    <div className="create-listing-wrapper">
       <h1>Add your listing here</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label>Title</label>
+          <p>Title</p>
           <input
             type="text"
             name="title"
@@ -70,7 +74,7 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Country</label>
+          <p>Country</p>
           <input
             type="text"
             name="country"
@@ -80,7 +84,7 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>City</label>
+          <p>City</p>
           <input
             type="text"
             name="city"
@@ -90,15 +94,39 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Length of stay (to be fixed: ENUM case)</label>
+          <p>Possible length of stay</p>
+          <div className="checkbox-container">
+            {AMENITIES.LENGTH_OF_STAY.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="lengthOfStay"
+                handleChange={handleChange}
+                checked={form.lengthOfStay.includes(item)}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
-          <label>Type (to be fixed: ENUM case)</label>
+          <p>Type</p>
+          <div className="radio-container">
+            {AMENITIES.LISTING_TYPE.map((item, index) => (
+              <RadioInput
+                key={index}
+                name="type"
+                handleChange={handleChange}
+                checked={!form.type ? item[0] : item[index]}
+                value={item}
+              >
+                {item}
+              </RadioInput>
+            ))}
+          </div>
         </div>
 
         <div>
-          <label>Number Of Sleeping Spots</label>
+          <p>Number of sleeping spots</p>
           <input
             type="number"
             name="numberOfSleepingSpots"
@@ -108,7 +136,7 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>General description</label>
+          <p>General description</p>
           <input
             type="textarea"
             name="generalDescription"
@@ -119,152 +147,170 @@ export default function CreateListing(props) {
 
         <div>
           <p>Kitchen equipment</p>
-
-          <label>
-            <input
-              type="checkbox"
-              id="kitchenEquipmentOven"
-              name="kitchenEquipment"
-              className="checkbox"
-              onChange={handleChange}
-              value="oven"
-              checked={form.kitchenEquipment.includes("oven")}
-            />
-            Oven
-            <input
-              type="checkbox"
-              id="kitchenEquipmentBlender"
-              name="kitchenEquipment"
-              className="checkbox"
-              onChange={handleChange}
-              value="blender"
-              checked={form.kitchenEquipment.includes("blender")}
-            />
-            Blender
-          </label>
+          <div className="checkbox-container">
+            {AMENITIES.KITCHEN_EQUIPMENT.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="kitchenEquipment"
+                handleChange={handleChange}
+                checked={form.kitchenEquipment.includes(item)}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
-          <label>Bathroom equipment (to be fixed: checkbox)</label>
+          <p>Bathroom equipment</p>
+          <div className="checkbox-container">
+            {AMENITIES.BATHROOM_EQUIPMENT.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="bathroomEquipment"
+                handleChange={handleChange}
+                checked={form.bathroomEquipment.includes(item)}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
-          <label>Work setup (to be fixed: checkbox)</label>
+          <p>Work setup</p>
+          <div className="checkbox-container">
+            {AMENITIES.WORK_SETUP.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="workSetup"
+                handleChange={handleChange}
+                checked={form.workSetup.includes(item)}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
-          <label>Accessability (to be fixed: checkbox)</label>
+          <p>Accessibility</p>
+          <div className="checkbox-container">
+            {AMENITIES.ACCESSIBILITY.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="accessibility"
+                handleChange={handleChange}
+                checked={form.accessibility.includes(item)}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
           <p>Is smoking allowed?</p>
-
-          <label>
-            <input
-              type="radio"
-              id="smokersWelcomeYes"
+          <div className="radio-container">
+            <RadioInput
               name="smokersWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={form.smokersWelcome}
               value={true}
-            />
-            Yes
-            <input
-              type="radio"
-              id="smokersWelcomeNo"
+            >
+              Yes
+            </RadioInput>
+            <RadioInput
               name="smokersWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={!form.smokersWelcome}
               value={false}
-            />
-            No
-          </label>
+            >
+              No
+            </RadioInput>
+          </div>
         </div>
 
         <div>
           <p>Are kids welcome?</p>
-
-          <label>
-            <input
-              type="radio"
-              id="kidsWelcomeYes"
+          <div className="radio-container">
+            <RadioInput
               name="kidsWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={form.kidsWelcome}
               value={true}
-            />
-            Yes
-            <input
-              type="radio"
-              id="kidsWelcomeNo"
+            >
+              Yes
+            </RadioInput>
+            <RadioInput
               name="kidsWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={!form.kidsWelcome}
               value={false}
-            />
-            No
-          </label>
+            >
+              No
+            </RadioInput>
+          </div>
         </div>
+
         <div>
           <p>Are pets welcome?</p>
-
-          <label>
-            <input
-              type="radio"
-              id="petsWelcomeYes"
+          <div className="radio-container">
+            <RadioInput
               name="petsWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={form.petsWelcome}
               value={true}
-            />
-            Yes
-            <input
-              type="radio"
-              id="petsWelcomeNo"
+            >
+              Yes
+            </RadioInput>
+            <RadioInput
               name="petsWelcome"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={!form.petsWelcome}
               value={false}
-            />
-            No
-          </label>
+            >
+              No
+            </RadioInput>
+          </div>
         </div>
 
         <div>
-          <p>Is there outside space available?</p>
-
-          <label>
-            <input
-              type="radio"
-              id="spaceOutsideYes"
+          <p>Do you have space outside (balcony, terrace, garden)?</p>
+          <div className="radio-container">
+            <RadioInput
               name="spaceOutside"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={form.spaceOutside}
               value={true}
-            />
-            Yes
-            <input
-              type="radio"
-              id="spaceOutsideNo"
+            >
+              Yes
+            </RadioInput>
+            <RadioInput
               name="spaceOutside"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={!form.spaceOutside}
               value={false}
-            />
-            No
-          </label>
+            >
+              No
+            </RadioInput>
+          </div>
         </div>
 
         <div>
-          <label>Extra remarks</label>
+          {/* we should make it interactive labels instead of checkmarks! :D */}
+          <p>What describes your place best?</p>
+          <div className="checkbox-container">
+            {AMENITIES.AMBIENCE.map((item, index) => (
+              <CheckboxInput
+                item={item}
+                key={index}
+                name="ambienceLabels"
+                handleChange={handleChange}
+                checked={form.ambienceLabels.includes(item)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p>What else shall we know about your place?</p>
           <input
             type="textarea"
             name="extraRemarks"
@@ -274,17 +320,7 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <label>Ambience description</label>
-          <input
-            type="textarea"
-            name="ambienceDescription"
-            onChange={handleChange}
-            value={form.ambienceDescription}
-          />
-        </div>
-
-        <div>
-          <label>Add images (to be fixed: multiple images possible)</label>
+          <p>Add images (to be fixed: multiple images possible)</p>
           <input
             type="text"
             name="imagesGallery"
@@ -295,33 +331,93 @@ export default function CreateListing(props) {
 
         <div>
           <p>Is the place available now?</p>
-
-          <label>
-            <input
-              type="radio"
-              id="availabilityYes"
+          <div className="radio-container">
+            <RadioInput
               name="availability"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={form.availability}
               value={true}
-            />
-            Yes
-            <input
-              type="radio"
-              id="availabilityNo"
+            >
+              Yes
+            </RadioInput>
+            <RadioInput
               name="availability"
-              className="radio"
-              onChange={handleChange}
+              handleChange={handleChange}
               checked={!form.availability}
               value={false}
-            />
-            No
-          </label>
+            >
+              No
+            </RadioInput>
+          </div>
         </div>
-
         <button>Submit the listing!</button>
       </form>
     </div>
   );
+
+  function CheckboxInput(props) {
+    const { item, name, handleChange, checked } = props;
+    return (
+      <div>
+        <input
+          type="checkbox"
+          className="checkbox"
+          id={item}
+          name={name}
+          value={item}
+          onClick={handleChange}
+          checked={checked}
+        />
+        <label>{item}</label>
+      </div>
+    );
+  }
+
+  function RadioInput(props) {
+    const { children, name, handleChange, checked, value } = props;
+    return (
+      <div>
+        <input
+          type="radio"
+          className="radio"
+          id={children}
+          name={name}
+          onChange={handleChange}
+          checked={checked}
+          value={value}
+        />
+        <label>{children}</label>
+      </div>
+    );
+  }
 }
+
+// WORKED WITH ANDRE
+// {
+/* <div>
+<p>Is smoking allowed?</p>
+
+<label>
+  <input
+    type="radio"
+    id="smokersWelcomeYes"
+    name="smokersWelcome"
+    className="radio"
+    onChange={handleChange}
+    checked={form.smokersWelcome}
+    value={true}
+  />
+  Yes
+  <input
+    type="radio"
+    id="smokersWelcomeNo"
+    name="smokersWelcome"
+    className="radio"
+    onChange={handleChange}
+    checked={!form.smokersWelcome}
+    value={false}
+  />
+  No
+</label>
+</div> */
+// }
