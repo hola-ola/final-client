@@ -8,13 +8,13 @@ import useForm from "../hooks/useForm";
 import "./CreateListing.css";
 
 export default function CreateListing(props) {
-  const [form, handleChange, handleSubmit] = useForm({
+  const [form, handleChange, handleSubmit, inputProps] = useForm({
     title: "",
     owner: "",
     country: "",
     city: "",
     lengthOfStay: [],
-    type: "",
+    type: "Flat",
     numberOfSleepingSpots: "",
     generalDescription: "",
     kitchenEquipment: [],
@@ -27,7 +27,6 @@ export default function CreateListing(props) {
     spaceOutside: true,
     extraRemarks: "",
     ambienceLabels: [],
-    ambienceDescription: "",
     imagesGallery: "",
     availability: true,
   });
@@ -38,7 +37,7 @@ export default function CreateListing(props) {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
     const userId = props.user._id;
 
-    return console.log(formValues);
+    // return console.log(formValues);
 
     LISTING_SERVICE.CREATE_LISTING({ formValues, userId }, accessToken)
       .then((response) => {
@@ -50,24 +49,13 @@ export default function CreateListing(props) {
       });
   });
 
-  const style = {
-    textAlign: "left",
-    marginLeft: "20vw",
-    lineHeight: "30px",
-  };
-
   return (
     <div className="create-listing-wrapper">
       <h1>Add your listing here</h1>
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
-          <input
-            type="text"
-            name="title"
-            onChange={handleChange}
-            value={form.title}
-          />
+          <input {...inputProps("title")} />
           {error?.key === "title" && (
             <p className="errorMessage">{error.message}</p>
           )}
@@ -75,22 +63,12 @@ export default function CreateListing(props) {
 
         <div>
           <p>Country</p>
-          <input
-            type="text"
-            name="country"
-            onChange={handleChange}
-            value={form.country}
-          />
+          <input {...inputProps("country")} />
         </div>
 
         <div>
           <p>City</p>
-          <input
-            type="text"
-            name="city"
-            onChange={handleChange}
-            value={form.city}
-          />
+          <input {...inputProps("city")} />
         </div>
 
         <div>
@@ -98,11 +76,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.LENGTH_OF_STAY.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="lengthOfStay"
-                handleChange={handleChange}
-                checked={form.lengthOfStay.includes(item)}
+                {...inputProps("lengthOfStay", { item })}
               />
             ))}
           </div>
@@ -110,39 +85,28 @@ export default function CreateListing(props) {
 
         <div>
           <p>Type</p>
-          <div className="radio-container">
+          <div className="checkbox-container">
             {AMENITIES.LISTING_TYPE.map((item, index) => (
-              <RadioInput
-                key={index}
-                name="type"
-                handleChange={handleChange}
-                checked={!form.type ? item[0] : item[index]}
-                value={item}
-              >
-                {item}
-              </RadioInput>
+              <CheckboxInput key={index} {...inputProps("type", { item })} />
             ))}
           </div>
         </div>
 
         <div>
           <p>Number of sleeping spots</p>
-          <input
-            type="number"
-            name="numberOfSleepingSpots"
-            onChange={handleChange}
-            value={form.numberOfSleepingSpots}
-          />
+          <div className="checkbox-container">
+            {AMENITIES.SLEEPS.map((item, index) => (
+              <CheckboxInput
+                key={index}
+                {...inputProps("numberOfSleepingSpots", { item })}
+              />
+            ))}
+          </div>
         </div>
 
         <div>
           <p>General description</p>
-          <input
-            type="textarea"
-            name="generalDescription"
-            onChange={handleChange}
-            value={form.generalDescription}
-          />
+          <input {...inputProps("generalDescription", { type: "textarea" })} />
         </div>
 
         <div>
@@ -150,11 +114,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.KITCHEN_EQUIPMENT.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="kitchenEquipment"
-                handleChange={handleChange}
-                checked={form.kitchenEquipment.includes(item)}
+                {...inputProps("kitchenEquipment", { item })}
               />
             ))}
           </div>
@@ -165,11 +126,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.BATHROOM_EQUIPMENT.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="bathroomEquipment"
-                handleChange={handleChange}
-                checked={form.bathroomEquipment.includes(item)}
+                {...inputProps("bathroomEquipment", { item })}
               />
             ))}
           </div>
@@ -180,11 +138,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.WORK_SETUP.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="workSetup"
-                handleChange={handleChange}
-                checked={form.workSetup.includes(item)}
+                {...inputProps("workSetup", { item })}
               />
             ))}
           </div>
@@ -195,11 +150,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.ACCESSIBILITY.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="accessibility"
-                handleChange={handleChange}
-                checked={form.accessibility.includes(item)}
+                {...inputProps("accessibility", { item })}
               />
             ))}
           </div>
@@ -209,18 +161,18 @@ export default function CreateListing(props) {
           <p>Is smoking allowed?</p>
           <div className="radio-container">
             <RadioInput
-              name="smokersWelcome"
-              handleChange={handleChange}
-              checked={form.smokersWelcome}
-              value={true}
+              {...inputProps("smokersWelcome", {
+                value: true,
+                checked: form.smokersWelcome,
+              })}
             >
               Yes
             </RadioInput>
             <RadioInput
-              name="smokersWelcome"
-              handleChange={handleChange}
-              checked={!form.smokersWelcome}
-              value={false}
+              {...inputProps("smokersWelcome", {
+                value: false,
+                checked: !form.smokersWelcome,
+              })}
             >
               No
             </RadioInput>
@@ -231,18 +183,18 @@ export default function CreateListing(props) {
           <p>Are kids welcome?</p>
           <div className="radio-container">
             <RadioInput
-              name="kidsWelcome"
-              handleChange={handleChange}
-              checked={form.kidsWelcome}
-              value={true}
+              {...inputProps("kidsWelcome", {
+                value: true,
+                checked: form.kidsWelcome,
+              })}
             >
               Yes
             </RadioInput>
             <RadioInput
-              name="kidsWelcome"
-              handleChange={handleChange}
-              checked={!form.kidsWelcome}
-              value={false}
+              {...inputProps("kidsWelcome", {
+                value: false,
+                checked: !form.kidsWelcome,
+              })}
             >
               No
             </RadioInput>
@@ -253,18 +205,18 @@ export default function CreateListing(props) {
           <p>Are pets welcome?</p>
           <div className="radio-container">
             <RadioInput
-              name="petsWelcome"
-              handleChange={handleChange}
-              checked={form.petsWelcome}
-              value={true}
+              {...inputProps("petsWelcome", {
+                value: true,
+                checked: form.petsWelcome,
+              })}
             >
               Yes
             </RadioInput>
             <RadioInput
-              name="petsWelcome"
-              handleChange={handleChange}
-              checked={!form.petsWelcome}
-              value={false}
+              {...inputProps("petsWelcome", {
+                value: false,
+                checked: !form.petsWelcome,
+              })}
             >
               No
             </RadioInput>
@@ -275,18 +227,18 @@ export default function CreateListing(props) {
           <p>Do you have space outside (balcony, terrace, garden)?</p>
           <div className="radio-container">
             <RadioInput
-              name="spaceOutside"
-              handleChange={handleChange}
-              checked={form.spaceOutside}
-              value={true}
+              {...inputProps("spaceOutside", {
+                value: true,
+                checked: form.spaceOutside,
+              })}
             >
               Yes
             </RadioInput>
             <RadioInput
-              name="spaceOutside"
-              handleChange={handleChange}
-              checked={!form.spaceOutside}
-              value={false}
+              {...inputProps("spaceOutside", {
+                value: false,
+                checked: !form.spaceOutside,
+              })}
             >
               No
             </RadioInput>
@@ -299,11 +251,8 @@ export default function CreateListing(props) {
           <div className="checkbox-container">
             {AMENITIES.AMBIENCE.map((item, index) => (
               <CheckboxInput
-                item={item}
                 key={index}
-                name="ambienceLabels"
-                handleChange={handleChange}
-                checked={form.ambienceLabels.includes(item)}
+                {...inputProps("ambienceLabels", { item })}
               />
             ))}
           </div>
@@ -311,12 +260,7 @@ export default function CreateListing(props) {
 
         <div>
           <p>What else shall we know about your place?</p>
-          <input
-            type="textarea"
-            name="extraRemarks"
-            onChange={handleChange}
-            value={form.extraRemarks}
-          />
+          <input {...inputProps("extraRemarks", { type: "textarea" })} />
         </div>
 
         <div>
@@ -333,18 +277,18 @@ export default function CreateListing(props) {
           <p>Is the place available now?</p>
           <div className="radio-container">
             <RadioInput
-              name="availability"
-              handleChange={handleChange}
-              checked={form.availability}
-              value={true}
+              {...inputProps("availability", {
+                value: true,
+                checked: form.availability,
+              })}
             >
               Yes
             </RadioInput>
             <RadioInput
-              name="availability"
-              handleChange={handleChange}
-              checked={!form.availability}
-              value={false}
+              {...inputProps("availability", {
+                value: false,
+                checked: !form.availability,
+              })}
             >
               No
             </RadioInput>
@@ -365,7 +309,7 @@ export default function CreateListing(props) {
           id={item}
           name={name}
           value={item}
-          onClick={handleChange}
+          onChange={handleChange}
           checked={checked}
         />
         <label>{item}</label>
@@ -391,33 +335,3 @@ export default function CreateListing(props) {
     );
   }
 }
-
-// WORKED WITH ANDRE
-// {
-/* <div>
-<p>Is smoking allowed?</p>
-
-<label>
-  <input
-    type="radio"
-    id="smokersWelcomeYes"
-    name="smokersWelcome"
-    className="radio"
-    onChange={handleChange}
-    checked={form.smokersWelcome}
-    value={true}
-  />
-  Yes
-  <input
-    type="radio"
-    id="smokersWelcomeNo"
-    name="smokersWelcome"
-    className="radio"
-    onChange={handleChange}
-    checked={!form.smokersWelcome}
-    value={false}
-  />
-  No
-</label>
-</div> */
-// }

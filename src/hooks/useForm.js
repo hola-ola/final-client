@@ -5,7 +5,6 @@ export default function useForm(formObj) {
 
   function handleChange(e) {
     const { target } = e;
-    console.log(target.type);
 
     if (target.type === "radio") {
       const isTrue = target.value === "true";
@@ -30,12 +29,16 @@ export default function useForm(formObj) {
         });
       }
       // Use case for checkbox with one option only
-      if (target.checked === true) {
-        return setForm({ ...form, [target.name]: target.value });
-      }
+      return setForm({
+        ...form,
+        [target.name]: target.checked ? target.value : "",
+      });
     }
 
-    setForm({ ...form, [target.name]: target.value });
+    setForm({
+      ...form,
+      [target.name]: target.type === "number" ? +target.value : target.value,
+    });
   }
 
   // fn -> stands for function. We cant write function, because its a reserved keyword
@@ -46,5 +49,26 @@ export default function useForm(formObj) {
     };
   }
 
-  return [form, handleChange, handleSubmit];
+  function inputProps(name, obj = {}) {
+    const { value = form[name], type = "text", checked, item } = obj; //optional values
+
+    const checkedVal =
+      typeof checked != "undefined"
+        ? checked
+        : Array.isArray(form[name])
+        ? form[name].includes(item)
+        : item === form[name];
+
+    return {
+      name: name,
+      value,
+      onChange: handleChange,
+      handleChange: handleChange, // this is here, because in the functional compoenents you are expecting a `handleChange` prop. If we change it to onChange, we can delete this line
+      type,
+      checked: checkedVal,
+      item,
+    };
+  }
+
+  return [form, handleChange, handleSubmit, inputProps];
 }
