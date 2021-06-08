@@ -4,7 +4,8 @@ export const LENGTH_OF_STAY = [
   "Long stay",
   "Flexible",
 ];
-export const LISTING_TYPE = ["Room", "House", "Flat"];
+export const LISTING_TYPE = ["Flat", "House", "Room"];
+export const SLEEPS = ["1", "2", "3", "4", "5+"];
 export const BATHROOM_EQUIPMENT = [
   "Shower",
   "Bathtube",
@@ -21,6 +22,7 @@ export const KITCHEN_EQUIPMENT = [
   "Kitchen table",
   "Fridge",
   "Freezer",
+  "Blender",
 ];
 export const WORK_SETUP = [
   "High-speed Wifi",
