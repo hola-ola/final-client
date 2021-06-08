@@ -94,6 +94,7 @@ export default function App() {
           path={PATHS.USERPAGE}
           component={UserPage}
           user={user}
+          authenticate={authenticate}
         />
       </Switch>
     </div>

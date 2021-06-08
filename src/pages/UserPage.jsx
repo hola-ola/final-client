@@ -3,11 +3,6 @@ import * as CONSTS from "../utils/consts";
 import * as PATHS from "../utils/paths";
 import * as USER_SERVICE from "../services/user.service.js";
 
-function EditProfile(props) {
-  console.log("So you want to edit your profile? Okay!");
-  const usernameFromProps = props.match.params.username;
-}
-
 export default function UserPage(props) {
   const [user, setUser] = useState({});
   const usernameFromProps = props.match.params.username;
@@ -23,20 +18,21 @@ export default function UserPage(props) {
       });
   }, [props.match.params.username]);
 
-  function DeleteProfile(props) {
-    console.log(
-      "User deleting process started! Call the cops! And these are the props: ",
-      props.match
-    );
-
+  function DeleteProfile() {
     USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
       .then((response) => {
         console.log("The user has been removed");
         props.history.push(PATHS.HOMEPAGE);
+        localStorage.removeItem(CONSTS.ACCESS_TOKEN);
+        props.authenticate(null);
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
       });
+  }
+
+  function EditProfile(props) {
+    console.log("So you want to edit your profile? Okay!");
   }
 
   return (

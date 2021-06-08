@@ -20,13 +20,25 @@ export function GET_USER(username, token) {
 
 export function USER_DELETE(username, token) {
   return userService
-    .delete(`/${username}/delete`, {
+    .get(`/${username}/delete`, {
       headers: {
         authorization: token,
       },
     })
     .then((response) => {
-      console.log("data from server (user delete): ", response.data);
+      return response;
     })
     .catch((err) => console.log(err));
+}
+
+export function USER_UPDATE(username, token) {
+  return userService
+    .get(`/${username}/update`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      console.log("Data from the server: ", response.data);
+    });
 }
