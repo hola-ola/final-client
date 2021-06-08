@@ -13,6 +13,7 @@ import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import CreateListing from "./pages/CreateListing";
+import UserPage from "./pages/UserPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -86,6 +87,12 @@ export default function App() {
           exact
           path={PATHS.CREATE_LISTING}
           component={CreateListing}
+          user={user}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.USERPAGE}
+          component={UserPage}
           user={user}
         />
       </Switch>
