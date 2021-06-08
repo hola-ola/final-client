@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as CONSTS from "../utils/consts";
+import * as PATHS from "../utils/paths";
 import * as USER_SERVICE from "../services/user.service.js";
 
-function EditProfile() {
+function EditProfile(props) {
   console.log("So you want to edit your profile? Okay!");
-}
-
-function DeleteProfile() {
-  console.log("Are you sure you want to remove your profile?");
+  const usernameFromProps = props.match.params.username;
 }
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});
-  const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
   const usernameFromProps = props.match.params.username;
+  const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-  USER_SERVICE.GET_USER(usernameFromProps, accessToken)
-    .then((response) => {
-      console.log("This is the response: ", response);
-      setUser(response.data.user);
-    })
-    .catch((err) => {
-      console.error("This is the error: ", err);
-    });
+  useEffect(() => {
+    USER_SERVICE.GET_USER(usernameFromProps, accessToken)
+      .then((response) => {
+        setUser(response.data.user);
+      })
+      .catch((err) => {
+        console.error("This is the error: ", err);
+      });
+  }, [props.match.params.username]);
+
+  function DeleteProfile(props) {
+    console.log(
+      "User deleting process started! Call the cops! And these are the props: ",
+      props.match
+    );
+
+    USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
+      .then((response) => {
+        console.log("The user has been removed");
+        props.history.push(PATHS.HOMEPAGE);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
+      });
+  }
 
   return (
     <div className="UserPage">
@@ -35,7 +50,7 @@ export default function UserPage(props) {
         <p>Last name: {user.lastName}</p>
         <p>Username: {user.username}</p>
         <button onClick={EditProfile}>Edit your profile</button>
-        <button onClick={DeleteProfile}>Remove your profile</button>
+        <button onClick={DeleteProfile}>Delete your profile</button>
       </div>
 
       <div>

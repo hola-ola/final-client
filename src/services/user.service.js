@@ -13,7 +13,20 @@ export function GET_USER(username, token) {
       },
     })
     .then((response) => {
-      console.log("data from server: ", response.data);
+      return response;
+    })
+    .catch((err) => console.log(err));
+}
+
+export function USER_DELETE(username, token) {
+  return userService
+    .delete(`/${username}/delete`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      console.log("data from server (user delete): ", response.data);
     })
     .catch((err) => console.log(err));
 }
