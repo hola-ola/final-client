@@ -8,8 +8,6 @@ import LISTING_SERVICE from "../../services/listing.service";
 const Navbar = (props) => {
   const { user } = props;
 
-  // LISTING_SERVICE;
-
   return (
     <nav>
       <div>
@@ -24,9 +22,6 @@ const Navbar = (props) => {
             <div className="navbar">
               <Link to={`${PATHS.USER}/${user.username}`} className="authLink">
                 Profile
-              </Link>
-              <Link to={PATHS.SINGLE_LISTING} className="authLink">
-                Listing
               </Link>
               <Link to={PATHS.HOMEPAGE} className="authLink">
                 Inbox

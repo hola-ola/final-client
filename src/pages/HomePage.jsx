@@ -8,7 +8,7 @@ export default function HomePage(props) {
         <div className="search">
           <input type="text" placeholder="I live in..."></input>
           <input type="text" placeholder="I'd like to swap for..."></input>
-          <button type="submit">Let's swop!</button>
+          <button type="submit">Let's swap!</button>
         </div>
       </div>
 
