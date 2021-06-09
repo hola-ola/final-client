@@ -18,15 +18,16 @@ export function CREATE_LISTING(body, token) {
     .catch((err) => console.log(err));
 }
 
-export function VIEW_LISTING(body, token) {
+export function VIEW_LISTING(listingId, token) {
   return listingService
-    .post("/:listingId", body, {
+    .get(`/${listingId}`, {
       headers: {
         authorization: token,
       },
     })
     .then((res) => {
       console.log("data from server: ", res.data);
+      return res;
     })
     .catch((err) => console.log(err));
 }
