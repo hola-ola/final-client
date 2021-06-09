@@ -31,8 +31,9 @@ export default function UserPage(props) {
       });
   }
 
-  function EditProfile(props) {
-    console.log("So you want to edit your profile? Okay!");
+  function EditProfile() {
+    console.log("Starting profie edition");
+    USER_SERVICE.USER_UPDATE(usernameFromProps, accessToken);
   }
 
   return (

@@ -3,33 +3,50 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
+import LISTING_SERVICE from "../../services/listing.service";
 
 const Navbar = (props) => {
+  const { user } = props;
+
+  // LISTING_SERVICE;
+
   return (
     <nav>
-      <Link to={PATHS.HOMEPAGE} className="nav__projectName">
-        {CONSTS.CAPITALIZED_APP} - created with IronLauncher
-      </Link>
+      <div>
+        <Link to={PATHS.HOMEPAGE} className="project-name">
+          {CONSTS.CAPITALIZED_APP}
+        </Link>
+      </div>
 
-      <div className="nav__authLinks">
-        {props.user ? (
+      <div>
+        {user ? (
           <>
-            <div style={{ color: "white" }}>Hey, {props.user.username}!</div>
-            <Link to={PATHS.PROTECTEDPAGE} className="authLink">
-              Protected Page
-            </Link>
-            <button className="nav-logoutbtn" onClick={props.handleLogout}>
-              Logout
-            </button>
+            <div className="navbar">
+              <Link to={`${PATHS.USER}/${user.username}`} className="authLink">
+                Profile
+              </Link>
+              <Link to={PATHS.SINGLE_LISTING} className="authLink">
+                Listing
+              </Link>
+              <Link to={PATHS.HOMEPAGE} className="authLink">
+                Inbox
+              </Link>
+              <p>Hey, {props.user.username}!</p>
+              <button className="nav-logoutbtn" onClick={props.handleLogout}>
+                Logout
+              </button>
+            </div>
           </>
         ) : (
           <>
-            <Link to={PATHS.SIGNUPPAGE} className="authLink">
-              Signup
-            </Link>
-            <Link to={PATHS.LOGINPAGE} className="authLink">
-              Log In
-            </Link>
+            <div>
+              <Link to={PATHS.SIGNUPPAGE} className="authLink">
+                Signup
+              </Link>
+              <Link to={PATHS.LOGINPAGE} className="authLink">
+                Log In
+              </Link>
+            </div>
           </>
         )}
       </div>

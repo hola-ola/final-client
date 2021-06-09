@@ -1,25 +1,28 @@
-import logo from "../logo.svg";
-import "../App.css";
+import React from "react";
+import "./HomePage.css";
 
-function HomePage() {
+export default function HomePage(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="home-container">
+        <div className="search">
+          <input type="text" placeholder="I live in..."></input>
+          <input type="text" placeholder="I'd like to swap for..."></input>
+          <button type="submit">Let's swop!</button>
+        </div>
+      </div>
+
+      <div className="home-container white-back">
+        <h1>Swap flats and live wherever you want</h1>
+      </div>
+
+      <div className="home-container quote-section">
+        <h1>Here will be a cool quote</h1>
+      </div>
+
+      <div className="home-container white-back">
+        <h1>Popular swop spots</h1>
+      </div>
     </div>
   );
 }
-
-export default HomePage;

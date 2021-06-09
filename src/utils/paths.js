@@ -4,7 +4,8 @@ export const PROTECTEDPAGE = "/protected";
 export const SIGNUPPAGE = "/auth/signup";
 export const LOGINPAGE = "/auth/login";
 
-export const USERPAGE = "/user/:username";
+export const USER = "/user";
+export const USERPAGE = `${USER}/:username`;
 export const USER_EDIT = `${USERPAGE}/edit`;
 
 export const LISTINGS = "/listings";

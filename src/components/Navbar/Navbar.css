@@ -1,48 +1,36 @@
 nav {
   display: flex;
   padding: 1em;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
-  background: #282c34;
+  background: #241e4e;
   font-weight: 600;
+  color: #f2f8f4;
 }
 
-.nav__projectName {
-  color: #e4f9ff;
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.project-name {
+  color: #bddbc7;
   text-decoration: none;
+  margin: 10px;
 }
 
-.authLink {
-  color: #61dafb;
+.authLink,
+p {
+  color: #f2f8f4;
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
-}
-
-.authLink + .authLink {
-  padding: 1em;
-}
-
-.authLink:hover {
-  color: #ffffff;
+  margin: 10px;
 }
 
 .nav-logoutbtn {
-  font-family: inherit;
-  font-weight: inherit;
-  padding: 0.5em 1em;
-  margin-left: 1em;
-  background-color: #5595ff;
-  box-shadow: 0 0 5px 0 aliceblue;
+  font-size: 16px;
+  background-color: #bddbc7;
+  color: #241e4e;
+  padding: 10px 20px;
   border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  color: #e3f2ff;
-  transition: all 0.2s ease-in-out;
-  position: sticky;
-  top: 0;
-}
-
-.nav-logoutbtn:hover {
-  transform: scale(1.05);
-  background-color: #d13e3e;
 }
