@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { login } from "../services/auth";
+import { login } from "../../services/auth.js";
 import "./Signup";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
+import * as CONSTS from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
 
 export default function LogIn({ authenticate, history }) {
   const [form, setForm] = useState({

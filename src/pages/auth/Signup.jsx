@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { signup } from "../services/auth";
-import "./auth.css";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
+import { signup } from "../../services/auth.js";
+import "../auth.css";
+import * as CONSTS from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
 
 export default function Signup({ authenticate, history }) {
   const [form, setForm] = useState({

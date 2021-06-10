@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
-import HomePage from "./pages/HomePage";
-import LogIn from "./pages/LogIn";
+import HomePage from "./pages/homepage/HomePage";
+import LogIn from "./pages/auth/LogIn";
 import ProtectedPage from "./pages/ProtectedPage";
-import Signup from "./pages/Signup";
+import Signup from "./pages/auth/Signup";
 import NormalRoute from "./routing-components/NormalRoute";
 import LoggedOutRoute from "./routing-components/LoggedOutRoute";
 import ProtectedRoute from "./routing-components/ProtectedRoute";
 import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
-import CreateListing from "./pages/CreateListing";
+import CreateListing from "./pages/listing/CreateListing";
 import SingleListing from "./pages/listing/SingleListing";
-import UserPage from "./pages/UserPage";
+import UserPage from "./pages/user/UserPage";
 
 export default function App() {
   const [user, setUser] = useState(null);

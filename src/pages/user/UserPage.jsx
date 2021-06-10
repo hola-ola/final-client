@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
-import * as USER_SERVICE from "../services/user.service.js";
+import * as CONSTS from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
+import * as USER_SERVICE from "../../services/user.service.js";
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});

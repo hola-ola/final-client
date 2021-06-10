@@ -1,12 +1,12 @@
 import React from "react";
-import * as LISTING_SERVICE from "../services/listing.service";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
-import * as AMENITIES from "../utils/amenities";
-import useForm from "../hooks/useForm";
+import * as LISTING_SERVICE from "../../services/listing.service";
+import * as CONSTS from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
+import * as AMENITIES from "../../utils/amenities";
+import useForm from "../../hooks/useForm";
 
 import "./CreateListing.css";
-import "../App.css";
+import "../../App.css";
 
 export default function CreateListing(props) {
   const [form, handleChange, handleSubmit, inputProps] = useForm({
