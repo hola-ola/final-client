@@ -44,3 +44,26 @@ export const AMBIENCE = [
 ];
 //not used atm
 // export const OTHER = ["Air conditioning", "Floor heating", "Parking spot"];
+
+export const LISTING_FORM = {
+  title: "",
+  owner: "",
+  country: "",
+  city: "",
+  lengthOfStay: [],
+  type: "Flat",
+  numberOfSleepingSpots: "",
+  generalDescription: "",
+  kitchenEquipment: [],
+  bathroomEquipment: [],
+  workSetup: [],
+  accessibility: [],
+  smokersWelcome: true,
+  kidsWelcome: true,
+  petsWelcome: true,
+  spaceOutside: true,
+  extraRemarks: "",
+  ambienceLabels: [],
+  imagesGallery: "",
+  availability: true,
+};

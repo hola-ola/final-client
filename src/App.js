@@ -13,7 +13,7 @@ import { getLoggedIn, logout } from "./services/auth";
 import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import CreateListing from "./pages/CreateListing";
-import SingleListing from "./pages/SingleListing";
+import SingleListing from "./pages/listing/SingleListing";
 import UserPage from "./pages/UserPage";
 
 export default function App() {

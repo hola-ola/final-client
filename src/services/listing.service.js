@@ -14,8 +14,9 @@ export function CREATE_LISTING(body, token) {
     })
     .then((res) => {
       console.log("data from server: ", res.data);
+      return res.data;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err.response));
 }
 
 export function VIEW_LISTING(listingId, token) {
@@ -26,8 +27,7 @@ export function VIEW_LISTING(listingId, token) {
       },
     })
     .then((res) => {
-      console.log("data from server: ", res.data);
       return res;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err.response));
 }

@@ -6,43 +6,28 @@ import * as AMENITIES from "../utils/amenities";
 import useForm from "../hooks/useForm";
 
 import "./CreateListing.css";
+import "../App.css";
 
 export default function CreateListing(props) {
   const [form, handleChange, handleSubmit, inputProps] = useForm({
-    title: "",
-    owner: "",
-    country: "",
-    city: "",
-    lengthOfStay: [],
-    type: "Flat",
-    numberOfSleepingSpots: "",
-    generalDescription: "",
-    kitchenEquipment: [],
-    bathroomEquipment: [],
-    workSetup: [],
-    accessibility: [],
-    smokersWelcome: true,
-    kidsWelcome: true,
-    petsWelcome: true,
-    spaceOutside: true,
-    extraRemarks: "",
-    ambienceLabels: [],
-    imagesGallery: "",
-    availability: true,
+    ...AMENITIES.LISTING_FORM,
   });
 
   const [error, setError] = React.useState(null);
 
   const onSubmit = handleSubmit((formValues) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-    const userId = props.user._id;
+    // const userId = props.user._id;
 
     // return console.log(formValues);
 
-    LISTING_SERVICE.CREATE_LISTING({ formValues, userId }, accessToken)
+    LISTING_SERVICE.CREATE_LISTING({ formValues }, accessToken)
       .then((response) => {
+        if (!response) {
+          return console.log("NO RESPONSE");
+        }
         console.log("This is the response: ", response);
-        props.history.push(PATHS.HOMEPAGE);
+        props.history.push(`${PATHS.LISTINGS}/${response.listing._id}`);
       })
       .catch((err) => {
         console.error("This is the error: ", err.response);

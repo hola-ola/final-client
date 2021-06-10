@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import * as LISTING_SERVICE from "../services/listing.service";
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
-import * as AMENITIES from "../utils/amenities";
+import * as LISTING_SERVICE from "../../services/listing.service";
+import * as CONSTS from "../../utils/consts";
+import * as PATHS from "../../utils/paths";
+import * as AMENITIES from "../../utils/amenities";
 
 export default function SingleListing(props) {
   const [listing, setListing] = useState({});
@@ -11,7 +11,12 @@ export default function SingleListing(props) {
 
   useEffect(() => {
     LISTING_SERVICE.VIEW_LISTING(listingFromProps, accessToken)
-      .then((res) => setListing(res.data.listing))
+      .then((res) => {
+        if (!res.data.listing) {
+          return props.history.push(PATHS.HOMEPAGE);
+        }
+        setListing(res.data.listing);
+      })
       .catch((err) => console.log("This is the error: ", err));
   }, [listingFromProps]);
 
