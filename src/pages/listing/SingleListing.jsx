@@ -5,7 +5,9 @@ import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
 
 export default function SingleListing(props) {
-  const [listing, setListing] = useState({});
+  const [listing, setListing] = useState({
+    ...AMENITIES.LISTING_FORM,
+  });
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 

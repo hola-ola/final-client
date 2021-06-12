@@ -9,15 +9,21 @@ import "./CreateListing.css";
 import "../../App.css";
 
 export default function CreateListing(props) {
-  const [form, handleChange, handleSubmit, inputProps] = useForm({
+  const [
+    form,
+    handleChange,
+    handleSubmit,
+    inputProps,
+    images,
+    handleImageChange,
+  ] = useForm({
     ...AMENITIES.LISTING_FORM,
   });
 
   const [error, setError] = React.useState(null);
 
-  const onSubmit = handleSubmit((formValues) => {
+  const onSubmit = handleSubmit((formValues, imagesGallery) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-    // const userId = props.user._id;
 
     // return console.log(formValues);
 
@@ -250,12 +256,13 @@ export default function CreateListing(props) {
 
         <div>
           <p>Add images (to be fixed: multiple images possible)</p>
-          <input
+          <input type="file" onChange={handleImageChange} />
+          {/* <input
             type="text"
             name="imagesGallery"
             onChange={handleChange}
             value={form.imagesGallery}
-          />
+          /> */}
         </div>
 
         <div>

@@ -2,9 +2,14 @@ import { useState } from "react";
 
 export default function useForm(formObj) {
   const [form, setForm] = useState(formObj);
+  const [images, setImages] = useState([]);
 
   function handleChange(e) {
     const { target } = e;
+
+    if (target.type === "file") {
+      console.log(target.files[0].name);
+    }
 
     if (target.type === "radio") {
       const isTrue = target.value === "true";
@@ -45,7 +50,7 @@ export default function useForm(formObj) {
   function handleSubmit(fn) {
     return (event) => {
       event.preventDefault();
-      fn(form);
+      fn(form, images);
     };
   }
 
@@ -70,5 +75,35 @@ export default function useForm(formObj) {
     };
   }
 
-  return [form, handleChange, handleSubmit, inputProps];
+  function handleImageChange() {}
+
+  //receives window.FormData();
+  //axios call to a generic endpoint for image handling
+  //service for image upload
+  //after .then setImages() with res from axios
+  function submitImages() {}
+
+  return [
+    form,
+    handleChange,
+    handleSubmit,
+    inputProps,
+    images,
+    handleImageChange,
+    submitImages,
+  ];
 }
+
+// if (target.type === file) {
+//   const formBody = new window.FormData();
+//   formBody.append("imagesGallery": ...form[target.name])
+// }
+
+//call - on the frontend
+// axios.post(`${process.env.REACT_APP_SERVER_URL}/uploadPicture/:listingId`, picture).then().catch()
+//add authorization headers
+
+//route - on the backend
+// router.post("/uploadPicture/:listingId", upload.single("imagesGallery") (req, res) => {
+//update the listing
+// });
