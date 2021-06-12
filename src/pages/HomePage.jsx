@@ -21,7 +21,7 @@ export default function HomePage(props) {
       </div>
 
       <div className="home-container white-back">
-        <h1>Popular swop spots</h1>
+        <h1>Popular swap spots</h1>
       </div>
     </div>
   );
