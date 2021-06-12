@@ -15,6 +15,8 @@ import * as CONSTS from "./utils/consts";
 import CreateListing from "./pages/listing/CreateListing";
 import SingleListing from "./pages/listing/SingleListing";
 import EditListing from "./pages/listing/EditListing";
+import DeleteListing from "./pages/listing/DeleteListing";
+import RemovedListing from "./pages/listing/RemovedListing";
 import UserPage from "./pages/user/UserPage";
 
 export default function App() {
@@ -103,6 +105,19 @@ export default function App() {
           component={EditListing}
           user={user}
         />
+        <ProtectedRoute
+          exact
+          path={PATHS.DELETE_LISTING}
+          component={DeleteListing}
+          user={user}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.LISTING_REMOVED}
+          component={RemovedListing}
+          user={user}
+        />
+
         <ProtectedRoute
           exact
           path={PATHS.USERPAGE}

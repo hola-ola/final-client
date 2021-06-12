@@ -25,7 +25,6 @@ export default function CreateListing(props) {
   const onSubmit = handleSubmit((formValues, imagesGallery) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-    // return console.log(formValues);
     LISTING_SERVICE.CREATE_LISTING(
       { formValues: { ...formValues, imagesGallery } },
       accessToken

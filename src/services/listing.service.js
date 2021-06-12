@@ -45,13 +45,38 @@ export function EDIT_LISTING(listingId, token) {
 }
 
 export function EDITED_LISTING(body, listingId, token) {
-  console.log(body);
   return listingService
     .put(`/${listingId}/edit`, body, {
       headers: { authorization: token },
     })
     .then((res) => {
       return res;
+    })
+    .catch((err) => console.log(err.response));
+}
+
+export function DELETE_LISTING(listingId, token) {
+  return listingService
+    .get(`/${listingId}/delete`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => console.log(err.response));
+}
+
+export function REMOVE_LISTING(listingId, token) {
+  return listingService
+    .get(`/${listingId}/removed`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      return response;
     })
     .catch((err) => console.log(err.response));
 }

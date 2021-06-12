@@ -16,8 +16,10 @@ export default function EditListing(props) {
     images,
     handleImageChange,
   ] = useForm({
-    ...listing,
+    listing,
   });
+
+  const [error, setError] = React.useState(null);
 
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
@@ -32,8 +34,6 @@ export default function EditListing(props) {
       })
       .catch((err) => console.log("This is the error:", err));
   }, [listingFromProps]);
-
-  const [error, setError] = React.useState(null);
 
   const onSubmit = handleSubmit((formValues, imagesGallery) => {
     const editedValues = { ...formValues, imagesGallery };
@@ -79,7 +79,7 @@ export default function EditListing(props) {
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
-          <input {...inputProps("title")} value={title} />
+          <input {...inputProps("title")} placeholder={title} />
           {error?.key === "title" && (
             <p className="errorMessage">{error.message}</p>
           )}
