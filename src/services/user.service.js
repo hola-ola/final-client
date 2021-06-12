@@ -31,14 +31,15 @@ export function USER_DELETE(username, token) {
     .catch((err) => console.log(err));
 }
 
-export function USER_UPDATE(username, token) {
+export function USER_UPDATE(username, body, token) {
   return userService
-    .get(`/${username}/update`, {
+    .post(`/${username}/update`, body, {
       headers: {
         authorization: token,
       },
     })
     .then((response) => {
       console.log("Data from the server: ", response.data);
+      return response.data;
     });
 }

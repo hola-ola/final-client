@@ -1,24 +1,12 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD:src/pages/user/UserPage.jsx
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
-import * as USER_SERVICE from "../../services/user.service.js";
-=======
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
 import * as USER_SERVICE from "../services/user.service.js";
-import UpdateProfile from "../components/User/UpdateProfile";
-import useToggle from "../hooks/useToggle";
-import "./UserPage.css";
->>>>>>> aleks-features:src/pages/UserPage.jsx
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});
-  const { authenticate } = props;
   const usernameFromProps = props.match.params.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-
-  const [displayUpdateProfile, toggleUpdateProfile] = useToggle(false);
 
   useEffect(() => {
     USER_SERVICE.GET_USER(usernameFromProps, accessToken)
@@ -43,6 +31,11 @@ export default function UserPage(props) {
       });
   }
 
+  function EditProfile() {
+    console.log("Starting profie edition");
+    USER_SERVICE.USER_UPDATE(usernameFromProps, accessToken);
+  }
+
   return (
     <div className="UserPage">
       <h1>Hello {user.username}, this is your profile</h1>
@@ -53,14 +46,8 @@ export default function UserPage(props) {
         <p>First name: {user.firstName}</p>
         <p>Last name: {user.lastName}</p>
         <p>Username: {user.username}</p>
-        <p>Bio: {user.userBio}</p>
-        <button onClick={toggleUpdateProfile}>Edit profile</button>
-        <button onClick={DeleteProfile}>Delete profile</button>
-        {displayUpdateProfile && (
-          <>
-            <UpdateProfile user={user} authenticate={authenticate} {...props} />
-          </>
-        )}
+        <button onClick={EditProfile}>Edit your profile</button>
+        <button onClick={DeleteProfile}>Delete your profile</button>
       </div>
 
       <div>
@@ -72,7 +59,7 @@ export default function UserPage(props) {
       <div>
         <h3>Your wishlist</h3>
         <p>To fix when we have adding to wishlist ready</p>
-        <button>View the wishlist</button>
+        <button>View whole wishlist</button>
       </div>
     </div>
   );
