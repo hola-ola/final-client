@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD:src/pages/user/UserPage.jsx
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service.js";
-=======
-import * as CONSTS from "../utils/consts";
-import * as PATHS from "../utils/paths";
-import * as USER_SERVICE from "../services/user.service.js";
-import UpdateProfile from "../components/User/UpdateProfile";
-import useToggle from "../hooks/useToggle";
+import UpdateProfile from "../../components/User/UpdateProfile";
+import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
->>>>>>> aleks-features:src/pages/UserPage.jsx
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});
