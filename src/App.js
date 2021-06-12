@@ -14,6 +14,7 @@ import * as PATHS from "./utils/paths";
 import * as CONSTS from "./utils/consts";
 import CreateListing from "./pages/listing/CreateListing";
 import SingleListing from "./pages/listing/SingleListing";
+import EditListing from "./pages/listing/EditListing";
 import UserPage from "./pages/user/UserPage";
 
 export default function App() {
@@ -94,6 +95,12 @@ export default function App() {
           exact
           path={PATHS.SINGLE_LISTING}
           component={SingleListing}
+          user={user}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.EDIT_LISTING}
+          component={EditListing}
           user={user}
         />
         <ProtectedRoute

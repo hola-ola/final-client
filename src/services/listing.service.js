@@ -32,3 +32,14 @@ export function VIEW_LISTING(listingId, token) {
     })
     .catch((err) => console.log(err.response));
 }
+
+export function EDIT_LISTING(listingId, token) {
+  return listingService
+    .get(`/${listingId}/edit`, {
+      headers: { authorization: token },
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err.response));
+}

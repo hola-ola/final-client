@@ -11,3 +11,4 @@ export const USER_EDIT = `${USERPAGE}/edit`;
 export const LISTINGS = "/listings";
 export const CREATE_LISTING = `${LISTINGS}/create`;
 export const SINGLE_LISTING = `${LISTINGS}/:listingId`;
+export const EDIT_LISTING = `${LISTINGS}/:listingId/edit`;
