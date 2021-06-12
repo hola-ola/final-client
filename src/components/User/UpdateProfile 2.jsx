@@ -18,30 +18,17 @@ function UpdateProfile(props) {
   const onSubmit = handleSubmit((form) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-    // USER_SERVICE.USER_UPDATE(form.username, form, accessToken)
-    //   .then((response) => {
-    //     console.log("Response after user update: ", response);
-    //     setError(null);
-    //     if (!response.status) {
-    //       return setError(response);
-    //     }
-    //     authenticate(response.data.user);
-    //     props.history.push({
-    //       pathname: `${PATHS.USER}/${response.data.user.username}`,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
-
-    USER_SERVICE.UPDATE_USER(form, accessToken)
+    USER_SERVICE.USER_UPDATE(form.username, form, accessToken)
       .then((response) => {
-        console.log(response.data);
+        console.log("Response after user update: ", response);
+        setError(null);
+        if (!response.status) {
+          return setError(response);
+        }
         authenticate(response.data.user);
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });
-        props.selfDestruct();
       })
       .catch((err) => {
         console.error(err.response);

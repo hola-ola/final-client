@@ -52,12 +52,7 @@ export default function UserPage(props) {
         <button onClick={DeleteProfile}>Delete profile</button>
         {displayUpdateProfile && (
           <>
-            <UpdateProfile
-              selfDestruct={toggleUpdateProfile}
-              user={user}
-              authenticate={authenticate}
-              {...props}
-            />
+            <UpdateProfile user={user} authenticate={authenticate} {...props} />
           </>
         )}
       </div>

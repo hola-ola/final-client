@@ -43,3 +43,12 @@ export function USER_UPDATE(username, body, token) {
       return response.data;
     });
 }
+
+export function UPDATE_USER(body, token) {
+  console.log("HERE?");
+  return userService.put("/update", body, {
+    headers: {
+      authorization: token,
+    },
+  });
+}
