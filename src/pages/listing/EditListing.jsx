@@ -7,6 +7,7 @@ import useForm from "../../hooks/useForm";
 
 export default function EditListing(props) {
   const [listing, setListing] = useState({});
+
   const [
     form,
     handleChange,
@@ -28,7 +29,6 @@ export default function EditListing(props) {
           return props.history.push(PATHS.HOMEPAGE);
         }
         setListing(res.data.listing);
-        //
       })
       .catch((err) => console.log("This is the error:", err));
   }, [listingFromProps]);
@@ -37,13 +37,11 @@ export default function EditListing(props) {
 
   const onSubmit = handleSubmit((formValues, imagesGallery) => {
     const editedValues = { ...formValues, imagesGallery };
-    // return console.log(formValues);
     LISTING_SERVICE.EDITED_LISTING(editedValues, listingFromProps, accessToken)
       .then((response) => {
         if (!response) {
           return console.log("NO RESPONSE");
         }
-        console.log(response);
         console.log("This is the response: ", response);
         return props.history.push(`${PATHS.LISTINGS}/${listing._id}`);
       })
@@ -81,7 +79,7 @@ export default function EditListing(props) {
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
-          <input {...inputProps("title")} placeholder={title} />
+          <input {...inputProps("title")} value={title} />
           {error?.key === "title" && (
             <p className="errorMessage">{error.message}</p>
           )}
