@@ -1,4 +1,6 @@
+import axios from "axios";
 import { useState } from "react";
+import * as CONSTS from "../utils/consts";
 
 export default function useForm(formObj) {
   const [form, setForm] = useState(formObj);
@@ -6,10 +8,6 @@ export default function useForm(formObj) {
 
   function handleChange(e) {
     const { target } = e;
-
-    if (target.type === "file") {
-      console.log(target.files[0].name);
-    }
 
     if (target.type === "radio") {
       const isTrue = target.value === "true";
@@ -75,13 +73,31 @@ export default function useForm(formObj) {
     };
   }
 
-  function handleImageChange() {}
+  function handleImageChange(e) {
+    const { target } = e;
+    // return;
 
-  //receives window.FormData();
-  //axios call to a generic endpoint for image handling
-  //service for image upload
-  //after .then setImages() with res from axios
-  function submitImages() {}
+    if (target.type === "file") {
+      Array.from(target.files).forEach((image) => {
+        const formBody = new window.FormData();
+        formBody.append("image", image);
+        submitImage(formBody);
+      });
+    }
+  }
+
+  function submitImage(formBody) {
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/image`, formBody, {
+        headers: {
+          authorization: localStorage.getItem(CONSTS.ACCESS_TOKEN),
+        },
+      })
+      .then((res) => {
+        setImages([...images, res.data.picture]);
+      })
+      .catch((err) => console.error(err.response));
+  }
 
   return [
     form,
@@ -90,20 +106,5 @@ export default function useForm(formObj) {
     inputProps,
     images,
     handleImageChange,
-    submitImages,
   ];
 }
-
-// if (target.type === file) {
-//   const formBody = new window.FormData();
-//   formBody.append("imagesGallery": ...form[target.name])
-// }
-
-//call - on the frontend
-// axios.post(`${process.env.REACT_APP_SERVER_URL}/uploadPicture/:listingId`, picture).then().catch()
-//add authorization headers
-
-//route - on the backend
-// router.post("/uploadPicture/:listingId", upload.single("imagesGallery") (req, res) => {
-//update the listing
-// });

@@ -26,8 +26,10 @@ export default function CreateListing(props) {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
     // return console.log(formValues);
-
-    LISTING_SERVICE.CREATE_LISTING({ formValues }, accessToken)
+    LISTING_SERVICE.CREATE_LISTING(
+      { formValues: { ...formValues, imagesGallery } },
+      accessToken
+    )
       .then((response) => {
         if (!response) {
           return console.log("NO RESPONSE");
@@ -255,14 +257,8 @@ export default function CreateListing(props) {
         </div>
 
         <div>
-          <p>Add images (to be fixed: multiple images possible)</p>
+          <p>Add images</p>
           <input type="file" onChange={handleImageChange} />
-          {/* <input
-            type="text"
-            name="imagesGallery"
-            onChange={handleChange}
-            value={form.imagesGallery}
-          /> */}
         </div>
 
         <div>

@@ -32,6 +32,7 @@ export default function SingleListing(props) {
     kitchenEquipment,
     bathroomEquipment,
     workSetup,
+    imagesGallery,
   } = listing;
 
   console.log(listing);
@@ -80,7 +81,10 @@ export default function SingleListing(props) {
       </div>
 
       <div>
-        <h2>Photos: TBA</h2>
+        <h2>Photos:</h2>
+        {imagesGallery.map((photo, index) => (
+          <img src={imagesGallery[index]} alt={title} width="300px"></img>
+        ))}
       </div>
     </div>
   );

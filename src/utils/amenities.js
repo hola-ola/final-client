@@ -64,6 +64,6 @@ export const LISTING_FORM = {
   spaceOutside: true,
   extraRemarks: "",
   ambienceLabels: [],
-  imagesGallery: "",
+  imagesGallery: [],
   availability: true,
 };
