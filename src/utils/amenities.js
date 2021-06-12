@@ -67,3 +67,26 @@ export const LISTING_FORM = {
   imagesGallery: [],
   availability: true,
 };
+
+// export const LISTING_FORM_KEYS = {
+//   title,
+//   owner,
+//   country,
+//   city,
+//   lengthOfStay,
+//   type,
+//   numberOfSleepingSpots,
+//   generalDescription,
+//   kitchenEquipment,
+//   bathroomEquipment,
+//   workSetup,
+//   accessibility,
+//   smokersWelcome,
+//   kidsWelcome,
+//   petsWelcome,
+//   spaceOutside,
+//   extraRemarks,
+//   ambienceLabels,
+//   imagesGallery,
+//   availability,
+// };

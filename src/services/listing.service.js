@@ -43,3 +43,15 @@ export function EDIT_LISTING(listingId, token) {
     })
     .catch((err) => console.log(err.response));
 }
+
+export function EDITED_LISTING(body, listingId, token) {
+  console.log(body);
+  return listingService
+    .put(`/${listingId}/edit`, body, {
+      headers: { authorization: token },
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err.response));
+}
