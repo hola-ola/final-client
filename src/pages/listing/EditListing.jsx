@@ -7,6 +7,7 @@ import useForm from "../../hooks/useForm";
 
 export default function EditListing(props) {
   const [listing, setListing] = useState({});
+
   const [
     form,
     handleChange,
@@ -34,9 +35,43 @@ export default function EditListing(props) {
 
   const [error, setError] = React.useState(null);
 
-  const onSubmit = handleSubmit();
+  const onSubmit = handleSubmit((formValues, imagesGallery) => {
+    const editedValues = { ...formValues, imagesGallery };
+    LISTING_SERVICE.EDITED_LISTING(editedValues, listingFromProps, accessToken)
+      .then((response) => {
+        if (!response) {
+          return console.log("NO RESPONSE");
+        }
+        console.log("This is the response: ", response);
+        return props.history.push(`${PATHS.LISTINGS}/${listing._id}`);
+      })
+      .catch((err) => {
+        console.error("This is the error: ", err.response);
+      });
+  });
 
-  // const {Object.keys({AMENITIES.LISTING_FORM})} = listing
+  const {
+    title,
+    owner,
+    country,
+    city,
+    lengthOfStay,
+    type,
+    numberOfSleepingSpots,
+    generalDescription,
+    kitchenEquipment,
+    bathroomEquipment,
+    workSetup,
+    accessibility,
+    smokersWelcome,
+    kidsWelcome,
+    petsWelcome,
+    spaceOutside,
+    extraRemarks,
+    ambienceLabels,
+    imagesGallery,
+    availability,
+  } = listing;
 
   return (
     <div className="create-listing-wrapper">
@@ -44,7 +79,7 @@ export default function EditListing(props) {
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
-          <input {...inputProps("title")} />
+          <input {...inputProps("title")} value={title} />
           {error?.key === "title" && (
             <p className="errorMessage">{error.message}</p>
           )}
@@ -52,12 +87,12 @@ export default function EditListing(props) {
 
         <div>
           <p>Country</p>
-          <input {...inputProps("country")} />
+          <input {...inputProps("country")} placeholder={country} />
         </div>
 
         <div>
           <p>City</p>
-          <input {...inputProps("city")} />
+          <input {...inputProps("city")} placeholder={city} />
         </div>
 
         <div>
@@ -95,7 +130,10 @@ export default function EditListing(props) {
 
         <div>
           <p>General description</p>
-          <input {...inputProps("generalDescription", { type: "textarea" })} />
+          <input
+            {...inputProps("generalDescription", { type: "textarea" })}
+            value={generalDescription}
+          />
         </div>
 
         <div>
@@ -249,7 +287,10 @@ export default function EditListing(props) {
 
         <div>
           <p>What else shall we know about your place?</p>
-          <input {...inputProps("extraRemarks", { type: "textarea" })} />
+          <input
+            {...inputProps("extraRemarks", { type: "textarea" })}
+            placeholder={extraRemarks}
+          />
         </div>
 
         <div>
