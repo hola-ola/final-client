@@ -2,7 +2,7 @@ import React from "react";
 import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
-import useForm from "../../hooks/useForm";
+import useForm from "../../hooks/useForm.js";
 
 function UpdateProfile(props) {
   const { user, authenticate } = props;
@@ -18,17 +18,30 @@ function UpdateProfile(props) {
   const onSubmit = handleSubmit((form) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-    USER_SERVICE.USER_UPDATE(form.username, form, accessToken)
+    // USER_SERVICE.USER_UPDATE(form.username, form, accessToken)
+    //   .then((response) => {
+    //     console.log("Response after user update: ", response);
+    //     setError(null);
+    //     if (!response.status) {
+    //       return setError(response);
+    //     }
+    //     authenticate(response.data.user);
+    //     props.history.push({
+    //       pathname: `${PATHS.USER}/${response.data.user.username}`,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.response);
+    //   });
+
+    USER_SERVICE.UPDATE_USER(form, accessToken)
       .then((response) => {
-        console.log("Response after user update: ", response);
-        setError(null);
-        if (!response.status) {
-          return setError(response);
-        }
+        console.log(response.data);
         authenticate(response.data.user);
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });
+        props.selfDestruct();
       })
       .catch((err) => {
         console.error(err.response);
