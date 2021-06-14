@@ -9,7 +9,7 @@ export default function useForm(formObj) {
   function handleChange(e) {
     const { target } = e;
 
-    console.log(target.value);
+    // console.log(target);
 
     if (target.type === "radio") {
       const isTrue = target.value === "true";
@@ -56,6 +56,7 @@ export default function useForm(formObj) {
 
   function inputProps(name, obj = {}) {
     const { value = form[name], type = "text", checked, item } = obj; //optional values
+    // console.log(typeof checked);
 
     const checkedVal =
       typeof checked != "undefined"
@@ -77,7 +78,6 @@ export default function useForm(formObj) {
 
   function handleImageChange(e) {
     const { target } = e;
-    // return;
 
     if (target.type === "file") {
       Array.from(target.files).forEach((image) => {

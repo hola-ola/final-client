@@ -79,7 +79,7 @@ export default function EditListing(props) {
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
-          <input {...inputProps("title")} placeholder={title} />
+          <input {...inputProps("title")} value={title} />
           {error?.key === "title" && (
             <p className="errorMessage">{error.message}</p>
           )}
@@ -102,6 +102,7 @@ export default function EditListing(props) {
               <CheckboxInput
                 key={index}
                 {...inputProps("lengthOfStay", { item })}
+                // checked={[lengthOfStay].includes(item) ? true : false}
               />
             ))}
           </div>
@@ -111,7 +112,11 @@ export default function EditListing(props) {
           <p>Type</p>
           <div className="checkbox-container">
             {AMENITIES.LISTING_TYPE.map((item, index) => (
-              <CheckboxInput key={index} {...inputProps("type", { item })} />
+              <CheckboxInput
+                key={index}
+                {...inputProps("type", { item })}
+                // checked={[type].includes(item) ? true : false}
+              />
             ))}
           </div>
         </div>

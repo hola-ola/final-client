@@ -35,7 +35,6 @@ export default function SingleListing(props) {
     imagesGallery,
   } = listing;
 
-  console.log(listing);
   return (
     <div>
       <h1>{title}</h1>
@@ -83,7 +82,12 @@ export default function SingleListing(props) {
       <div>
         <h2>Photos:</h2>
         {imagesGallery.map((photo, index) => (
-          <img src={imagesGallery[index]} alt={title} width="300px"></img>
+          <img
+            src={imagesGallery[index]}
+            alt={title}
+            width="300px"
+            key={index}
+          ></img>
         ))}
       </div>
     </div>
