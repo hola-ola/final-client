@@ -31,21 +31,7 @@ export function USER_DELETE(username, token) {
     .catch((err) => console.log(err));
 }
 
-export function USER_UPDATE(username, body, token) {
-  return userService
-    .post(`/${username}/update`, body, {
-      headers: {
-        authorization: token,
-      },
-    })
-    .then((response) => {
-      console.log("Data from the server: ", response.data);
-      return response.data;
-    });
-}
-
 export function UPDATE_USER(body, token) {
-  console.log("HERE?");
   return userService.put("/update", body, {
     headers: {
       authorization: token,

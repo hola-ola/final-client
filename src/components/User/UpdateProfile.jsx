@@ -7,7 +7,14 @@ import useForm from "../../hooks/useForm.js";
 function UpdateProfile(props) {
   const { user, authenticate } = props;
   const [error, setError] = React.useState(null);
-  const [form, handleChange, handleSubmit, inputProps] = useForm({
+  const [
+    form,
+    handleChange,
+    handleSubmit,
+    inputProps,
+    images,
+    handleImageChange,
+  ] = useForm({
     firstName: user.firstName,
     lastName: user.lastName,
     username: user.username,
@@ -18,30 +25,14 @@ function UpdateProfile(props) {
   const onSubmit = handleSubmit((form) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-    // USER_SERVICE.USER_UPDATE(form.username, form, accessToken)
-    //   .then((response) => {
-    //     console.log("Response after user update: ", response);
-    //     setError(null);
-    //     if (!response.status) {
-    //       return setError(response);
-    //     }
-    //     authenticate(response.data.user);
-    //     props.history.push({
-    //       pathname: `${PATHS.USER}/${response.data.user.username}`,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.error(err.response);
-    //   });
-
     USER_SERVICE.UPDATE_USER(form, accessToken)
       .then((response) => {
-        console.log(response.data);
+        console.log("HALOOOO!", response.data);
         authenticate(response.data.user);
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });
-        props.selfDestruct();
+        // props.selfDestruct();
       })
       .catch((err) => {
         console.error(err.response);
@@ -97,10 +88,11 @@ function UpdateProfile(props) {
         <div>
           <label>Your profile picture</label>
           <input
+            type="file"
             name="profilePic"
             placeholder="Your profile picture"
             value={form.profilePic}
-            onChange={handleChange}
+            onChange={handleImageChange}
           />
         </div>
         <button>Submit changes</button>
