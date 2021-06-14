@@ -1,0 +1,41 @@
+.home-container {
+  background-color: #f2f8f4;
+  height: 550px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.search {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.search input {
+  height: 30px;
+  width: 240px;
+  background-color: #bddbc7;
+  font-size: 16px;
+}
+
+.search button {
+  font-size: 16px;
+  margin-left: 10px;
+  background-color: #241e4e;
+  color: #f2f8f4;
+  padding: 10px 20px;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 0;
+  padding: 20px;
+}
+
+.white-back {
+  background-color: white;
+}
