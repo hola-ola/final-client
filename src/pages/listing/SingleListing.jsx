@@ -33,8 +33,10 @@ export default function SingleListing(props) {
     bathroomEquipment,
     workSetup,
     imagesGallery,
+    owner,
   } = listing;
 
+  console.log(owner);
   return (
     <div>
       <h1>{title}</h1>
@@ -44,7 +46,7 @@ export default function SingleListing(props) {
         </p>
       </div>
       <div>
-        <p>Owner: TBD</p>
+        <p>Owner of the flat: {owner.username}</p>
       </div>
       <div>
         <p>Type: {type}</p>
