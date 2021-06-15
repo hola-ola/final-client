@@ -4,6 +4,7 @@ import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service.js";
 import UpdateProfile from "../../components/User/UpdateProfile";
 import UpdateProfilePic from "../../components/User/UpdateProfilePic";
+import AddReview from "../../components/User/AddReview";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
 
@@ -17,8 +18,9 @@ export default function UserPage(props) {
 
   const [displayUpdateProfile, toggleUpdateProfile] = useToggle(false);
   const [displayUpdatePic, toggleUpdatePic] = useToggle(false);
+  const [displayAddReview, toggleAddReview] = useToggle(false);
 
-  useEffect(() => {
+  function refetchUser() {
     USER_SERVICE.GET_USER(usernameFromProps, accessToken)
       .then((response) => {
         setUser(response.data.user);
@@ -27,6 +29,10 @@ export default function UserPage(props) {
       .catch((err) => {
         console.error("This is the error: ", err);
       });
+  }
+
+  useEffect(() => {
+    refetchUser();
   }, [props.match.params.username]);
 
   function DeleteProfile() {
@@ -46,7 +52,7 @@ export default function UserPage(props) {
     <div className="user-page">
       <div className="user-data">
         <div>
-          <img src={user.profilePic} alt={user.username}></img>
+          <img width="200" src={user.profilePic} alt={user.username}></img>
           {owner && (
             <>
               <button onClick={toggleUpdatePic}>Update profile pic</button>
@@ -54,7 +60,11 @@ export default function UserPage(props) {
           )}
           {displayUpdatePic && (
             <>
-              <UpdateProfilePic user={user} authenticate={authenticate} />
+              <UpdateProfilePic
+                getUser={refetchUser}
+                user={user}
+                authenticate={authenticate}
+              />
             </>
           )}
         </div>
@@ -89,11 +99,20 @@ export default function UserPage(props) {
 
         <div>
           <h3>Received reviews</h3>
-          <p>To fix when we have adding reviews ready</p>
           <button>View all reviews</button>
+
           {!owner && (
             <>
-              <button>Add a review</button>
+              <button onClick={toggleAddReview}>Add a review</button>
+            </>
+          )}
+          {displayAddReview && (
+            <>
+              <AddReview
+                user={user}
+                authenticate={authenticate}
+                {...props}
+              ></AddReview>
             </>
           )}
         </div>

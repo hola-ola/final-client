@@ -5,11 +5,13 @@ import * as PATHS from "../../utils/paths";
 import useSingleImage from "../../hooks/useSingleImage";
 
 function UpdateProfilePic(props) {
-  const { user, authenticate } = props;
+  const { user, getUser } = props;
   const [error, setError] = useState(null);
 
-  const [form, singleImage, SingleImageChange, SingleImageSubmit] =
-    useSingleImage(user.profilePic);
+  const { SingleImageChange, SingleImageSubmit } = useSingleImage(
+    user.profilePic,
+    getUser
+  );
 
   return (
     <form onSubmit={SingleImageSubmit}>
