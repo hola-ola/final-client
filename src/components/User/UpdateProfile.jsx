@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import useForm from "../../hooks/useForm.js";
+import useSingleImage from "../../hooks/useSingleImage";
 
 function UpdateProfile(props) {
   const { user, authenticate } = props;
-  const [error, setError] = React.useState(null);
+  const [error, setError] = useState(null);
+
   const [
     form,
     handleChange,
@@ -22,17 +24,17 @@ function UpdateProfile(props) {
     userBio: user.userBio,
   });
 
-  const onSubmit = handleSubmit((form) => {
+  const onSubmit = handleSubmit((form, image) => {
     const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+    const editedValues = { ...form };
 
-    USER_SERVICE.UPDATE_USER(form, accessToken)
+    USER_SERVICE.UPDATE_USER(editedValues, accessToken)
       .then((response) => {
-        console.log("HALOOOO!", response.data);
+        console.log("This is updated user: ", response.data);
         authenticate(response.data.user);
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });
-        // props.selfDestruct();
       })
       .catch((err) => {
         console.error(err.response);
@@ -85,16 +87,7 @@ function UpdateProfile(props) {
             onChange={handleChange}
           />
         </div>
-        <div>
-          <label>Your profile picture</label>
-          <input
-            type="file"
-            name="profilePic"
-            placeholder="Your profile picture"
-            value={form.profilePic}
-            onChange={handleImageChange}
-          />
-        </div>
+
         <button>Submit changes</button>
       </div>
       {error && (
