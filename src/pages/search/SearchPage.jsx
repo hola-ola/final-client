@@ -5,6 +5,8 @@ import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
 import useForm from "../../hooks/useForm";
 
+import ResultCard from "../../components/Result/ResultCard";
+
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
 
@@ -19,20 +21,14 @@ export default function SearchPage(props) {
   }, []);
 
   console.log(results);
-
+  console.log(results);
   return (
     <div>
       <h1>Here you will see search results</h1>
       <div>
         <h3>Search results</h3>
         {results.map((item, index) => (
-          <div key={index}>
-            <img src={item.imagesGallery[0]} alt={item.title} />
-            <h4>{item.title}</h4>
-            <h4>
-              {item.city}, {item.country}
-            </h4>
-          </div>
+          <ResultCard item={item} key={index} />
         ))}
       </div>
     </div>
