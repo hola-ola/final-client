@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import * as PATHS from "../../utils/paths";
 import "./HomePage.css";
 
 export default function HomePage(props) {
@@ -6,9 +8,16 @@ export default function HomePage(props) {
     <div>
       <div className="home-container">
         <div className="search">
-          <input type="text" placeholder="I live in..."></input>
-          <input type="text" placeholder="I'd like to swap for..."></input>
-          <button type="submit">Let's swap!</button>
+          <h1>Find your perfect home exchange</h1>
+          <h3>I'd like to swap for a place in...</h3>
+          <input type="text" placeholder="enter city or country"></input>
+          <Link to={`${PATHS.SEARCH_RESULTS}`} className="search-button">
+            Let's swap!
+          </Link>
+          <p>or</p>
+          <Link to={`${PATHS.SEARCH_RESULTS}`} className="search-button">
+            Explore all options
+          </Link>
         </div>
       </div>
 
