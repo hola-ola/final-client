@@ -14,3 +14,6 @@ export const SINGLE_LISTING = `${LISTINGS}/:listingId`;
 export const EDIT_LISTING = `${LISTINGS}/:listingId/edit`;
 export const DELETE_LISTING = `${LISTINGS}/:listingId/delete`;
 export const LISTING_REMOVED = `${LISTINGS}/:listingId/removed`;
+
+export const RESULTS = "/results";
+export const SEARCH_RESULTS = `${RESULTS}/search`;

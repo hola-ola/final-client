@@ -18,6 +18,7 @@ import EditListing from "./pages/listing/EditListing";
 import DeleteListing from "./pages/listing/DeleteListing";
 import RemovedListing from "./pages/listing/RemovedListing";
 import UserPage from "./pages/user/UserPage";
+import SearchPage from "./pages/search/SearchPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -80,6 +81,13 @@ export default function App() {
           path={PATHS.LOGINPAGE}
           authenticate={authenticate}
           component={LogIn}
+        />
+        <NormalRoute
+          exact
+          user={user}
+          path={PATHS.SEARCH_RESULTS}
+          authenticate={authenticate}
+          component={SearchPage}
         />
         <ProtectedRoute
           exact

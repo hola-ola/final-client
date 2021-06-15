@@ -36,7 +36,6 @@ export default function SingleListing(props) {
     owner,
   } = listing;
 
-  console.log(owner);
   return (
     <div>
       <h1>{title}</h1>
