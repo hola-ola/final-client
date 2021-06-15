@@ -20,8 +20,7 @@ export default function SearchPage(props) {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(results);
-  console.log(results);
+  // console.log(results);
   return (
     <div>
       <h1>Here you will see search results</h1>
