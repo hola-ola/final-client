@@ -6,10 +6,6 @@ export default function useForm(formObj) {
   const [form, setForm] = useState(formObj);
   const [images, setImages] = useState([]);
 
-  // useEffect(() => {
-  //   setForm(formObj);
-  // }, [formObj]);
-
   function overrideForm(formValue) {
     setForm(formValue);
   }
