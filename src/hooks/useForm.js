@@ -1,10 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as CONSTS from "../utils/consts";
 
 export default function useForm(formObj) {
   const [form, setForm] = useState(formObj);
   const [images, setImages] = useState([]);
+
+  // useEffect(() => {
+  //   setForm(formObj);
+  // }, [formObj]);
+
+  function overrideForm(formValue) {
+    setForm(formValue);
+  }
 
   function handleChange(e) {
     const { target } = e;
@@ -39,6 +47,8 @@ export default function useForm(formObj) {
         [target.name]: target.checked ? target.value : "",
       });
     }
+
+    console.log(form);
 
     setForm({
       ...form,
@@ -108,5 +118,6 @@ export default function useForm(formObj) {
     inputProps,
     images,
     handleImageChange,
+    overrideForm,
   ];
 }

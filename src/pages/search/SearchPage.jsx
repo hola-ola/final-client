@@ -9,8 +9,10 @@ import ResultCard from "../../components/Result/ResultCard";
 
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
-
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+  // const params = new URLSearchParams(props.location.search);
+  // params.get
+  // console.log(props.location.search);
 
   useEffect(() => {
     SEARCH_SERVICE.SEARCH_LISTINGS(accessToken)

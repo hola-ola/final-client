@@ -15,9 +15,8 @@ export default function EditListing(props) {
     inputProps,
     images,
     handleImageChange,
-  ] = useForm({
-    listing,
-  });
+    overrideForm,
+  ] = useForm(listing);
 
   const [error, setError] = React.useState(null);
 
@@ -31,6 +30,7 @@ export default function EditListing(props) {
           return props.history.push(PATHS.HOMEPAGE);
         }
         setListing(res.data.listing);
+        overrideForm(res.data.listing);
       })
       .catch((err) => console.log("This is the error:", err));
   }, [listingFromProps]);
@@ -71,7 +71,7 @@ export default function EditListing(props) {
     ambienceLabels,
     imagesGallery,
     availability,
-  } = listing;
+  } = form;
 
   return (
     <div className="create-listing-wrapper">
