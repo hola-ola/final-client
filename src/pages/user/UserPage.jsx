@@ -2,15 +2,21 @@ import React, { useState, useEffect } from "react";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service.js";
+import * as REVIEW_SERVICE from "../../services/review.service";
+import * as LISTING_SERVICE from "../../services/listing.service";
 import UpdateProfile from "../../components/User/UpdateProfile";
 import UpdateProfilePic from "../../components/User/UpdateProfilePic";
-import AddReview from "../../components/User/AddReview";
+import AddReview from "../../components/Reviews/AddReview";
+import ShowReview from "../../components/Reviews/ShowReview";
+import ResultCard from "../../components/Result/ResultCard";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});
   const [owner, setOwner] = useState(true);
+  const [receivedReviews, setReceivedReviews] = useState([]);
+  const [givenReviews, setGivenReviews] = useState([]);
   const { authenticate } = props;
   const usernameFromProps = props.match.params.username;
   const loggedUser = props.user.username;
@@ -31,8 +37,30 @@ export default function UserPage(props) {
       });
   }
 
+  function GetReceivedReviews() {
+    REVIEW_SERVICE.RECEIVED_REVIEWS(usernameFromProps, accessToken)
+      .then((response) => {
+        setReceivedReviews(response);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
+      });
+  }
+
+  function GetGivenReviews() {
+    REVIEW_SERVICE.GIVEN_REVIEWS(usernameFromProps, accessToken)
+      .then((response) => {
+        setGivenReviews(response);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
+      });
+  }
+
   useEffect(() => {
     refetchUser();
+    GetReceivedReviews();
+    GetGivenReviews();
   }, [props.match.params.username]);
 
   function DeleteProfile() {
@@ -94,27 +122,33 @@ export default function UserPage(props) {
         {!owner && (
           <>
             <button>Send a message</button>
+            <button onClick={toggleAddReview}>Add a review</button>
+          </>
+        )}
+        {displayAddReview && (
+          <>
+            <AddReview
+              user={user}
+              authenticate={authenticate}
+              {...props}
+            ></AddReview>
           </>
         )}
 
         <div>
           <h3>Received reviews</h3>
           <button>View all reviews</button>
+          {receivedReviews.slice(0, 4).map((item, index) => (
+            <ShowReview item={item} key={index} />
+          ))}
+        </div>
 
-          {!owner && (
-            <>
-              <button onClick={toggleAddReview}>Add a review</button>
-            </>
-          )}
-          {displayAddReview && (
-            <>
-              <AddReview
-                user={user}
-                authenticate={authenticate}
-                {...props}
-              ></AddReview>
-            </>
-          )}
+        <div>
+          <h3>Given reviews</h3>
+          <button>View all reviews</button>
+          {givenReviews.slice(0, 4).map((item, index) => (
+            <ShowReview item={item} key={index} />
+          ))}
         </div>
       </div>
 
