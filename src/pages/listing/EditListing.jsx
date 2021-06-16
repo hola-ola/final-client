@@ -29,6 +29,7 @@ export default function EditListing(props) {
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
         }
+
         setListing(res.data.listing);
         overrideForm(res.data.listing);
       })
