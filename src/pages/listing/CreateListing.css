@@ -21,3 +21,12 @@ body {
 .radio-container {
   display: flex;
 }
+
+.textarea {
+  width: 80vw;
+  height: 200px;
+}
+
+textarea::placeholder {
+  padding: 5px;
+}

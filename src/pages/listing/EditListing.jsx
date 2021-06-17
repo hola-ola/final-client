@@ -131,14 +131,6 @@ export default function EditListing(props) {
         </div>
 
         <div>
-          <p>General description</p>
-          <input
-            {...inputProps("generalDescription", { type: "textarea" })}
-            value={generalDescription}
-          />
-        </div>
-
-        <div>
           <p>Kitchen equipment</p>
           <div className="checkbox-container">
             {AMENITIES.KITCHEN_EQUIPMENT.map((item, index) => (
@@ -275,8 +267,21 @@ export default function EditListing(props) {
         </div>
 
         <div>
+          <p>General description</p>
+          <p>
+            Please tell us a bit more about your place and your flatmates (if
+            you have any).
+          </p>
+          <textarea
+            {...inputProps("generalDescription", { type: "textarea" })}
+            value={generalDescription}
+            className="textarea"
+          />
+        </div>
+
+        <div>
           {/* we should make it interactive labels instead of checkmarks! :D */}
-          <p>What describes your place best?</p>
+          <p>What describes your neighborhood best?</p>
           <div className="checkbox-container">
             {AMENITIES.AMBIENCE.map((item, index) => (
               <CheckboxInput
@@ -289,9 +294,11 @@ export default function EditListing(props) {
 
         <div>
           <p>What else shall we know about your place?</p>
-          <input
+          <p>Let other users know about the coolest places in the hood!</p>
+          <textarea
             {...inputProps("extraRemarks", { type: "textarea" })}
             placeholder={extraRemarks}
+            className="textarea"
           />
         </div>
 
