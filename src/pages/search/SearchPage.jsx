@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import * as SEARCH_SERVICE from "../../services/results.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
-import * as AMENITIES from "../../utils/amenities";
-import useForm from "../../hooks/useForm";
 
 import ResultCard from "../../components/Result/ResultCard";
 
@@ -28,7 +26,7 @@ export default function SearchPage(props) {
         }
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [q]);
 
   return (
     <div>
@@ -38,7 +36,7 @@ export default function SearchPage(props) {
           <div>
             <p>Sorry, we haven't found any results for "{q}"</p>
             <Link to={`${PATHS.SEARCH_RESULTS}`}>
-              Check available homes in other cities
+              Check what's available in other cities
             </Link>
           </div>
         ) : null}
