@@ -31,7 +31,12 @@ export const WORK_SETUP = [
   "Standing desk",
   "Additional monitor",
 ];
-export const ACCESSIBILITY = ["Elevator", "No stairs", "Roll-in shower"];
+export const ACCESSIBILITY = [
+  "Elevator",
+  "No stairs",
+  "Roll-in shower",
+  "No accessibility features",
+];
 export const AMBIENCE = [
   "Close to nature",
   "City life",
@@ -42,8 +47,6 @@ export const AMBIENCE = [
   "Outside of the city",
   "Chillout",
 ];
-//not used atm
-// export const OTHER = ["Air conditioning", "Floor heating", "Parking spot"];
 
 export const LISTING_FORM = {
   title: "",
@@ -67,26 +70,3 @@ export const LISTING_FORM = {
   imagesGallery: [],
   availability: true,
 };
-
-// export const LISTING_FORM_KEYS = {
-//   title,
-//   owner,
-//   country,
-//   city,
-//   lengthOfStay,
-//   type,
-//   numberOfSleepingSpots,
-//   generalDescription,
-//   kitchenEquipment,
-//   bathroomEquipment,
-//   workSetup,
-//   accessibility,
-//   smokersWelcome,
-//   kidsWelcome,
-//   petsWelcome,
-//   spaceOutside,
-//   extraRemarks,
-//   ambienceLabels,
-//   imagesGallery,
-//   availability,
-// };

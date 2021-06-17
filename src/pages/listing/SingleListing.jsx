@@ -21,6 +21,7 @@ export default function SingleListing(props) {
   const [listing, setListing] = useState({
     ...AMENITIES.LISTING_FORM,
   });
+
   const [isOwner, setIsOwner] = useState(false);
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
@@ -73,8 +74,18 @@ export default function SingleListing(props) {
           Location: {city}, {country}
         </p>
       </div>
-      <div>
-        <p>Owner of the flat: {owner.username}</p>
+      <div className="owner-card">
+        <h4>About the owner</h4>
+        <img src={owner.profilePic} height="100px" />
+        <p>{owner.firstName}</p>
+        {owner.firstName ? (
+          <p>
+            {owner.firstName} ({owner.username})
+          </p>
+        ) : (
+          <p>{owner.username}</p>
+        )}
+        <Link to={`${PATHS.USER}/${owner.username}`}>See user's profile</Link>
       </div>
       <div>
         <p>Type: {type}</p>
@@ -203,9 +214,7 @@ export default function SingleListing(props) {
             Delete
           </Link>
         </div>
-      ) : (
-        <Link to={`${PATHS.USER}/${owner.username}`}>See owner's profile</Link>
-      )}
+      ) : null}
     </div>
   );
 }
