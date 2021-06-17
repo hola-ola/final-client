@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FaBed, FaBaby, FaDog, FaUmbrellaBeach } from "react-icons/fa";
+import {
+  FaBed,
+  FaBaby,
+  FaDog,
+  FaUmbrellaBeach,
+  FaRegCalendarCheck,
+  FaRegCalendarTimes,
+} from "react-icons/fa";
 import { MdSmokingRooms } from "react-icons/md";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
@@ -50,7 +57,8 @@ export default function SingleListing(props) {
     availability,
   } = listing;
 
-  let iconSize = "35px";
+  let SmallIconSize = "25px";
+  let BigIconSize = "35px";
 
   return (
     <div>
@@ -73,33 +81,52 @@ export default function SingleListing(props) {
         </div>
       </div>
       <div>
+        {availability ? (
+          <div>
+            <FaRegCalendarCheck
+              size={SmallIconSize}
+              style={{ color: "yellowgreen" }}
+            />
+            <p>Currently available</p>
+          </div>
+        ) : (
+          <div>
+            <FaRegCalendarTimes
+              size={SmallIconSize}
+              style={{ color: "salmon" }}
+            />
+            <p>Currently unavailable</p>
+          </div>
+        )}
+      </div>
+      <div>
         <h2>About the flat</h2>
         <div className="icons-container">
           <div className="sleeps-box">
-            <FaBed size={iconSize} style={{ color: "yellowgreen" }} />
+            <FaBed size={BigIconSize} style={{ color: "yellowgreen" }} />
             <span>{numberOfSleepingSpots}</span>
           </div>
           <div>
             <MdSmokingRooms
-              size={iconSize}
+              size={BigIconSize}
               style={{ color: smokersWelcome ? "yellowgreen" : "salmon" }}
             />
           </div>
           <div>
             <FaBaby
-              size={iconSize}
-              style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
-            />
-          </div>
-          <div>
-            <FaDog
-              size={iconSize}
+              size={BigIconSize}
               style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
             />
           </div>
           <div>
+            <FaDog
+              size={BigIconSize}
+              style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
+            />
+          </div>
+          <div>
             <FaUmbrellaBeach
-              size={iconSize}
+              size={BigIconSize}
               style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
             />
           </div>
