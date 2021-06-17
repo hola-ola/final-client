@@ -6,7 +6,7 @@ import useForm from "../../hooks/useForm.js";
 import useSingleImage from "../../hooks/useSingleImage";
 
 function UpdateProfile(props) {
-  const { user, authenticate } = props;
+  const { user, authenticate, refetchUser } = props;
   const [error, setError] = useState(null);
 
   const [
@@ -32,6 +32,7 @@ function UpdateProfile(props) {
       .then((response) => {
         console.log("This is updated user: ", response.data);
         authenticate(response.data.user);
+        refetchUser();
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });

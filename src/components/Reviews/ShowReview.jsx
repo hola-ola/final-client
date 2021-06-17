@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as PATHS from "../../utils/paths";
 import "./ShowReview.css";
@@ -7,16 +7,16 @@ function ShowReview(props) {
   const { item, index, user } = props;
   const [reviewsAuthor, setReviewsAuthor] = React.useState(true);
 
-  function CheckReviewsAuthor() {
+  useEffect(() => {
     user.username === item.reviewingUser.username
       ? setReviewsAuthor(true)
       : setReviewsAuthor(false);
-  }
+  }, []);
 
   return (
     <div className="one-review">
       <div key={index}>
-        <h3>{item.title}</h3>
+        <h4>{item.title}</h4>
 
         {reviewsAuthor ? (
           <>
