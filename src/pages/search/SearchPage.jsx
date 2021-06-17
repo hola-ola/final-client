@@ -41,7 +41,9 @@ export default function SearchPage(props) {
           </div>
         ) : null}
         {results.map((item, index) => (
-          <ResultCard item={item} key={index} />
+          <ResultCard item={item} key={index}>
+            More info
+          </ResultCard>
         ))}
       </div>
     </div>

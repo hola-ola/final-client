@@ -32,7 +32,10 @@ export default function EditListing(props) {
         setListing(res.data.listing);
         overrideForm(res.data.listing);
       })
-      .catch((err) => console.log("This is the error:", err));
+      .catch((err) => {
+        console.log("This is the error:", err);
+        // return props.history.push(PATHS.HOMEPAGE);
+      });
   }, [listingFromProps]);
 
   const onSubmit = handleSubmit((formValues, imagesGallery) => {

@@ -14,7 +14,7 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>More info</Link>
+      <Link to={`${PATHS.LISTINGS}/${item._id}`}>{props.children}</Link>
     </div>
   );
 }
