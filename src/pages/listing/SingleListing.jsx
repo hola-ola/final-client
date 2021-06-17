@@ -6,8 +6,11 @@ import {
   FaUmbrellaBeach,
   FaRegCalendarCheck,
   FaRegCalendarTimes,
+  FaRegHeart,
 } from "react-icons/fa";
 import { MdSmokingRooms } from "react-icons/md";
+import { BiMapPin, BiHomeHeart, BiBed } from "react-icons/bi";
+import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
@@ -67,28 +70,82 @@ export default function SingleListing(props) {
   let BigIconSize = "35px";
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <div>
-        <p>
-          Location: {city}, {country}
-        </p>
+    <div className="listing-wrapper">
+      <div className="listing-header">
+        <div className="listing-title">
+          <h1>{title}</h1>
+          <div className="listing-action-icons">
+            <div>
+              <Link>
+                <FiShare size={SmallIconSize} className="listing-icon" />
+              </Link>
+              <p>Share</p>
+            </div>
+            <div>
+              <Link>
+                <FaRegHeart size={SmallIconSize} className="listing-icon" />
+              </Link>
+              <p>Add to wishlist</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="listing-basic-info">
+          <div>
+            <BiMapPin size={SmallIconSize} />
+            <p>
+              {city}, {country}
+            </p>
+          </div>
+          <div>
+            <BiHomeHeart size={SmallIconSize} />
+            <p>{type}</p>
+          </div>
+          <div>
+            <BiBed size={SmallIconSize} />
+            <p>Sleep: {numberOfSleepingSpots}</p>
+          </div>
+
+          {availability ? (
+            <div>
+              <FaRegCalendarCheck
+                size={SmallIconSize}
+                style={{ color: "yellowgreen" }}
+              />
+              <p>Currently available</p>
+            </div>
+          ) : (
+            <div>
+              <FaRegCalendarTimes
+                size={SmallIconSize}
+                style={{ color: "salmon" }}
+              />
+              <p>Currently unavailable</p>
+            </div>
+          )}
+        </div>
       </div>
+
       <div className="owner-card">
-        <h4>About the owner</h4>
-        <img src={owner.profilePic} height="100px" />
-        <p>{owner.firstName}</p>
-        {owner.firstName ? (
-          <p>
-            {owner.firstName} ({owner.username})
-          </p>
-        ) : (
-          <p>{owner.username}</p>
-        )}
-        <Link to={`${PATHS.USER}/${owner.username}`}>See user's profile</Link>
+        <h4>Meet the owner</h4>
+        <div>
+          <img src={owner.profilePic} height="100px" />
+          <div className="owner-card-info">
+            {owner.firstName ? (
+              <p>
+                {owner.firstName} ({owner.username})
+              </p>
+            ) : (
+              <p>{owner.username}</p>
+            )}
+            <Link to={`${PATHS.USER}/${owner.username}`}>
+              See user's profile
+            </Link>
+          </div>
+        </div>
       </div>
+
       <div>
-        <p>Type: {type}</p>
         <div>
           Available for:{" "}
           {lengthOfStay.map((item) => (
@@ -96,32 +153,10 @@ export default function SingleListing(props) {
           ))}
         </div>
       </div>
-      <div>
-        {availability ? (
-          <div>
-            <FaRegCalendarCheck
-              size={SmallIconSize}
-              style={{ color: "yellowgreen" }}
-            />
-            <p>Currently available</p>
-          </div>
-        ) : (
-          <div>
-            <FaRegCalendarTimes
-              size={SmallIconSize}
-              style={{ color: "salmon" }}
-            />
-            <p>Currently unavailable</p>
-          </div>
-        )}
-      </div>
+
       <div>
         <h2>About the flat</h2>
         <div className="icons-container">
-          <div className="sleeps-box">
-            <FaBed size={BigIconSize} style={{ color: "yellowgreen" }} />
-            <span>{numberOfSleepingSpots}</span>
-          </div>
           <div>
             <MdSmokingRooms
               size={BigIconSize}
