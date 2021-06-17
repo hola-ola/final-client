@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
+import * as AMENITIES from "../../utils/amenities";
 import * as USER_SERVICE from "../../services/user.service.js";
 import * as REVIEW_SERVICE from "../../services/review.service";
 import * as LISTING_SERVICE from "../../services/listing.service";
@@ -17,6 +19,7 @@ export default function UserPage(props) {
   const [owner, setOwner] = useState(true);
   const [receivedReviews, setReceivedReviews] = useState([]);
   const [givenReviews, setGivenReviews] = useState([]);
+  const [userListing, setUserListing] = useState({ ...AMENITIES.LISTING_FORM });
   const { authenticate } = props;
   const usernameFromProps = props.match.params.username;
   const loggedUser = props.user.username;
@@ -34,6 +37,26 @@ export default function UserPage(props) {
       })
       .catch((err) => {
         console.error("This is the error: ", err);
+      });
+  }
+
+  useEffect(() => {
+    refetchUser();
+    GetReceivedReviews();
+    GetGivenReviews();
+    GetUserListing();
+  }, [props.match.params.username]);
+
+  function DeleteProfile() {
+    USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
+      .then((response) => {
+        console.log("The user has been removed");
+        props.history.push(PATHS.HOMEPAGE);
+        localStorage.removeItem(CONSTS.ACCESS_TOKEN);
+        props.authenticate(null);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
       });
   }
 
@@ -57,19 +80,14 @@ export default function UserPage(props) {
       });
   }
 
-  useEffect(() => {
-    refetchUser();
-    GetReceivedReviews();
-    GetGivenReviews();
-  }, [props.match.params.username]);
-
-  function DeleteProfile() {
-    USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
+  function GetUserListing() {
+    LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
       .then((response) => {
-        console.log("The user has been removed");
-        props.history.push(PATHS.HOMEPAGE);
-        localStorage.removeItem(CONSTS.ACCESS_TOKEN);
-        props.authenticate(null);
+        setUserListing(response.data.listing);
+        console.log(
+          "This is the listing of this user: ",
+          response.data.listing
+        );
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
@@ -115,6 +133,7 @@ export default function UserPage(props) {
                 user={user}
                 authenticate={authenticate}
                 {...props}
+                refetchUser={refetchUser}
               />
             </>
           )}
@@ -136,18 +155,21 @@ export default function UserPage(props) {
         )}
 
         <div>
-          <h3>Received reviews</h3>
+          <h2>REVIEWS</h2>
           <button>View all reviews</button>
+          <h3>Received reviews</h3>
+
           {receivedReviews.slice(0, 4).map((item, index) => (
-            <ShowReview item={item} key={index} />
+            <ShowReview item={item} key={index} user={user} />
           ))}
         </div>
 
         <div>
           <h3>Given reviews</h3>
-          <button>View all reviews</button>
+
+          <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}></Link>
           {givenReviews.slice(0, 4).map((item, index) => (
-            <ShowReview item={item} key={index} />
+            <ShowReview item={item} key={index} user={user} />
           ))}
         </div>
       </div>
@@ -155,7 +177,19 @@ export default function UserPage(props) {
       <div className="user-listing">
         <div>
           <h3>Listing</h3>
-          <img src="" alt={`Listing of ${user.username}`}></img>
+          {user.userListing ? (
+            <>
+              <ResultCard item={userListing} key={userListing._id} />
+            </>
+          ) : (
+            <>
+              <p>You haven't created a listing yet</p>
+              <Link to={`${PATHS.CREATE_LISTING}`}>
+                <button>Create a listing</button>
+              </Link>
+            </>
+          )}
+
           {owner && (
             <>
               <button>Edit listing</button>
