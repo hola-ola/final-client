@@ -8,6 +8,7 @@ import {
   FaRegCalendarTimes,
 } from "react-icons/fa";
 import { MdSmokingRooms } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
 import * as CONSTS from "../../utils/consts";
@@ -20,6 +21,7 @@ export default function SingleListing(props) {
   const [listing, setListing] = useState({
     ...AMENITIES.LISTING_FORM,
   });
+  const [isOwner, setIsOwner] = useState(false);
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
@@ -28,6 +30,9 @@ export default function SingleListing(props) {
       .then((res) => {
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
+        }
+        if (props.user.userListing.includes(listingFromProps)) {
+          setIsOwner(true);
         }
         setListing(res.data.listing);
       })
@@ -190,6 +195,17 @@ export default function SingleListing(props) {
           ></img>
         ))}
       </div>
+
+      {isOwner ? (
+        <div>
+          <Link to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}>Edit</Link>
+          <Link to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}>
+            Delete
+          </Link>
+        </div>
+      ) : (
+        <Link to={`${PATHS.USER}/${owner.username}`}>See owner's profile</Link>
+      )}
     </div>
   );
 }

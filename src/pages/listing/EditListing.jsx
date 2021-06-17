@@ -29,7 +29,6 @@ export default function EditListing(props) {
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
         }
-
         setListing(res.data.listing);
         overrideForm(res.data.listing);
       })
@@ -43,7 +42,6 @@ export default function EditListing(props) {
         if (!response) {
           return console.log("NO RESPONSE");
         }
-        console.log("This is the response: ", response);
         return props.history.push(`${PATHS.LISTINGS}/${listing._id}`);
       })
       .catch((err) => {
