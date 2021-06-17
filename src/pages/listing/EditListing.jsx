@@ -76,7 +76,7 @@ export default function EditListing(props) {
 
   return (
     <div className="create-listing-wrapper">
-      <h1>We're gonna update this shit</h1>
+      <h1>Edit your listing</h1>
       <form onSubmit={onSubmit}>
         <div>
           <p>Title</p>
@@ -103,7 +103,6 @@ export default function EditListing(props) {
               <CheckboxInput
                 key={index}
                 {...inputProps("lengthOfStay", { item })}
-                // checked={[lengthOfStay].includes(item) ? true : false}
               />
             ))}
           </div>
@@ -113,11 +112,7 @@ export default function EditListing(props) {
           <p>Type</p>
           <div className="checkbox-container">
             {AMENITIES.LISTING_TYPE.map((item, index) => (
-              <CheckboxInput
-                key={index}
-                {...inputProps("type", { item })}
-                // checked={[type].includes(item) ? true : false}
-              />
+              <CheckboxInput key={index} {...inputProps("type", { item })} />
             ))}
           </div>
         </div>
@@ -325,7 +320,7 @@ export default function EditListing(props) {
             </RadioInput>
           </div>
         </div>
-        <button>Submit the listing!</button>
+        <button>Save changes</button>
       </form>
     </div>
   );

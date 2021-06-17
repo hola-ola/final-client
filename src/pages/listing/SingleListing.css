@@ -1,1 +1,21 @@
+.icons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin: auto;
+}
 
+.icons-container div {
+  padding: 5px;
+}
+
+.sleeps-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sleeps-box span {
+  font-size: 25px;
+  padding-left: 5px;
+}

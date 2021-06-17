@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { FaBed, FaBaby, FaDog, FaUmbrellaBeach } from "react-icons/fa";
+import { MdSmokingRooms } from "react-icons/md";
+
 import * as LISTING_SERVICE from "../../services/listing.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
+
+import "./SingleListing.css";
 
 export default function SingleListing(props) {
   const [listing, setListing] = useState({
@@ -24,17 +29,28 @@ export default function SingleListing(props) {
 
   const {
     title,
-    city,
+    owner,
     country,
+    city,
+    lengthOfStay,
     type,
     numberOfSleepingSpots,
-    lengthOfStay,
+    generalDescription,
     kitchenEquipment,
     bathroomEquipment,
     workSetup,
+    accessibility,
+    smokersWelcome,
+    kidsWelcome,
+    petsWelcome,
+    spaceOutside,
+    extraRemarks,
+    ambienceLabels,
     imagesGallery,
-    owner,
+    availability,
   } = listing;
+
+  let iconSize = "35px";
 
   return (
     <div>
@@ -58,7 +74,36 @@ export default function SingleListing(props) {
       </div>
       <div>
         <h2>About the flat</h2>
-        <p>Sleeps: {numberOfSleepingSpots}</p>
+        <div className="icons-container">
+          <div className="sleeps-box">
+            <FaBed size={iconSize} style={{ color: "yellowgreen" }} />
+            <span>{numberOfSleepingSpots}</span>
+          </div>
+          <div>
+            <MdSmokingRooms
+              size={iconSize}
+              style={{ color: smokersWelcome ? "yellowgreen" : "salmon" }}
+            />
+          </div>
+          <div>
+            <FaBaby
+              size={iconSize}
+              style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
+            />
+          </div>
+          <div>
+            <FaDog
+              size={iconSize}
+              style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
+            />
+          </div>
+          <div>
+            <FaUmbrellaBeach
+              size={iconSize}
+              style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
+            />
+          </div>
+        </div>
         <div>
           Kitchen:{" "}
           {kitchenEquipment.map((item) => (
@@ -77,7 +122,34 @@ export default function SingleListing(props) {
             <p>{item}</p>
           ))}
         </div>
-        <div>Accessibility:</div>
+        <div>
+          <p></p>Accessibility:
+          <div>
+            {accessibility.map((item) => (
+              <p>{item}</p>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3>What ({owner.username}) says about their place:</h3>
+          <div>{generalDescription}</div>
+        </div>
+      </div>
+
+      <div>
+        <h2>About the area</h2>
+        <div>
+          <h3>Perfect for:</h3>
+          <div>
+            {ambienceLabels.map((item) => (
+              <p>{item}</p>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3>What {owner.username} says about the neighborhood:</h3>
+          <div>{extraRemarks}</div>
+        </div>
       </div>
 
       <div>

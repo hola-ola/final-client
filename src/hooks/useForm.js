@@ -44,7 +44,7 @@ export default function useForm(formObj) {
       });
     }
 
-    console.log(form);
+    // console.log(form);
 
     setForm({
       ...form,
