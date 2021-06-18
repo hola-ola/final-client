@@ -6,7 +6,6 @@ const listingService = axios.create({
 });
 
 export function CREATE_LISTING(body, token) {
-  console.log(body);
   return listingService
     .post("/create", body, {
       headers: {
@@ -14,7 +13,6 @@ export function CREATE_LISTING(body, token) {
       },
     })
     .then((res) => {
-      console.log("data from server: ", res.data);
       return res.data;
     })
     .catch((err) => console.log(err.response));
