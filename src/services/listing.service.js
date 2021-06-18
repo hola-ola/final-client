@@ -78,3 +78,16 @@ export function REMOVE_LISTING(listingId, token) {
     })
     .catch((err) => console.log(err.response));
 }
+
+export function VIEW_USER_LISTING(username, token) {
+  return listingService
+    .get(`/${username}/listing`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err.response));
+}

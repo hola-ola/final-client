@@ -17,3 +17,5 @@ export const LISTING_REMOVED = `${LISTINGS}/:listingId/removed`;
 
 export const RESULTS = "/results";
 export const SEARCH_RESULTS = `${RESULTS}/search`;
+
+export const USER_REVIEWS = `${USERPAGE}/reviews`;

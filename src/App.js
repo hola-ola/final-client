@@ -19,6 +19,7 @@ import DeleteListing from "./pages/listing/DeleteListing";
 import RemovedListing from "./pages/listing/RemovedListing";
 import UserPage from "./pages/user/UserPage";
 import SearchPage from "./pages/search/SearchPage";
+import GetAllReviews from "./pages/reviews/AllReviews";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -125,11 +126,17 @@ export default function App() {
           component={RemovedListing}
           user={user}
         />
-
         <ProtectedRoute
           exact
           path={PATHS.USERPAGE}
           component={UserPage}
+          user={user}
+          authenticate={authenticate}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.USER_REVIEWS}
+          component={GetAllReviews}
           user={user}
           authenticate={authenticate}
         />
