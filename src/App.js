@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
+import axios from "axios";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./pages/homepage/HomePage";
@@ -20,6 +21,7 @@ import RemovedListing from "./pages/listing/RemovedListing";
 import UserPage from "./pages/user/UserPage";
 import SearchPage from "./pages/search/SearchPage";
 import GetAllReviews from "./pages/reviews/AllReviews";
+import InboxPage from "./pages/inbox/InboxPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +38,12 @@ export default function App() {
       }
       setUser(res.data.user);
       setIsLoading(false);
+      //getting a list of conversations focusing only on the number of unread
+      axios
+        .get(`${CONSTS.SERVER_URL}/conversations`, {
+          headers: { authorization: accessToken },
+        })
+        .then((response) => console.log("CONVERSATIONS", response));
     });
   }, []);
 
@@ -137,6 +145,13 @@ export default function App() {
           exact
           path={PATHS.USER_REVIEWS}
           component={GetAllReviews}
+          user={user}
+          authenticate={authenticate}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.MESSAGES}
+          component={InboxPage}
           user={user}
           authenticate={authenticate}
         />
