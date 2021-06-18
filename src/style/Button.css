@@ -1,0 +1,15 @@
+.btn {
+  min-width: 70px;
+  padding: 7px;
+  border-radius: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.red {
+  background-color: salmon;
+}
