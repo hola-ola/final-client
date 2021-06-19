@@ -38,7 +38,10 @@ const Navbar = (props) => {
               <Link to={PATHS.HOMEPAGE} className="navbar-link">
                 Inbox
               </Link>
-              <Link className="btn tan navbar-link" onClick={handleLogout}>
+              <Link
+                className="btn sandybrown  navbar-link"
+                onClick={handleLogout}
+              >
                 Logout
               </Link>
             </div>
