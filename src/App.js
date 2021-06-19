@@ -109,6 +109,7 @@ export default function App() {
           path={PATHS.CREATE_LISTING}
           component={CreateListing}
           user={user}
+          authenticate={authenticate}
         />
         <ProtectedRoute
           exact

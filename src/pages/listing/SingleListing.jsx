@@ -30,6 +30,7 @@ export default function SingleListing(props) {
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   useEffect(() => {
+    console.log(props.user);
     LISTING_SERVICE.VIEW_LISTING(listingFromProps, accessToken)
       .then((res) => {
         if (!res.data.listing) {
