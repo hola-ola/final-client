@@ -101,3 +101,17 @@ export function VIEW_USER_LISTING(username, token) {
     })
     .catch((err) => console.log(err.response));
 }
+
+// ADD to user's wishlist
+export function WISHLIST_ADD(listingId, token) {
+  return listingService
+    .get(`/${listingId}/wishlist-add`, {
+      headers: {
+        authorization: token,
+      },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => console.log(err));
+}

@@ -13,7 +13,6 @@ import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
-import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
@@ -32,9 +31,9 @@ export default function SingleListing(props) {
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   function AddToWishlist() {
-    USER_SERVICE.WISHLIST_ADD(listingFromProps, accessToken)
+    LISTING_SERVICE.WISHLIST_ADD(listingFromProps, accessToken)
       .then((response) => {
-        console.log("The response about the wishlist: ", response);
+        // console.log("The response about the wishlist: ", response);
       })
       .catch((err) => {
         console.error(err.response);
@@ -42,7 +41,7 @@ export default function SingleListing(props) {
   }
 
   useEffect(() => {
-    console.log(props.user);
+    // console.log(props.user);
     LISTING_SERVICE.VIEW_LISTING(listingFromProps, accessToken)
       .then((res) => {
         if (!res.data.listing) {

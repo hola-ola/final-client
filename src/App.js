@@ -20,9 +20,10 @@ import DeleteListing from "./pages/listing/DeleteListing";
 import RemovedListing from "./pages/listing/RemovedListing";
 import UserPage from "./pages/user/UserPage";
 import SearchPage from "./pages/search/SearchPage";
-import GetAllReviews from "./pages/reviews/AllReviews";
+import UserReviews from "./pages/user/UserReviews";
 import InboxPage from "./pages/inbox/InboxPage";
 import NewMessage from "./pages/inbox/NewMessage";
+import userWishlist from "./pages/user/UserWishlist";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -146,7 +147,7 @@ export default function App() {
         <ProtectedRoute
           exact
           path={PATHS.USER_REVIEWS}
-          component={GetAllReviews}
+          component={UserReviews}
           user={user}
           authenticate={authenticate}
         />
@@ -154,6 +155,13 @@ export default function App() {
           exact
           path={PATHS.MESSAGES}
           component={InboxPage}
+          user={user}
+          authenticate={authenticate}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.USER_WISHLIST}
+          component={userWishlist}
           user={user}
           authenticate={authenticate}
         />
