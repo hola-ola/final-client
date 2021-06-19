@@ -7,6 +7,10 @@
   padding: 10px;
 }
 
+.result-card img {
+  max-width: 200px;
+}
+
 .result-card button {
   width: 100px;
   margin: auto;
