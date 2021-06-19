@@ -6,6 +6,7 @@ import * as AMENITIES from "../../utils/amenities";
 import * as USER_SERVICE from "../../services/user.service.js";
 import * as REVIEW_SERVICE from "../../services/review.service";
 import * as LISTING_SERVICE from "../../services/listing.service";
+import * as MESSAGE_SERVICE from "../../services/message.service";
 import UpdateProfile from "../../components/User/UpdateProfile";
 import UpdateProfilePic from "../../components/User/UpdateProfilePic";
 import DeleteProfile from "../../components/User/DeleteProfile";
@@ -86,6 +87,12 @@ export default function UserPage(props) {
       });
   }
 
+  function contactUser() {
+    MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div className="user-page">
       <div className="user-data">
@@ -106,7 +113,7 @@ export default function UserPage(props) {
             </>
           )}
         </div>
-
+        {!owner ? <button onClick={contactUser}>Contact user</button> : null}
         <div>
           <h3>Personal details</h3>
           <p>First name: {user.firstName}</p>

@@ -22,7 +22,18 @@ export function NEW_CONVERSATION(token) {
       headers: { authorization: token },
     })
     .then((res) => {
-      console.log(res.data);
+      return res.data;
+    })
+    .catch((err) => console.log(err.response));
+}
+
+export function CONTACT_USER(recepient, token) {
+  console.log(recepient);
+  return messageService
+    .post("/start-conversation", recepient, {
+      headers: { authorization: token },
+    })
+    .then((res) => {
       return res.data;
     })
     .catch((err) => console.log(err.response));

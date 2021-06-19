@@ -157,13 +157,13 @@ export default function App() {
           user={user}
           authenticate={authenticate}
         />
-        <ProtectedRoute
+        {/* <ProtectedRoute
           exact
           path={PATHS.NEW_MESSAGE}
           component={NewMessage}
           user={user}
           authenticate={authenticate}
-        />
+        /> */}
       </Switch>
     </div>
   );
