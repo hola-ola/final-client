@@ -8,6 +8,7 @@ export const USER = "/user";
 export const USERPAGE = `${USER}/:username`;
 export const USER_EDIT = `${USERPAGE}/edit`;
 export const USER_REVIEWS = `${USERPAGE}/reviews`;
+export const USER_WISHLIST = `${USERPAGE}/wishlist`;
 
 export const LISTINGS = "/listings";
 export const CREATE_LISTING = `${LISTINGS}/create`;

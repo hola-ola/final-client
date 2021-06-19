@@ -7,13 +7,12 @@ import * as USER_SERVICE from "../../services/user.service.js";
 import * as REVIEW_SERVICE from "../../services/review.service";
 import * as LISTING_SERVICE from "../../services/listing.service";
 import * as MESSAGE_SERVICE from "../../services/message.service";
-// import UpdateProfile from "../../components/User/UpdateProfile";
-// import UpdateProfilePic from "../../components/User/UpdateProfilePic";
-// import DeleteProfile from "../../components/User/DeleteProfile";
+import UpdateProfile from "../../components/User/UpdateProfile";
+import UpdateProfilePic from "../../components/User/UpdateProfilePic";
+import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
 import ResultCard from "../../components/Result/ResultCard";
-import AllReviews from "../../pages/reviews/AllReviews";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
 
@@ -27,6 +26,7 @@ export default function UserPage(props) {
   const usernameFromProps = props.match.params.username;
   const loggedUser = props.user.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+  const userWishlist = user.wishlist;
 
   const [displayUpdateProfile, toggleUpdateProfile] = useToggle(false);
   const [displayDeleteProfile, toggleDeleteProfile] = useToggle(false);
@@ -104,7 +104,7 @@ export default function UserPage(props) {
               <button onClick={toggleUpdatePic}>Update profile pic</button>
             </>
           )}
-          {/* {displayUpdatePic && (
+          {displayUpdatePic && (
             <>
               <UpdateProfilePic
                 getUser={refetchUser}
@@ -112,7 +112,7 @@ export default function UserPage(props) {
                 authenticate={authenticate}
               />
             </>
-          )} */}
+          )}
         </div>
         {!owner ? <button onClick={contactUser}>Contact user</button> : null}
         <div>
@@ -127,7 +127,7 @@ export default function UserPage(props) {
               <button onClick={toggleDeleteProfile}>Delete profile</button>
             </>
           )}
-          {/* {displayUpdateProfile && (
+          {displayUpdateProfile && (
             <>
               <UpdateProfile
                 user={user}
@@ -137,8 +137,8 @@ export default function UserPage(props) {
                 toggleUpdateProfile={toggleUpdateProfile}
               />
             </>
-          )} */}
-          {/* {displayDeleteProfile && (
+          )}
+          {displayDeleteProfile && (
             <>
               <DeleteProfile
                 user={user}
@@ -147,7 +147,7 @@ export default function UserPage(props) {
                 toggleDeleteProfile={toggleDeleteProfile}
               />
             </>
-          )} */}
+          )}
         </div>
         {!owner && (
           <>
@@ -233,8 +233,31 @@ export default function UserPage(props) {
         </div>
         <div>
           <h3>Wishlist</h3>
-          <p>To fix when we have adding to wishlist ready</p>
-          <button>View all</button>
+          {!owner && !user?.wishlist?.length && (
+            <>
+              <p>
+                {user.username} hasn't added any listings to their wishlist yet
+              </p>
+            </>
+          )}
+          {owner && !user?.wishlist?.length && (
+            <>
+              <p>You haven't added any listings to your wishlist yet</p>
+            </>
+          )}
+          {user?.wishlist?.length ? (
+            <>
+              <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                <button>View wishlist</button>
+              </Link>
+
+              {userWishlist.slice(0, 4).map((item) => (
+                <ResultCard item={item} key={item._id}>
+                  View listing
+                </ResultCard>
+              ))}
+            </>
+          ) : null}
         </div>
       </div>
     </div>

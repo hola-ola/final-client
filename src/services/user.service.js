@@ -42,9 +42,18 @@ export function UPDATE_USER(body, token) {
   });
 }
 
-// ADD to user's wishlist
-export function WISHLIST_ADD(body, token) {
-  return userService.put("/wishlist/add", body, {
+// GET user wishlist
+export function GET_WISHLIST(username, token) {
+  return userService.get(`/${username}/wishlist`, {
+    headers: {
+      authorization: token,
+    },
+  });
+}
+
+// DELETE user wishlist
+export function WISHLIST_DELETE(username, listingId, token) {
+  return userService.get(`/${username}/wishlist/delete`, {
     headers: {
       authorization: token,
     },

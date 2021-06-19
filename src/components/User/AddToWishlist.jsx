@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as CONSTS from "../../utils/consts";
 import * as USER_SERVICE from "../../services/user.service.js";
 
