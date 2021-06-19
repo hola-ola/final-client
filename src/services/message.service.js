@@ -22,6 +22,7 @@ export function NEW_CONVERSATION(token) {
       headers: { authorization: token },
     })
     .then((res) => {
+      console.log(res.data);
       return res.data;
     })
     .catch((err) => console.log(err.response));

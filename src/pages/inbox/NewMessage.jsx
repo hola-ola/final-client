@@ -13,8 +13,10 @@ export default function NewMessage() {
     messages: [],
   });
 
+  const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+
   useEffect(() => {
-    MESSAGE_SERVICE.NEW_CONVERSATION()
+    MESSAGE_SERVICE.NEW_CONVERSATION(accessToken)
       .then((res) => {
         console.log(res.data);
       })
