@@ -7,9 +7,9 @@ import * as USER_SERVICE from "../../services/user.service.js";
 import * as REVIEW_SERVICE from "../../services/review.service";
 import * as LISTING_SERVICE from "../../services/listing.service";
 import * as MESSAGE_SERVICE from "../../services/message.service";
-import UpdateProfile from "../../components/User/UpdateProfile";
-import UpdateProfilePic from "../../components/User/UpdateProfilePic";
-import DeleteProfile from "../../components/User/DeleteProfile";
+// import UpdateProfile from "../../components/User/UpdateProfile";
+// import UpdateProfilePic from "../../components/User/UpdateProfilePic";
+// import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
 import ResultCard from "../../components/Result/ResultCard";
@@ -104,7 +104,7 @@ export default function UserPage(props) {
               <button onClick={toggleUpdatePic}>Update profile pic</button>
             </>
           )}
-          {displayUpdatePic && (
+          {/* {displayUpdatePic && (
             <>
               <UpdateProfilePic
                 getUser={refetchUser}
@@ -112,7 +112,7 @@ export default function UserPage(props) {
                 authenticate={authenticate}
               />
             </>
-          )}
+          )} */}
         </div>
         {!owner ? <button onClick={contactUser}>Contact user</button> : null}
         <div>
@@ -127,7 +127,7 @@ export default function UserPage(props) {
               <button onClick={toggleDeleteProfile}>Delete profile</button>
             </>
           )}
-          {displayUpdateProfile && (
+          {/* {displayUpdateProfile && (
             <>
               <UpdateProfile
                 user={user}
@@ -137,8 +137,8 @@ export default function UserPage(props) {
                 toggleUpdateProfile={toggleUpdateProfile}
               />
             </>
-          )}
-          {displayDeleteProfile && (
+          )} */}
+          {/* {displayDeleteProfile && (
             <>
               <DeleteProfile
                 user={user}
@@ -147,7 +147,7 @@ export default function UserPage(props) {
                 toggleDeleteProfile={toggleDeleteProfile}
               />
             </>
-          )}
+          )} */}
         </div>
         {!owner && (
           <>

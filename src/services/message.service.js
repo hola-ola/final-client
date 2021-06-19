@@ -28,7 +28,6 @@ export function NEW_CONVERSATION(token) {
 }
 
 export function CONTACT_USER(recepient, token) {
-  console.log(recepient);
   return messageService
     .post(
       "/start-conversation",
