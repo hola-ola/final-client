@@ -1,0 +1,11 @@
+.howto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  max-width: 200px;
+}
+
+.howto-card p {
+  /* align to center */
+}

@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import * as PATHS from "../../utils/paths";
 import * as CONTENT from "../../utils/content";
 import DestinationCard from "../../components/DestinationCard/DestinationCard";
+import HowToCard from "../../components/HowToCard/HowToCard";
+import {
+  BiHomeHeart,
+  BiSearchAlt,
+  BiMailSend,
+  BiWinkSmile,
+} from "react-icons/bi";
+import { IoMdSwap } from "react-icons/io";
 import "./HomePage.css";
 import "../../style/Button.css";
 
@@ -56,18 +64,32 @@ export default function HomePage(props) {
       <div className="howitworks-container">
         <div className="content-box">
           <h2>See how it works</h2>
-          <p>1. Create your listing</p>
-          <p>[description]</p>
-          <p>[button]</p>
-          <p>2. Look for homes</p>
-          <p>[description]</p>
-          <p>[button]</p>
-          <p>3. Swap with someone</p>
-          <p>[description]</p>
-          <p>[button]</p>
-          <p>4. Live like a local</p>
-          <p>[description]</p>
-          <p>[button]</p>
+          <p>
+            We promise it's as simple as it sounds. You exchange your home with
+            another person or family for a vacation, a quick city break, or a
+            longer period of time.
+          </p>
+          <div className="destinations-box">
+            {CONTENT.HOW_IT_WORKS.map((item, index) => (
+              <div>
+                {index === 0 ? (
+                  <BiHomeHeart size="50px" />
+                ) : index === 1 ? (
+                  <BiSearchAlt size="50px" />
+                ) : index === 2 ? (
+                  <BiMailSend size="50px" />
+                ) : index === 3 ? (
+                  <IoMdSwap size="50px" />
+                ) : (
+                  <BiWinkSmile size="50px" />
+                )}
+                <HowToCard item={item} key={index} />
+              </div>
+            ))}
+          </div>
+          <Link to={`${PATHS.CREATE_LISTING}`} className="btn bigger coral">
+            Create your listing
+          </Link>
         </div>
       </div>
 
@@ -76,7 +98,7 @@ export default function HomePage(props) {
           <h2>Discover popular destinations</h2>
           <div className="destinations-box">
             {CONTENT.POPULAR_DESTINATIONS.map((item, index) => (
-              <DestinationCard item={item} index={index} />
+              <DestinationCard item={item} key={index} />
             ))}
           </div>
         </div>

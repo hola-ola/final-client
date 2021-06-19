@@ -20,3 +20,32 @@ export const POPULAR_DESTINATIONS = [
     src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624136322/hop-flat-swap/hp-canary-islands_zgzvt0.jpg",
   },
 ];
+
+export const HOW_IT_WORKS = [
+  {
+    title: "1. Create your listing",
+    description:
+      "Just checking how it looks with a long long long long long long long long long long long  text",
+    icon: "BiHomeHeart",
+  },
+  {
+    title: "2. Look for homes",
+    description: "[description]",
+    icon: "BiSearchAlt",
+  },
+  {
+    title: "3. Get in touch",
+    description: "[description]",
+    icon: "BiMailSend",
+  },
+  {
+    title: "4. Swap your homes",
+    description: "[description]",
+    icon: "IoMdSwap",
+  },
+  {
+    title: "5. Live like a local",
+    description: "[description]",
+    icon: "BiWinkSmile",
+  },
+];

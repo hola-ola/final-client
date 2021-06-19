@@ -5,9 +5,9 @@ import "./DestinationCard.css";
 import "../../style/Button.css";
 
 export default function DestinationCard(props) {
-  const { item, index } = props;
+  const { item } = props;
   return (
-    <div key={index} className="dest-card">
+    <div className="dest-card">
       <div className="image-cropper">
         <Link
           to={`${PATHS.SEARCH_RESULTS}?q=${item.destination}`}
