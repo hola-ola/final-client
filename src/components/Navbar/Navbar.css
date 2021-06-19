@@ -1,11 +1,14 @@
+/* green #d4e09b
+black #191414 */
+
 nav {
+  height: 60px;
   display: flex;
-  padding: 1em;
   justify-content: space-between;
-  flex-wrap: wrap;
-  background: #241e4e;
+  align-items: center;
+  background: #d4e09b;
   font-weight: 600;
-  color: #f2f8f4;
+  color: #191414;
 }
 
 .navbar {
@@ -14,22 +17,39 @@ nav {
   justify-content: space-around;
 }
 
-.project-name {
-  color: #bddbc7;
-  text-decoration: none;
-  margin: 10px;
+.navbar-logo {
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 15px;
 }
 
-.authLink {
-  color: #f2f8f4;
-  text-decoration: none;
-  margin: 10px;
+.navbar-logo-icon {
+  color: #191414;
+  margin: 5px;
 }
 
-.nav-logoutbtn {
-  font-size: 16px;
-  background-color: #bddbc7;
-  color: #241e4e;
+.navbar-logo-name {
+  color: #191414;
+  text-decoration: none;
+  font-size: 1.2em;
+  letter-spacing: 3px;
+  padding: 0 5px;
+}
+
+.navbar-links {
+  height: 40px;
   padding: 10px 20px;
-  border: none;
+  width: 20vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-link {
+  color: #191414;
+  text-decoration: none;
+  font-size: 1.1em;
+  margin: 10px;
 }

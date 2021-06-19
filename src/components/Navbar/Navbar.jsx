@@ -1,44 +1,59 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
+import { BiHomeHeart } from "react-icons/bi";
+
+import "./Navbar.css";
+import "../../style/Button.css";
 
 const Navbar = (props) => {
-  const { user } = props;
+  const { user, handleLogout } = props;
 
   return (
     <nav>
-      <div>
-        <Link to={PATHS.HOMEPAGE} className="project-name">
-          {CONSTS.CAPITALIZED_APP}
-        </Link>
+      <div className="navbar-logo">
+        <div>
+          <BiHomeHeart className="navbar-logo-icon" size="30px" />
+        </div>
+        <div>
+          <Link to={PATHS.HOMEPAGE} className="navbar-logo-name">
+            {CONSTS.CAPITALIZED_APP}
+          </Link>
+        </div>
       </div>
 
       <div>
         {user ? (
           <>
-            <div className="navbar">
-              <Link to={`${PATHS.USER}/${user.username}`} className="authLink">
+            <div className="navbar-links">
+              {/* <div>Hey, {user.username}!</div> */}
+              <Link
+                to={`${PATHS.USER}/${user.username}`}
+                className="navbar-link"
+              >
                 Profile
               </Link>
-              <Link to={PATHS.HOMEPAGE} className="authLink">
+              <Link to={PATHS.HOMEPAGE} className="navbar-link">
                 Inbox
               </Link>
-              <p>Hey, {props.user.username}!</p>
-              <button className="nav-logoutbtn" onClick={props.handleLogout}>
+              <Link
+                className="btn sandybrown  navbar-link"
+                onClick={handleLogout}
+              >
                 Logout
-              </button>
+              </Link>
             </div>
           </>
         ) : (
           <>
             <div>
-              <Link to={PATHS.SIGNUPPAGE} className="authLink">
-                Signup
+              <Link to={PATHS.SIGNUPPAGE} className="btn tan navbar-link">
+                Sign up
               </Link>
-              <Link to={PATHS.LOGINPAGE} className="authLink">
-                Log In
+              <Link to={PATHS.LOGINPAGE} className="btn tan navbar-link">
+                Log in
               </Link>
             </div>
           </>

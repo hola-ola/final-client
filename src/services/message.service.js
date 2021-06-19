@@ -28,11 +28,14 @@ export function NEW_CONVERSATION(token) {
 }
 
 export function CONTACT_USER(recepient, token) {
-  console.log(recepient);
   return messageService
-    .post("/start-conversation", recepient, {
-      headers: { authorization: token },
-    })
+    .post(
+      "/start-conversation",
+      { recepient },
+      {
+        headers: { authorization: token },
+      }
+    )
     .then((res) => {
       return res.data;
     })
