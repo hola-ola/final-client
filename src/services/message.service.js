@@ -18,7 +18,7 @@ export function SHOW_CONVERSATIONS(token) {
 
 export function NEW_CONVERSATION(token) {
   return messageService
-    .get("/new", {
+    .post("/new", {
       headers: { authorization: token },
     })
     .then((res) => {
