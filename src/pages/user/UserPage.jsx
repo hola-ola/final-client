@@ -8,6 +8,7 @@ import * as REVIEW_SERVICE from "../../services/review.service";
 import * as LISTING_SERVICE from "../../services/listing.service";
 import UpdateProfile from "../../components/User/UpdateProfile";
 import UpdateProfilePic from "../../components/User/UpdateProfilePic";
+import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
 import ResultCard from "../../components/Result/ResultCard";
@@ -26,6 +27,7 @@ export default function UserPage(props) {
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   const [displayUpdateProfile, toggleUpdateProfile] = useToggle(false);
+  const [displayDeleteProfile, toggleDeleteProfile] = useToggle(false);
   const [displayUpdatePic, toggleUpdatePic] = useToggle(false);
   const [displayAddReview, toggleAddReview] = useToggle(false);
 
@@ -42,23 +44,13 @@ export default function UserPage(props) {
 
   useEffect(() => {
     refetchUser();
-    GetReceivedReviews();
-    GetGivenReviews();
     GetUserListing();
   }, [props.match.params.username]);
 
-  function DeleteProfile() {
-    USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
-      .then((response) => {
-        // console.log("The user has been removed");
-        props.history.push(PATHS.HOMEPAGE);
-        localStorage.removeItem(CONSTS.ACCESS_TOKEN);
-        props.authenticate(null);
-      })
-      .catch((err) => {
-        console.error("The error is: ", err.response);
-      });
-  }
+  useEffect(() => {
+    GetReceivedReviews();
+    GetGivenReviews();
+  }, user);
 
   function GetReceivedReviews() {
     REVIEW_SERVICE.RECEIVED_REVIEWS(usernameFromProps, accessToken)
@@ -124,7 +116,7 @@ export default function UserPage(props) {
           {owner && (
             <>
               <button onClick={toggleUpdateProfile}>Edit profile</button>
-              <button onClick={DeleteProfile}>Delete profile</button>
+              <button onClick={toggleDeleteProfile}>Delete profile</button>
             </>
           )}
           {displayUpdateProfile && (
@@ -134,6 +126,15 @@ export default function UserPage(props) {
                 authenticate={authenticate}
                 {...props}
                 refetchUser={refetchUser}
+              />
+            </>
+          )}
+          {displayDeleteProfile && (
+            <>
+              <DeleteProfile
+                user={user}
+                authenticate={authenticate}
+                {...props}
               />
             </>
           )}
@@ -150,6 +151,9 @@ export default function UserPage(props) {
               user={user}
               authenticate={authenticate}
               {...props}
+              setReceivedReviews={setReceivedReviews}
+              receivedReviews={receivedReviews}
+              GetReceivedReviews={GetReceivedReviews}
             ></AddReview>
           </>
         )}
@@ -159,8 +163,8 @@ export default function UserPage(props) {
           <button>View all reviews</button>
           <h3>Received reviews</h3>
 
-          {receivedReviews.slice(0, 4).map((item, index) => (
-            <ShowReview item={item} key={index} user={user} />
+          {receivedReviews.slice(0, 4).map((item) => (
+            <ShowReview item={item} key={item._id} user={user} {...props} />
           ))}
         </div>
 
@@ -168,8 +172,8 @@ export default function UserPage(props) {
           <h3>Given reviews</h3>
 
           <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}></Link>
-          {givenReviews.slice(0, 4).map((item, index) => (
-            <ShowReview item={item} key={index} user={user} />
+          {givenReviews.slice(0, 4).map((item) => (
+            <ShowReview item={item} key={item._id} user={user} />
           ))}
         </div>
       </div>
@@ -177,20 +181,12 @@ export default function UserPage(props) {
       <div className="user-listing">
         <div>
           <h3>Listing</h3>
-          {owner && user.userListing && (
+          {!owner && !user?.userListing?.length && (
             <>
-              <ResultCard item={userListing} key={userListing._id}>
-                <button>View listing</button>
-              </ResultCard>
-              <Link to={`${PATHS.LISTINGS}/${user.userListing._id}/edit`}>
-                <button>Edit listing</button>
-              </Link>
-              <Link to={`${PATHS.LISTINGS}/${user.userListing._id}/delete`}>
-                <button>Delete listing</button>
-              </Link>
+              <p>{user.username} hasn't created a listing yet</p>
             </>
           )}
-          {owner && !user.userListing && (
+          {owner && !user?.userListing?.length && (
             <>
               <p>You haven't created a listing yet</p>
               <Link to={`${PATHS.CREATE_LISTING}`}>
@@ -198,18 +194,26 @@ export default function UserPage(props) {
               </Link>
             </>
           )}
-          {!owner && user.userListing && (
+          {!owner && user?.userListing?.length && (
             <>
               <ResultCard item={userListing} key={userListing._id}>
                 View listing
               </ResultCard>
             </>
           )}
-          {!owner && !user.userListing && (
+          {owner && user?.userListing?.length ? (
             <>
-              <p>{user.username} haven't created a listing yet</p>
+              <ResultCard item={userListing} key={userListing._id}>
+                <button>View listing</button>
+              </ResultCard>
+              <Link to={`${PATHS.LISTINGS}/${userListing._id}/edit`}>
+                <button>Edit listing</button>
+              </Link>
+              <Link to={`${PATHS.LISTINGS}/${userListing._id}/delete`}>
+                <button>Delete listing</button>
+              </Link>
             </>
-          )}
+          ) : null}
         </div>
         <div>
           <h3>Wishlist</h3>
