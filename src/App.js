@@ -22,6 +22,7 @@ import UserPage from "./pages/user/UserPage";
 import SearchPage from "./pages/search/SearchPage";
 import GetAllReviews from "./pages/reviews/AllReviews";
 import InboxPage from "./pages/inbox/InboxPage";
+import NewMessage from "./pages/inbox/NewMessage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -40,7 +41,7 @@ export default function App() {
       setIsLoading(false);
       //getting a list of conversations focusing only on the number of unread
       axios
-        .get(`${CONSTS.SERVER_URL}/conversations`, {
+        .get(`${CONSTS.SERVER_URL}/messages`, {
           headers: { authorization: accessToken },
         })
         .then((response) => console.log("CONVERSATIONS", response));
@@ -153,6 +154,13 @@ export default function App() {
           exact
           path={PATHS.MESSAGES}
           component={InboxPage}
+          user={user}
+          authenticate={authenticate}
+        />
+        <ProtectedRoute
+          exact
+          path={PATHS.NEW_MESSAGE}
+          component={NewMessage}
           user={user}
           authenticate={authenticate}
         />
