@@ -13,14 +13,13 @@ import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
+import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
 
 import "./SingleListing.css";
 import "../../style/Button.css";
-
-import AddToWishlist from "../../components/User/AddToWishlist";
 
 export default function SingleListing(props) {
   const { user, authenticate } = props;
@@ -32,8 +31,14 @@ export default function SingleListing(props) {
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
-  function AddToUserListing() {
-    AddToWishlist();
+  function AddToWishlist() {
+    USER_SERVICE.WISHLIST_ADD(listingFromProps, accessToken)
+      .then((response) => {
+        console.log("The response about the wishlist: ", response);
+      })
+      .catch((err) => {
+        console.error(err.response);
+      });
   }
 
   useEffect(() => {
@@ -92,7 +97,11 @@ export default function SingleListing(props) {
             </div>
             <div>
               <Link>
-                <FaRegHeart size={SmallIconSize} className="listing-icon" />
+                <FaRegHeart
+                  size={SmallIconSize}
+                  className="listing-icon"
+                  onClick={AddToWishlist}
+                />
               </Link>
               <p>Add to wishlist</p>
             </div>

@@ -4,27 +4,26 @@ import * as PATHS from "../../utils/paths";
 import "./ShowReview.css";
 
 function ShowReview(props) {
-  console.log(props);
+  // console.log("The props: ", props);
   const { item, index, user } = props;
   const [reviewsAuthor, setReviewsAuthor] = React.useState(true);
 
   useEffect(() => {
-    user.username === props.match.params.username
+    user.username === item.reviewingUser.username
       ? setReviewsAuthor(true)
       : setReviewsAuthor(false);
   }, []);
-
-  console.log("ITEMS VALUE", item);
 
   return (
     <div className="one-review">
       <div key={index}>
         <h4>{item.title}</h4>
 
-        {/* {reviewsAuthor ? (
+        {reviewsAuthor ? (
           <>
+            Review of{" "}
             <Link to={`${PATHS.USER}/${item.reviewedUser.username}`}>
-              <p>Review of {item.reviewedUser.username}</p>
+              {item.reviewedUser.username}
             </Link>
           </>
         ) : (
@@ -36,7 +35,7 @@ function ShowReview(props) {
               </Link>
             </p>
           </>
-        )} */}
+        )}
 
         <p>{item.body}</p>
       </div>

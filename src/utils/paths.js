@@ -7,6 +7,7 @@ export const LOGINPAGE = "/auth/login";
 export const USER = "/user";
 export const USERPAGE = `${USER}/:username`;
 export const USER_EDIT = `${USERPAGE}/edit`;
+export const USER_REVIEWS = `${USERPAGE}/reviews`;
 
 export const LISTINGS = "/listings";
 export const CREATE_LISTING = `${LISTINGS}/create`;
@@ -17,8 +18,6 @@ export const LISTING_REMOVED = `${LISTINGS}/:listingId/removed`;
 
 export const RESULTS = "/results";
 export const SEARCH_RESULTS = `${RESULTS}/search`;
-
-export const USER_REVIEWS = `${USERPAGE}/reviews`;
 
 export const MESSAGES = "/messages";
 export const SINGLE_CONVERSATION = `${MESSAGES}/:conversationId`;

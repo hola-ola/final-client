@@ -10,6 +10,7 @@ export default function AddReview(props) {
     setReceivedReviews,
     receivedReviews,
     GetReceivedReviews,
+    toggleAddReview,
   } = props;
   const [thisUser, setThisUser] = useState(user);
   const usernameFromProps = props.match.params.username;
@@ -37,9 +38,10 @@ export default function AddReview(props) {
         // console.log("Here we set the user to display new review");
 
         authenticate(thisUser);
-        console.log("The response: ", response);
-        console.log("Received reviews: ", receivedReviews);
+        // console.log("The response: ", response);
+        // console.log("Received reviews: ", receivedReviews);
         GetReceivedReviews();
+        toggleAddReview(false);
         // setReceivedReviews([...receivedReviews, response]);
       })
       .catch((err) => {
