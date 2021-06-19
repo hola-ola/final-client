@@ -22,7 +22,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px;
+  padding: 10px 15px;
 }
 
 .navbar-logo-icon {
@@ -40,8 +40,8 @@ nav {
 
 .navbar-links {
   height: 40px;
-  padding: 10px 15px;
-  width: 30vw;
+  padding: 10px 20px;
+  width: 20vw;
   display: flex;
   justify-content: space-between;
   align-items: center;

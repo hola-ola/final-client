@@ -1,9 +1,17 @@
 .btn {
   min-width: 70px;
   padding: 7px;
-  border-radius: 5px;
+  border-radius: 15px;
   color: white;
   text-decoration: none;
+}
+
+.bigger {
+  border-radius: 20px;
+  min-width: 100px;
+  padding: 15px;
+  font: 30px;
+  font-weight: bolder;
 }
 
 .orange {
@@ -16,4 +24,8 @@
 
 .tan {
   background-color: tan;
+}
+
+.darkcyan {
+  background-color: darkcyan;
 }
