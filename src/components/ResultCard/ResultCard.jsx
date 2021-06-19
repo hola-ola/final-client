@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as PATHS from "../../utils/paths";
 import "./ResultCard.css";
+import "../../style/Button.css";
 
 function ResultCard(props) {
   const { item, index } = props;
@@ -20,7 +21,9 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>{props.children}</Link>
+      <Link to={`${PATHS.LISTINGS}/${item._id}`} className="btn orange">
+        {props.children}
+      </Link>
     </div>
   );
 }
