@@ -4,7 +4,13 @@ import useForm from "../../hooks/useForm.js";
 import * as REVIEW_SERVICE from "../../services/review.service.js";
 
 export default function AddReview(props) {
-  const { user, authenticate } = props;
+  const {
+    user,
+    authenticate,
+    setReceivedReviews,
+    receivedReviews,
+    GetReceivedReviews,
+  } = props;
   const [thisUser, setThisUser] = useState(user);
   const usernameFromProps = props.match.params.username;
   const loggedUser = user._id;
@@ -29,7 +35,12 @@ export default function AddReview(props) {
       .then((response) => {
         // console.log("Server response review: ", response);
         // console.log("Here we set the user to display new review");
-        console.log(response);
+
+        authenticate(thisUser);
+        console.log("The response: ", response);
+        console.log("Received reviews: ", receivedReviews);
+        GetReceivedReviews();
+        // setReceivedReviews([...receivedReviews, response]);
       })
       .catch((err) => {
         console.error(err.response);

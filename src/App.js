@@ -40,7 +40,7 @@ export default function App() {
       setIsLoading(false);
       //getting a list of conversations focusing only on the number of unread
       axios
-        .get(`${CONSTS.SERVER_URL}/conversations`, {
+        .get(`${CONSTS.SERVER_URL}/messages`, {
           headers: { authorization: accessToken },
         })
         .then((response) => console.log("CONVERSATIONS", response));

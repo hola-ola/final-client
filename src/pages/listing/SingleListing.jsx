@@ -20,7 +20,10 @@ import * as AMENITIES from "../../utils/amenities";
 import "./SingleListing.css";
 import "../../style/Button.css";
 
+import AddToWishlist from "../../components/User/AddToWishlist";
+
 export default function SingleListing(props) {
+  const { user, authenticate } = props;
   const [listing, setListing] = useState({
     ...AMENITIES.LISTING_FORM,
   });
@@ -28,6 +31,10 @@ export default function SingleListing(props) {
   const [isOwner, setIsOwner] = useState(false);
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+
+  function AddToUserListing() {
+    AddToWishlist();
+  }
 
   useEffect(() => {
     console.log(props.user);

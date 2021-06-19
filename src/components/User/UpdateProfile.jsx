@@ -3,7 +3,6 @@ import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import useForm from "../../hooks/useForm.js";
-import useSingleImage from "../../hooks/useSingleImage";
 
 function UpdateProfile(props) {
   const { user, authenticate, refetchUser } = props;
@@ -30,7 +29,7 @@ function UpdateProfile(props) {
 
     USER_SERVICE.UPDATE_USER(editedValues, accessToken)
       .then((response) => {
-        console.log("This is updated user: ", response.data);
+        // console.log("This is updated user: ", response.data);
         authenticate(response.data.user);
         refetchUser();
         props.history.push({
