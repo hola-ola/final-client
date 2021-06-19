@@ -49,21 +49,31 @@ h3 {
 
 /* OWNER CARD */
 .owner-card {
-  background-color: lightpink;
   width: 220px;
   text-align: center;
   border: 1px solid lightgray;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
+}
+
+.owner-card div {
+  display: flex;
+}
+
+.owner-card img {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
 }
 
 .owner-card h4 {
-  padding: 0;
   margin: 0;
+  padding-bottom: 10px;
 }
 
 .owner-card-info {
   display: flex;
+  flex-direction: column;
 }
 
 /* ICONS */

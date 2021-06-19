@@ -18,6 +18,7 @@ import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
 
 import "./SingleListing.css";
+import "../../style/Button.css";
 
 export default function SingleListing(props) {
   const [listing, setListing] = useState({
@@ -29,16 +30,18 @@ export default function SingleListing(props) {
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   useEffect(() => {
+    console.log(props.user);
     LISTING_SERVICE.VIEW_LISTING(listingFromProps, accessToken)
       .then((res) => {
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
         }
+        setListing(res.data.listing);
         if (props.user.userListing.includes(listingFromProps)) {
           setIsOwner(true);
         }
-        setListing(res.data.listing);
       })
+      .then(() => {})
       .catch((err) => console.log("This is the error: ", err));
   }, [listingFromProps]);
 
@@ -137,8 +140,8 @@ export default function SingleListing(props) {
             ) : (
               <p>{owner.username}</p>
             )}
-            <Link to={`${PATHS.USER}/${owner.username}`}>
-              See user's profile
+            <Link to={`${PATHS.USER}/${owner.username}`} className="btn orange">
+              See profile
             </Link>
           </div>
         </div>
@@ -243,8 +246,16 @@ export default function SingleListing(props) {
 
       {isOwner ? (
         <div>
-          <Link to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}>Edit</Link>
-          <Link to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}>
+          <Link
+            to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}
+            className="btn orange"
+          >
+            Edit
+          </Link>
+          <Link
+            to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}
+            className="btn red"
+          >
             Delete
           </Link>
         </div>

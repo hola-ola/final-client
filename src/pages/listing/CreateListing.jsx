@@ -30,14 +30,16 @@ export default function CreateListing(props) {
       accessToken
     )
       .then((response) => {
+        console.log(response);
         if (!response) {
           return console.log("NO RESPONSE");
         }
         console.log("This is the response: ", response);
+        props.authenticate(response.user);
         props.history.push(`${PATHS.LISTINGS}/${response.listing._id}`);
       })
       .catch((err) => {
-        console.error("This is the error: ", err.response);
+        console.error("This is the error: ", err);
       });
   });
 
