@@ -6,7 +6,7 @@ const reviewService = axios.create({
 });
 
 export function ADD_REVIEW(username, form, token) {
-  console.log(form);
+  // console.log(form);
   return reviewService
     .post(`/${username}/add`, form, {
       headers: {

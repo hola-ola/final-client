@@ -50,7 +50,7 @@ export default function UserPage(props) {
   function DeleteProfile() {
     USER_SERVICE.USER_DELETE(usernameFromProps, accessToken)
       .then((response) => {
-        console.log("The user has been removed");
+        // console.log("The user has been removed");
         props.history.push(PATHS.HOMEPAGE);
         localStorage.removeItem(CONSTS.ACCESS_TOKEN);
         props.authenticate(null);
@@ -84,10 +84,10 @@ export default function UserPage(props) {
     LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
       .then((response) => {
         setUserListing(response.data.listing);
-        console.log(
-          "This is the listing of this user: ",
-          response.data.listing
-        );
+        // console.log(
+        //   "This is the listing of this user: ",
+        //   response.data.listing
+        // );
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
@@ -177,11 +177,20 @@ export default function UserPage(props) {
       <div className="user-listing">
         <div>
           <h3>Listing</h3>
-          {user.userListing ? (
+          {owner && user.userListing && (
             <>
-              <ResultCard item={userListing} key={userListing._id} />
+              <ResultCard item={userListing} key={userListing._id}>
+                <button>View listing</button>
+              </ResultCard>
+              <Link to={`${PATHS.LISTINGS}/${user.userListing._id}/edit`}>
+                <button>Edit listing</button>
+              </Link>
+              <Link to={`${PATHS.LISTINGS}/${user.userListing._id}/delete`}>
+                <button>Delete listing</button>
+              </Link>
             </>
-          ) : (
+          )}
+          {owner && !user.userListing && (
             <>
               <p>You haven't created a listing yet</p>
               <Link to={`${PATHS.CREATE_LISTING}`}>
@@ -189,11 +198,16 @@ export default function UserPage(props) {
               </Link>
             </>
           )}
-
-          {owner && (
+          {!owner && user.userListing && (
             <>
-              <button>Edit listing</button>
-              <button>Delte listing</button>
+              <ResultCard item={userListing} key={userListing._id}>
+                View listing
+              </ResultCard>
+            </>
+          )}
+          {!owner && !user.userListing && (
+            <>
+              <p>{user.username} haven't created a listing yet</p>
             </>
           )}
         </div>

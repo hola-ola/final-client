@@ -8,8 +8,14 @@ function ResultCard(props) {
   return (
     <div className="result-card">
       <div key={index}>
-        <img src={item.imagesGallery[0]} alt={item.title} />
-        <h4>{item.title}</h4>
+        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+          <img src={item.imagesGallery[0]} alt={item.title} />
+        </Link>
+
+        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+          <h4>{item.title}</h4>
+        </Link>
+
         <p>
           {item.city}, {item.country}
         </p>

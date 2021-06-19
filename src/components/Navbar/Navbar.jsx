@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
-import LISTING_SERVICE from "../../services/listing.service";
 
 const Navbar = (props) => {
   const { user } = props;
