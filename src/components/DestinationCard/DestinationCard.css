@@ -1,0 +1,25 @@
+.dest-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dest-card h3 {
+  padding: 10px 0;
+}
+
+.image-cropper {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.dest-card-image {
+  display: inline;
+  margin: 0 auto;
+  margin-left: -25%;
+  height: 100%;
+  width: auto;
+}

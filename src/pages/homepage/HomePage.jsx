@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as PATHS from "../../utils/paths";
+import * as CONTENT from "../../utils/content";
+import DestinationCard from "../../components/DestinationCard/DestinationCard";
 import "./HomePage.css";
 import "../../style/Button.css";
 
@@ -52,7 +54,7 @@ export default function HomePage(props) {
       </div>
 
       <div className="howitworks-container">
-        <div className="howitworks-box">
+        <div className="content-box">
           <h2>See how it works</h2>
           <p>1. Create your listing</p>
           <p>[description]</p>
@@ -70,8 +72,13 @@ export default function HomePage(props) {
       </div>
 
       <div className="destinations-container">
-        <div className="destinations-box">
+        <div className="content-box">
           <h2>Discover popular destinations</h2>
+          <div className="destinations-box">
+            {CONTENT.POPULAR_DESTINATIONS.map((item, index) => (
+              <DestinationCard item={item} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

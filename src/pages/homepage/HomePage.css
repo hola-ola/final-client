@@ -4,6 +4,7 @@ black #191414 */
 .homepage-wrapper {
   width: 100vw;
   margin: auto;
+  color: #191414;
 }
 
 .hero-image {
@@ -77,14 +78,14 @@ h1 {
   background-color: antiquewhite;
 }
 
-.howitworks-box {
+.content-box {
   width: 90vw;
   margin: auto;
   padding: 25px 0;
 }
 
 .destinations-box {
-  width: 90vw;
-  margin: auto;
-  padding: 25px 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
 }
