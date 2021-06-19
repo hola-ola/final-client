@@ -21,7 +21,7 @@ function submitImage(formBody) {
 export default function useSingleImage(formBody, authenticate) {
   const [form, setForm] = useState(formBody);
   const [singleImage, setSingleImage] = useState("");
-  console.log("HERE: ", singleImage);
+  // console.log("HERE: ", singleImage);
   function SingleImageChange(event) {
     const { target } = event;
     const file = target.files[0];
@@ -34,7 +34,7 @@ export default function useSingleImage(formBody, authenticate) {
 
   function SingleImageSubmit(event) {
     event.preventDefault();
-    console.log("Started to handle single image submit");
+    // console.log("Started to handle single image submit");
     axios
       .put(
         `${process.env.REACT_APP_SERVER_URL}/user/update-img`,
@@ -46,7 +46,7 @@ export default function useSingleImage(formBody, authenticate) {
         }
       )
       .then((response) => {
-        console.log("This is updated user picture:", response.data);
+        // console.log("This is updated user picture:", response.data);
         authenticate(response.data.user);
       })
       .catch((err) => {

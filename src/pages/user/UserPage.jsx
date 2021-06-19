@@ -12,6 +12,7 @@ import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
 import ResultCard from "../../components/Result/ResultCard";
+import AllReviews from "../../pages/reviews/AllReviews";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
 
@@ -126,6 +127,7 @@ export default function UserPage(props) {
                 authenticate={authenticate}
                 {...props}
                 refetchUser={refetchUser}
+                toggleUpdateProfile={toggleUpdateProfile}
               />
             </>
           )}
@@ -135,6 +137,7 @@ export default function UserPage(props) {
                 user={user}
                 authenticate={authenticate}
                 {...props}
+                toggleDeleteProfile={toggleDeleteProfile}
               />
             </>
           )}
@@ -154,27 +157,33 @@ export default function UserPage(props) {
               setReceivedReviews={setReceivedReviews}
               receivedReviews={receivedReviews}
               GetReceivedReviews={GetReceivedReviews}
+              toggleAddReview={toggleAddReview}
             ></AddReview>
           </>
         )}
 
         <div>
-          <h2>REVIEWS</h2>
-          <button>View all reviews</button>
-          <h3>Received reviews</h3>
+          <div>
+            <h2>REVIEWS</h2>
 
-          {receivedReviews.slice(0, 4).map((item) => (
-            <ShowReview item={item} key={item._id} user={user} {...props} />
-          ))}
-        </div>
+            <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
+              <button>View all reviews</button>
+            </Link>
+          </div>
 
-        <div>
-          <h3>Given reviews</h3>
+          <div>
+            <h3>Received reviews</h3>
+            {receivedReviews.slice(0, 4).map((item) => (
+              <ShowReview item={item} key={item._id} user={user} {...props} />
+            ))}
+          </div>
 
-          <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}></Link>
-          {givenReviews.slice(0, 4).map((item) => (
-            <ShowReview item={item} key={item._id} user={user} />
-          ))}
+          <div>
+            <h3>Given reviews</h3>
+            {givenReviews.slice(0, 4).map((item) => (
+              <ShowReview item={item} key={item._id} user={user} />
+            ))}
+          </div>
         </div>
       </div>
 
