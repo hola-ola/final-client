@@ -4,7 +4,7 @@ import * as SEARCH_SERVICE from "../../services/results.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 
-import ResultCard from "../../components/Result/ResultCard";
+import ResultCard from "../../components/ResultCard/ResultCard";
 
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
