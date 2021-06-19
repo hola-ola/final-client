@@ -26,6 +26,9 @@ export default function EditListing(props) {
   useEffect(() => {
     LISTING_SERVICE.EDIT_LISTING(listingFromProps, accessToken)
       .then((res) => {
+        if (!res) {
+          return props.history.push(PATHS.HOMEPAGE);
+        }
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
         }
@@ -34,7 +37,6 @@ export default function EditListing(props) {
       })
       .catch((err) => {
         console.log("This is the error:", err);
-        // return props.history.push(PATHS.HOMEPAGE);
       });
   }, [listingFromProps]);
 

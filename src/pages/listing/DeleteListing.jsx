@@ -12,11 +12,12 @@ export default function DeleteListing(props) {
   useEffect(() => {
     LISTING_SERVICE.DELETE_LISTING(listingFromProps, accessToken)
       .then((res) => {
-        console.log(res);
+        if (!res) {
+          return props.history.push(PATHS.HOMEPAGE);
+        }
         if (!res.data.listing) {
           return props.history.push(PATHS.HOMEPAGE);
         }
-        console.log(res);
         setListing(res.data.listing);
       })
       .catch((err) => console.log("This is the error:", err));

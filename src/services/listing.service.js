@@ -39,7 +39,12 @@ export function EDIT_LISTING(listingId, token) {
     .then((res) => {
       return res;
     })
-    .catch((err) => console.log(err.response));
+    .catch((err) => {
+      console.log(err.response);
+      if (err?.response?.status === 403) {
+        return false;
+      }
+    });
 }
 
 export function EDITED_LISTING(body, listingId, token) {
@@ -63,7 +68,12 @@ export function DELETE_LISTING(listingId, token) {
     .then((response) => {
       return response;
     })
-    .catch((err) => console.log(err.response));
+    .catch((err) => {
+      console.log(err.response);
+      if (err?.response?.status === 403) {
+        return false;
+      }
+    });
 }
 
 export function REMOVE_LISTING(listingId, token) {
