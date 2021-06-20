@@ -4,7 +4,7 @@ import * as PATHS from "../../utils/paths";
 import "./ShowReview.css";
 
 function ShowReview(props) {
-  console.log("The props: ", props);
+  // console.log("The props: ", props);
   const { item, index, loggedUser, usernameFromProps } = props;
   const [reviewsAuthor, setReviewsAuthor] = React.useState(true);
 

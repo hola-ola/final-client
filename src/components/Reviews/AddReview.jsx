@@ -13,9 +13,7 @@ export default function AddReview(props) {
     GetReceivedReviews,
     toggleAddReview,
   } = props;
-  const [thisUser, setThisUser] = useState(user);
   const usernameFromProps = props.match.params.username;
-  const loggedUser = user._id;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   const [
@@ -38,7 +36,7 @@ export default function AddReview(props) {
         // console.log("Server response review: ", response);
         // console.log("Here we set the user to display new review");
 
-        authenticate(thisUser);
+        authenticate(user);
         // console.log("The response: ", response);
         // console.log("Received reviews: ", receivedReviews);
         GetReceivedReviews();

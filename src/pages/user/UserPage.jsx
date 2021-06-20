@@ -12,6 +12,7 @@ import UpdateProfilePic from "../../components/User/UpdateProfilePic";
 import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
+import SendMessage from "../../components/Inbox/SendMessage";
 import ResultCard from "../../components/ResultCard/ResultCard";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
@@ -33,6 +34,7 @@ export default function UserPage(props) {
   const [displayDeleteProfile, toggleDeleteProfile] = useToggle(false);
   const [displayUpdatePic, toggleUpdatePic] = useToggle(false);
   const [displayAddReview, toggleAddReview] = useToggle(false);
+  const [displaySendMessage, toggleSendMessage] = useToggle(false);
 
   function RefetchUser() {
     USER_SERVICE.GET_USER(usernameFromProps, accessToken)
@@ -85,11 +87,11 @@ export default function UserPage(props) {
       });
   }
 
-  function contactUser() {
-    MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }
+  // function contactUser() {
+  //   MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
+  //     .then((response) => console.log(response))
+  //     .catch((err) => console.log(err));
+  // }
 
   return (
     <div className="user-page">
@@ -97,7 +99,6 @@ export default function UserPage(props) {
         <div className="user-pic">
           <img src={user.profilePic} alt={user.username}></img>
         </div>
-
         <div className="user-data">
           <p>
             {user.firstName} {user.lastName} | {user.username}{" "}
@@ -106,7 +107,6 @@ export default function UserPage(props) {
             My motto: <span>{user.motto}</span>
           </p>
         </div>
-
         <div className="user-buttons">
           {owner ? (
             <>
@@ -125,7 +125,7 @@ export default function UserPage(props) {
             </>
           ) : (
             <>
-              <button className="button sandybrown" onClick={contactUser}>
+              <button className="button sandybrown" onClick={toggleSendMessage}>
                 Send a message
               </button>
               <button className="button sandybrown" onClick={toggleAddReview}>
@@ -177,7 +177,16 @@ export default function UserPage(props) {
             ></AddReview>
           </>
         )}
-
+        {displaySendMessage && (
+          <>
+            <SendMessage
+              user={user}
+              authenticate={authenticate}
+              {...props}
+              toggleSendMessage={toggleSendMessage}
+            ></SendMessage>
+          </>
+        )}
         <div className="components">
           <div className="reviews">
             <div>
