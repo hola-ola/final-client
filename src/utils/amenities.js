@@ -29,22 +29,22 @@ export const WORK_SETUP = [
   "OK-ish Wifi",
   "Desk",
   "Standing desk",
-  "Additional monitor",
+  "Monitor",
 ];
 export const ACCESSIBILITY = [
   "Elevator",
   "No stairs",
   "Roll-in shower",
-  "No accessibility features",
+  "No features",
 ];
 export const AMBIENCE = [
-  "Close to nature",
+  "Nature",
   "City life",
   "Nightlife",
-  "Great for families",
-  "Great for couples",
-  "Great for solo travelers",
-  "Outside of the city",
+  "Families",
+  "Couples",
+  "Solo travelers",
+  "Work from home",
   "Chillout",
 ];
 

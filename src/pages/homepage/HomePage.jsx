@@ -13,6 +13,7 @@ import {
 import { IoMdSwap } from "react-icons/io";
 import "./HomePage.css";
 import "../../style/Button.css";
+import "../../style/Input.css";
 
 export default function HomePage(props) {
   const [query, setQuery] = useState("");
@@ -37,7 +38,7 @@ export default function HomePage(props) {
               <input
                 type="text"
                 placeholder="enter city or country"
-                className="search-box-input"
+                className="input-field search-box-input"
                 onChange={handleQueryChange}
               />
               <Link

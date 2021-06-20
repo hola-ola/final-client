@@ -54,14 +54,9 @@ h1 {
   float: left;
   height: 50px;
   width: 400px;
-  border: none;
-  border-radius: 15px;
-  background-color: #d4e09b;
   font-size: 20px;
-  letter-spacing: 2px;
   margin-right: 20px;
-  text-align: center;
-  outline: none;
+  background-color: #d4e09b;
 }
 
 .notsure-content {
