@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service";
-import ResultCard from "../../components/Result/ResultCard";
+import ResultCard from "../../components/ResultCard/ResultCard";
 
 export default function GetWishlistItems(props) {
   const [wishlist, setWishlist] = useState([]);

@@ -12,7 +12,7 @@ import UpdateProfilePic from "../../components/User/UpdateProfilePic";
 import DeleteProfile from "../../components/User/DeleteProfile";
 import AddReview from "../../components/Reviews/AddReview";
 import ShowReview from "../../components/Reviews/ShowReview";
-import ResultCard from "../../components/Result/ResultCard";
+import ResultCard from "../../components/ResultCard/ResultCard";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
 
