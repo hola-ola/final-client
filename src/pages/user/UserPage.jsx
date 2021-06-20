@@ -15,6 +15,7 @@ import ShowReview from "../../components/Reviews/ShowReview";
 import ResultCard from "../../components/ResultCard/ResultCard";
 import useToggle from "../../hooks/useToggle";
 import "./UserPage.css";
+import "../../style/Button.css";
 
 export default function UserPage(props) {
   const [user, setUser] = useState({});
@@ -33,7 +34,7 @@ export default function UserPage(props) {
   const [displayUpdatePic, toggleUpdatePic] = useToggle(false);
   const [displayAddReview, toggleAddReview] = useToggle(false);
 
-  function refetchUser() {
+  function RefetchUser() {
     USER_SERVICE.GET_USER(usernameFromProps, accessToken)
       .then((response) => {
         setUser(response.data.user);
@@ -45,7 +46,7 @@ export default function UserPage(props) {
   }
 
   useEffect(() => {
-    refetchUser();
+    RefetchUser();
     GetUserListing();
   }, [props.match.params.username]);
 
@@ -78,10 +79,6 @@ export default function UserPage(props) {
     LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
       .then((response) => {
         setUserListing(response.data.listing);
-        // console.log(
-        //   "This is the listing of this user: ",
-        //   response.data.listing
-        // );
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
@@ -96,35 +93,44 @@ export default function UserPage(props) {
 
   return (
     <div className="user-page">
-      <div className="user-data">
-        <div>
-          <img width="200" src={user.profilePic} alt={user.username}></img>
-          {owner && (
-            <>
-              <button onClick={toggleUpdatePic}>Update profile pic</button>
-            </>
-          )}
-          {displayUpdatePic && (
-            <>
-              <UpdateProfilePic
-                getUser={refetchUser}
-                user={user}
-                authenticate={authenticate}
-              />
-            </>
-          )}
+      <div>
+        <div className="user-pic">
+          <img src={user.profilePic} alt={user.username}></img>
         </div>
-        {!owner ? <button onClick={contactUser}>Contact user</button> : null}
-        <div>
-          <h3>Personal details</h3>
-          <p>First name: {user.firstName}</p>
-          <p>Last name: {user.lastName}</p>
-          <p>Username: {user.username}</p>
-          <p>Bio: {user.userBio}</p>
-          {owner && (
+
+        <div className="user-data">
+          <p>
+            {user.firstName} {user.lastName} | {user.username}{" "}
+          </p>
+          <p id="motto">
+            My motto: <span>{user.motto}</span>
+          </p>
+        </div>
+
+        <div className="user-buttons">
+          {owner ? (
             <>
-              <button onClick={toggleUpdateProfile}>Edit profile</button>
-              <button onClick={toggleDeleteProfile}>Delete profile</button>
+              <button className="button sandybrown" onClick={toggleUpdatePic}>
+                Edit profile pic
+              </button>
+              <button
+                className="button sandybrown"
+                onClick={toggleUpdateProfile}
+              >
+                Edit profile
+              </button>
+              <button className="button red" onClick={toggleDeleteProfile}>
+                Delete profile
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="button sandybrown" onClick={contactUser}>
+                Send a message
+              </button>
+              <button className="button sandybrown" onClick={toggleAddReview}>
+                Add a review
+              </button>
             </>
           )}
           {displayUpdateProfile && (
@@ -133,7 +139,7 @@ export default function UserPage(props) {
                 user={user}
                 authenticate={authenticate}
                 {...props}
-                refetchUser={refetchUser}
+                refetchUser={RefetchUser}
                 toggleUpdateProfile={toggleUpdateProfile}
               />
             </>
@@ -148,13 +154,16 @@ export default function UserPage(props) {
               />
             </>
           )}
+          {displayUpdatePic && (
+            <>
+              <UpdateProfilePic
+                getUser={RefetchUser}
+                user={user}
+                authenticate={authenticate}
+              />
+            </>
+          )}
         </div>
-        {!owner && (
-          <>
-            <button>Send a message</button>
-            <button onClick={toggleAddReview}>Add a review</button>
-          </>
-        )}
         {displayAddReview && (
           <>
             <AddReview
@@ -169,95 +178,138 @@ export default function UserPage(props) {
           </>
         )}
 
-        <div>
-          <div>
-            <h2>REVIEWS</h2>
+        <div className="components">
+          <div className="reviews">
+            <div>
+              {owner ? (
+                <>
+                  <h3>Your reviews</h3>
+                </>
+              ) : (
+                <>
+                  <h3>User reviews</h3>
+                </>
+              )}
+            </div>
+
+            <div>
+              <p className="reviews-type">Received reviews</p>
+              {!receivedReviews.length ? (
+                <>
+                  <p>There are no received reviews</p>
+                </>
+              ) : null}
+
+              {receivedReviews
+                .slice(Math.max(receivedReviews.length - 5, 1))
+                .map((item) => (
+                  <ShowReview
+                    item={item}
+                    key={item._id}
+                    loggedUser={loggedUser}
+                    usernameFromProps={usernameFromProps}
+                  />
+                ))}
+            </div>
+
+            <div>
+              <p className="reviews-type">Given reviews</p>
+
+              {!givenReviews.length ? (
+                <>
+                  <p>There are no given reviews</p>
+                </>
+              ) : null}
+              {givenReviews
+                .slice(Math.max(givenReviews.length - 5, 1))
+                .map((item) => (
+                  <ShowReview
+                    item={item}
+                    key={item._id}
+                    loggedUser={loggedUser}
+                    usernameFromProps={usernameFromProps}
+                  />
+                ))}
+            </div>
 
             <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
-              <button>View all reviews</button>
+              <button className="button darkcyan">View all reviews</button>
             </Link>
           </div>
 
           <div>
-            <h3>Received reviews</h3>
-            {receivedReviews.slice(0, 4).map((item) => (
-              <ShowReview item={item} key={item._id} user={user} {...props} />
-            ))}
+            <div className="listing">
+              {!owner && !user?.userListing?.length ? (
+                <>
+                  <h3>User listing</h3>
+                  <p>{user.username} hasn't created a listing yet</p>
+                </>
+              ) : null}
+              {owner && !user?.userListing?.length ? (
+                <>
+                  <h3>Your listing</h3>
+                  <p>You haven't created a listing yet</p>
+                  <Link to={`${PATHS.CREATE_LISTING}`}>
+                    <button className="button darkcyan">
+                      Create a listing
+                    </button>
+                  </Link>
+                </>
+              ) : null}
+              {!owner && user?.userListing?.length ? (
+                <>
+                  <h3>User listing</h3>
+                  <ResultCard item={userListing} key={user.userListing._id}>
+                    View listing
+                  </ResultCard>
+                </>
+              ) : null}
+              {owner && user?.userListing?.length ? (
+                <>
+                  <ResultCard item={userListing} key={userListing._id}>
+                    <button>View listing</button>
+                  </ResultCard>
+                  <Link to={`${PATHS.LISTINGS}/${userListing._id}/edit`}>
+                    <button>Edit listing</button>
+                  </Link>
+                  <Link to={`${PATHS.LISTINGS}/${userListing._id}/delete`}>
+                    <button>Delete listing</button>
+                  </Link>
+                </>
+              ) : null}
+            </div>
+
+            <div>
+              {!owner && !user?.wishlist?.length && (
+                <>
+                  <p>
+                    <h3>User wishlist</h3>
+                    {user.username} hasn't added any listings to their wishlist
+                    yet
+                  </p>
+                </>
+              )}
+              {owner && !user?.wishlist?.length && (
+                <>
+                  <h3>Your wishlist</h3>
+                  <p>You haven't added any listings to your wishlist yet</p>
+                </>
+              )}
+              {user?.wishlist?.length ? (
+                <>
+                  <h3>Your wishlist</h3>
+                  {userWishlist.slice(0, 4).map((item) => (
+                    <ResultCard item={item} key={item._id}>
+                      View listing
+                    </ResultCard>
+                  ))}
+                  <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                    <button className="button darkcyan">View wishlist</button>
+                  </Link>
+                </>
+              ) : null}
+            </div>
           </div>
-
-          <div>
-            <h3>Given reviews</h3>
-            {givenReviews.slice(0, 4).map((item) => (
-              <ShowReview item={item} key={item._id} user={user} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="user-listing">
-        <div>
-          <h3>Listing</h3>
-          {!owner && !user?.userListing?.length && (
-            <>
-              <p>{user.username} hasn't created a listing yet</p>
-            </>
-          )}
-          {owner && !user?.userListing?.length && (
-            <>
-              <p>You haven't created a listing yet</p>
-              <Link to={`${PATHS.CREATE_LISTING}`}>
-                <button>Create a listing</button>
-              </Link>
-            </>
-          )}
-          {!owner && user?.userListing?.length && (
-            <>
-              <ResultCard item={userListing} key={userListing._id}>
-                View listing
-              </ResultCard>
-            </>
-          )}
-          {owner && user?.userListing?.length ? (
-            <>
-              <ResultCard item={userListing} key={userListing._id}>
-                <button>View listing</button>
-              </ResultCard>
-              <Link to={`${PATHS.LISTINGS}/${userListing._id}/edit`}>
-                <button>Edit listing</button>
-              </Link>
-              <Link to={`${PATHS.LISTINGS}/${userListing._id}/delete`}>
-                <button>Delete listing</button>
-              </Link>
-            </>
-          ) : null}
-        </div>
-        <div>
-          <h3>Wishlist</h3>
-          {!owner && !user?.wishlist?.length && (
-            <>
-              <p>
-                {user.username} hasn't added any listings to their wishlist yet
-              </p>
-            </>
-          )}
-          {owner && !user?.wishlist?.length && (
-            <>
-              <p>You haven't added any listings to your wishlist yet</p>
-            </>
-          )}
-          {user?.wishlist?.length ? (
-            <>
-              <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
-                <button>View wishlist</button>
-              </Link>
-
-              {userWishlist.slice(0, 4).map((item) => (
-                <ResultCard item={item} key={item._id}>
-                  View listing
-                </ResultCard>
-              ))}
-            </>
-          ) : null}
         </div>
       </div>
     </div>

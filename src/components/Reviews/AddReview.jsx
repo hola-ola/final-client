@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as CONSTS from "../../utils/consts";
 import useForm from "../../hooks/useForm.js";
 import * as REVIEW_SERVICE from "../../services/review.service.js";
+import "../../style/Button.css";
 
 export default function AddReview(props) {
   const {
@@ -42,10 +43,10 @@ export default function AddReview(props) {
         // console.log("Received reviews: ", receivedReviews);
         GetReceivedReviews();
         toggleAddReview(false);
-        // setReceivedReviews([...receivedReviews, response]);
+        setReceivedReviews([...receivedReviews, response]);
       })
       .catch((err) => {
-        console.error(err.response);
+        // console.error(err.response);
       });
   });
 
@@ -53,12 +54,12 @@ export default function AddReview(props) {
     <form onSubmit={onSubmit}>
       <label>How long have you stayed at {usernameFromProps}'s?</label>
       <br></br>
-      <p>Start date: </p>
+      {/* <p>Start date: </p>
       <input type="date" name="startDate" onChange={handleChange} />
       <br></br>
       <p>End date: </p>
       <input type="date" name="endDate" onChange={handleChange} />
-      <br></br>
+      <br></br> */}
       <p>Add your review here:</p>
       <input
         type="text"
@@ -80,7 +81,7 @@ export default function AddReview(props) {
       <br></br>
       <input type="number" name="score" onChange={handleChange} />
       <br></br>
-      <button>Submit</button>
+      <button className="button sandybrown">Submit</button>
       <br></br>
     </form>
   );

@@ -5,7 +5,8 @@ import {
   FaUmbrellaBeach,
   FaRegCalendarCheck,
   FaRegCalendarTimes,
-  FaRegHeart,
+  FaHeart,
+  FaHeartBroken,
 } from "react-icons/fa";
 import { MdSmokingRooms } from "react-icons/md";
 import { BiMapPin, BiHomeHeart, BiBed } from "react-icons/bi";
@@ -13,6 +14,7 @@ import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import * as LISTING_SERVICE from "../../services/listing.service";
+import * as USER_SERVICE from "../../services/user.service.js";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
@@ -22,21 +24,40 @@ import "../../style/Button.css";
 
 export default function SingleListing(props) {
   const { user, authenticate } = props;
+  const [isOwner, setIsOwner] = useState(false);
+  const [isOnwishlist, setIsOnWishlist] = useState(false);
   const [listing, setListing] = useState({
     ...AMENITIES.LISTING_FORM,
   });
-
-  const [isOwner, setIsOwner] = useState(false);
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+
+  function CheckWishlist() {
+    user.wishlist.includes(listingFromProps)
+      ? setIsOnWishlist(true)
+      : setIsOnWishlist(false);
+    // console.log("isOnwishlist? ", isOnwishlist);
+  }
 
   function AddToWishlist() {
     LISTING_SERVICE.WISHLIST_ADD(listingFromProps, accessToken)
       .then((response) => {
-        // console.log("The response about the wishlist: ", response);
+        console.log("The listing has been added to your wishlist");
+        setIsOnWishlist(true);
       })
       .catch((err) => {
         console.error(err.response);
+      });
+  }
+
+  function RemoveFromWishlist() {
+    USER_SERVICE.WISHLIST_DELETE(listingFromProps, user.username, accessToken)
+      .then((response) => {
+        console.log("The listing has been removed from your wishlist");
+        setIsOnWishlist(false);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
       });
   }
 
@@ -52,7 +73,9 @@ export default function SingleListing(props) {
           setIsOwner(true);
         }
       })
-      .then(() => {})
+      .then(() => {
+        CheckWishlist();
+      })
       .catch((err) => console.log("This is the error: ", err));
   }, [listingFromProps]);
 
@@ -94,16 +117,34 @@ export default function SingleListing(props) {
               </Link>
               <p>Share</p>
             </div>
-            <div>
-              <Link>
-                <FaRegHeart
-                  size={SmallIconSize}
-                  className="listing-icon"
-                  onClick={AddToWishlist}
-                />
-              </Link>
-              <p>Add to wishlist</p>
-            </div>
+            {!isOwner && !isOnwishlist ? (
+              <>
+                <div>
+                  <Link>
+                    <FaHeart
+                      size={SmallIconSize}
+                      className="listing-icon"
+                      onClick={AddToWishlist}
+                    />
+                  </Link>
+                  <p>Add to wishlist</p>
+                </div>
+              </>
+            ) : null}
+            {!isOwner && isOnwishlist ? (
+              <>
+                <div>
+                  <Link>
+                    <FaHeartBroken
+                      size={SmallIconSize}
+                      className="listing-icon"
+                      onClick={RemoveFromWishlist}
+                    />
+                  </Link>
+                  <p>Remove from wishlist</p>
+                </div>
+              </>
+            ) : null}
           </div>
         </div>
 

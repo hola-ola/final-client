@@ -5,7 +5,7 @@ import * as PATHS from "../../utils/paths";
 import useForm from "../../hooks/useForm.js";
 
 function UpdateProfile(props) {
-  const { user, authenticate, refetchUser } = props;
+  const { user, authenticate, refetchUser, toggleUpdateProfile } = props;
   const [error, setError] = useState(null);
 
   const [
@@ -20,7 +20,7 @@ function UpdateProfile(props) {
     lastName: user.lastName,
     username: user.username,
     email: user.email,
-    userBio: user.userBio,
+    motto: user.motto,
   });
 
   const onSubmit = handleSubmit((form, image) => {
@@ -32,6 +32,7 @@ function UpdateProfile(props) {
         // console.log("This is updated user: ", response.data);
         authenticate(response.data.user);
         refetchUser();
+        toggleUpdateProfile(false);
         props.history.push({
           pathname: `${PATHS.USER}/${response.data.user.username}`,
         });
@@ -79,16 +80,16 @@ function UpdateProfile(props) {
           />
         </div>
         <div>
-          <label>Your bio</label>
+          <label>Your motto</label>
           <input
-            name="userBio"
-            placeholder="Your bio"
-            value={form.userBio}
+            name="motto"
+            placeholder="Your motto"
+            value={form.motto}
             onChange={handleChange}
           />
         </div>
 
-        <button>Submit changes</button>
+        <button className="button tan">Submit</button>
       </div>
       {error && (
         <div className="error-block">
