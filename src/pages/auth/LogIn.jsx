@@ -38,9 +38,9 @@ export default function LogIn({ authenticate, history }) {
   }
 
   return (
-    <div>
+    <div className="auth-wrapper">
       <h1>Log in</h1>
-      <form onSubmit={handleFormSubmission} className="signup__form">
+      <form onSubmit={handleFormSubmission} className="auth__form">
         <label htmlFor="input-usernameOrEmail">Username or email</label>
         <input
           id="input-usernameOrEmail"
@@ -50,6 +50,7 @@ export default function LogIn({ authenticate, history }) {
           value={usernameOrEmail}
           onChange={handleInputChange}
           required
+          className="input-field auth-input"
         />
 
         <label htmlFor="input-password">Password</label>
@@ -62,6 +63,7 @@ export default function LogIn({ authenticate, history }) {
           onChange={handleInputChange}
           required
           minLength="8"
+          className="input-field auth-input"
         />
 
         {error && (
@@ -70,7 +72,7 @@ export default function LogIn({ authenticate, history }) {
           </div>
         )}
 
-        <button className="button__submit" type="submit">
+        <button className="auth-btn sandybrown" type="submit">
           Log in
         </button>
       </form>
