@@ -1,4 +1,35 @@
-.dropdown-test {
-  height: 30px;
-  background-color: darkgrey;
+.dd-container {
+  min-width: 135px;
+  margin: 0 5px;
+}
+
+.dd-label {
+  border: 2px solid#d4e09b;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dd-list {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.dd-item {
+  display: flex;
+  padding: 5px;
+}
+
+.dd-item-text {
+  text-align: left;
+}
+
+.dd-item button {
+  border: none;
+  background-color: inherit;
+  font-size: 1em;
 }

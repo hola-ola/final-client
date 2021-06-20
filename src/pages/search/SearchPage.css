@@ -16,24 +16,10 @@
 }
 
 .filters-container {
-  width: 80vw;
+  width: 90vw;
   margin: auto;
   padding: 25px 0;
   display: flex;
   justify-content: space-between;
-}
-
-.filters-container > div {
-  min-width: 100px;
-}
-
-.filter-label {
-  border: 1px solid darkcyan;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.filter-label p {
-  padding: 0 5px;
+  font-size: 0.9em;
 }
