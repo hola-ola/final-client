@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import * as SEARCH_SERVICE from "../../services/results.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
+import * as AMENITIES from "../../utils/amenities";
 
 import ResultCard from "../../components/ResultCard/ResultCard";
 
@@ -12,6 +14,7 @@ import "../../style/Button.css";
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+  const [filterDropdown, setFilterDropdown] = useState(false);
 
   const params = new URLSearchParams(props.location.search);
   const q = params.get("q");
@@ -48,10 +51,92 @@ export default function SearchPage(props) {
         ) : null}
         <div className="filters-container">
           <div>
-            <h4>Type</h4>
-            <p>House</p>
-            <p>Flat</p>
-            <p>Room</p>
+            <div className="filter-label">
+              <p>Duration</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.LENGTH_OF_STAY.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Type</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.LISTING_TYPE.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Guests</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.SLEEPS.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Bathroom</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.BATHROOM_EQUIPMENT.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Kitchen</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.KITCHEN_EQUIPMENT.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Work from home</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.WORK_SETUP.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Accessibility</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.ACCESSIBILITY.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="filter-label">
+              <p>Perfect for</p>
+              {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            <div>
+              {AMENITIES.AMBIENCE.map((item, index) => (
+                <p>{item}</p>
+              ))}
+            </div>
           </div>
         </div>
 
