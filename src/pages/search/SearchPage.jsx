@@ -7,6 +7,7 @@ import * as PATHS from "../../utils/paths";
 import * as AMENITIES from "../../utils/amenities";
 
 import ResultCard from "../../components/ResultCard/ResultCard";
+import Dropdown from "../../components/Dropdown/Dropdown";
 
 import "./SearchPage.css";
 import "../../style/Button.css";
@@ -51,6 +52,7 @@ export default function SearchPage(props) {
         ) : null}
         <div className="filters-container">
           <div>
+            <Dropdown title="Duration" items={AMENITIES.LENGTH_OF_STAY} />
             <div className="filter-label">
               <p>Duration</p>
               {filterDropdown ? <IoIosArrowUp /> : <IoIosArrowDown />}
