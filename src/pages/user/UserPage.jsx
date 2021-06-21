@@ -95,10 +95,11 @@ export default function UserPage(props) {
 
   return (
     <div className="user-page">
-      <div>
+      <div className="component">
         <div className="user-pic">
           <img src={user.profilePic} alt={user.username}></img>
         </div>
+
         <div className="user-data">
           <p>
             {user.firstName} {user.lastName} | {user.username}{" "}
@@ -107,6 +108,7 @@ export default function UserPage(props) {
             My motto: <span>{user.motto}</span>
           </p>
         </div>
+
         <div className="user-buttons">
           {owner ? (
             <>
@@ -133,6 +135,22 @@ export default function UserPage(props) {
               </button>
             </>
           )}
+
+          {user.userListing?.length ? (
+            <>
+              <Link to={`${PATHS.LISTINGS}/${userListing._id}`}>
+                <button className="button sandybrown">View listing</button>
+              </Link>
+            </>
+          ) : null}
+          {owner && !user.userListing?.length ? (
+            <>
+              <Link to={`${PATHS.CREATE_LISTING}`}>
+                <button className="button darkcyan">Create listing</button>
+              </Link>
+            </>
+          ) : null}
+
           {displayUpdateProfile && (
             <>
               <UpdateProfile
@@ -163,90 +181,88 @@ export default function UserPage(props) {
               />
             </>
           )}
+          {displayAddReview && (
+            <>
+              <AddReview
+                user={user}
+                authenticate={authenticate}
+                {...props}
+                setReceivedReviews={setReceivedReviews}
+                receivedReviews={receivedReviews}
+                GetReceivedReviews={GetReceivedReviews}
+                toggleAddReview={toggleAddReview}
+              ></AddReview>
+            </>
+          )}
+          {displaySendMessage && (
+            <>
+              <SendMessage
+                user={user}
+                authenticate={authenticate}
+                {...props}
+                toggleSendMessage={toggleSendMessage}
+              ></SendMessage>
+            </>
+          )}
         </div>
-        {displayAddReview && (
-          <>
-            <AddReview
-              user={user}
-              authenticate={authenticate}
-              {...props}
-              setReceivedReviews={setReceivedReviews}
-              receivedReviews={receivedReviews}
-              GetReceivedReviews={GetReceivedReviews}
-              toggleAddReview={toggleAddReview}
-            ></AddReview>
-          </>
-        )}
-        {displaySendMessage && (
-          <>
-            <SendMessage
-              user={user}
-              authenticate={authenticate}
-              {...props}
-              toggleSendMessage={toggleSendMessage}
-            ></SendMessage>
-          </>
-        )}
-        <div className="components">
-          <div className="reviews">
-            <div>
-              {owner ? (
-                <>
-                  <h3>Your reviews</h3>
-                </>
-              ) : (
-                <>
-                  <h3>User reviews</h3>
-                </>
-              )}
-            </div>
+      </div>
+      <div>
+        <div className="reviews component">
+          <h3>Received reviews</h3>
 
-            <div>
-              <p className="reviews-type">Received reviews</p>
-              {!receivedReviews.length ? (
-                <>
-                  <p>There are no received reviews</p>
-                </>
-              ) : null}
+          <div className="component-row">
+            {!receivedReviews.length ? (
+              <>
+                <p>There are no received reviews</p>
+              </>
+            ) : (
+              <>
+                {receivedReviews
+                  .slice(Math.max(receivedReviews.length - 4, 1))
+                  .map((item) => (
+                    <ShowReview
+                      item={item}
+                      key={item._id}
+                      loggedUser={loggedUser}
+                      usernameFromProps={usernameFromProps}
+                    />
+                  ))}
+              </>
+            )}
+          </div>
 
-              {receivedReviews
-                .slice(Math.max(receivedReviews.length - 5, 1))
-                .map((item) => (
-                  <ShowReview
-                    item={item}
-                    key={item._id}
-                    loggedUser={loggedUser}
-                    usernameFromProps={usernameFromProps}
-                  />
-                ))}
-            </div>
-
-            <div>
-              <p className="reviews-type">Given reviews</p>
-
+          {/* <h3>Given reviews</h3>
+            <div className="reviews-row">
               {!givenReviews.length ? (
                 <>
                   <p>There are no given reviews</p>
                 </>
-              ) : null}
-              {givenReviews
-                .slice(Math.max(givenReviews.length - 5, 1))
-                .map((item) => (
-                  <ShowReview
-                    item={item}
-                    key={item._id}
-                    loggedUser={loggedUser}
-                    usernameFromProps={usernameFromProps}
-                  />
-                ))}
-            </div>
-
-            <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
-              <button className="button darkcyan">View all reviews</button>
-            </Link>
-          </div>
+              ) : (
+                <>
+                  {givenReviews
+                    .slice(Math.max(givenReviews.length - 4, 1))
+                    .map((item) => (
+                      <ShowReview
+                        item={item}
+                        key={item._id}
+                        loggedUser={loggedUser}
+                        usernameFromProps={usernameFromProps}
+                      />
+                    ))}
+                </>
+              )}
+            </div> */}
 
           <div>
+            <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
+              <button id="view-reviews" className="button darkcyan">
+                View all reviews
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        {/*
             <div className="listing">
               {!owner && !user?.userListing?.length ? (
                 <>
@@ -286,38 +302,42 @@ export default function UserPage(props) {
                   </Link>
                 </>
               ) : null}
-            </div>
+            </div> */}
 
-            <div>
-              {!owner && !user?.wishlist?.length && (
-                <>
-                  <p>
-                    <h3>User wishlist</h3>
-                    {user.username} hasn't added any listings to their wishlist
-                    yet
-                  </p>
-                </>
-              )}
-              {owner && !user?.wishlist?.length && (
-                <>
-                  <h3>Your wishlist</h3>
-                  <p>You haven't added any listings to your wishlist yet</p>
-                </>
-              )}
-              {user?.wishlist?.length ? (
-                <>
-                  <h3>Your wishlist</h3>
+        <div className="user-wishlist component">
+          {!owner && !user?.wishlist?.length && (
+            <>
+              <p>
+                <h3>User wishlist</h3>
+                {user.username} hasn't added any listings to their wishlist yet
+              </p>
+            </>
+          )}
+          {owner && !user?.wishlist?.length && (
+            <>
+              <h3>Your wishlist</h3>
+              <p>You haven't added any listings to your wishlist yet</p>
+            </>
+          )}
+          <h3>Your wishlist</h3>
+          <div>
+            {user?.wishlist?.length ? (
+              <>
+                <div className="component-row">
                   {userWishlist.slice(0, 4).map((item) => (
                     <ResultCard item={item} key={item._id}>
                       View listing
                     </ResultCard>
                   ))}
-                  <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
-                    <button className="button darkcyan">View wishlist</button>
-                  </Link>
-                </>
-              ) : null}
-            </div>
+                </div>
+
+                <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                  <button className="button darkcyan" id="view-wishlist-btn">
+                    View wishlist
+                  </button>
+                </Link>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

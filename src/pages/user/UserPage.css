@@ -1,4 +1,8 @@
 /* General styling */
+h3 {
+  text-align: center;
+  font-size: 28px;
+}
 
 /* Div with user picture */
 .user-pic {
@@ -7,9 +11,10 @@
 }
 
 .user-pic img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
+  margin-bottom: 15px;
   margin-top: 50px;
   object-fit: cover;
 }
@@ -29,37 +34,33 @@
   font-style: italic;
 }
 
-/* Div with user edit & delete buttons */
+/* Div with user buttons */
 .user-buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 50px;
 }
 
-/* Div with review and listings */
-.components {
-  background-color: antiquewhite;
-  width: 100%;
+/* General components styling */
+.component {
+  padding: 70px 0px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-top: 50px;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Div with reviews */
 .reviews {
+  background-color: antiquewhite;
+}
+
+.component-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  justify-content: center;
+  padding: 50px 0px;
 }
 
-.reviews-type {
-  text-decoration: underline;
+#view-wishlist-btn {
+  margin-top: 30px;
 }
-
-/* Div with user listing */
-.listing {
-  margin-bottom: 50px;
-}
-
-/* Div with wishlist */

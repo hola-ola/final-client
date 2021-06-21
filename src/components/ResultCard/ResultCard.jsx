@@ -21,8 +21,8 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`} className="btn orange">
-        {props.children}
+      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+        <button className="button darkcyan">{props.children}</button>
       </Link>
     </div>
   );

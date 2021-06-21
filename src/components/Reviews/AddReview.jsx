@@ -50,21 +50,15 @@ export default function AddReview(props) {
 
   return (
     <form onSubmit={onSubmit}>
-      <label>How long have you stayed at {usernameFromProps}'s?</label>
-      <br></br>
+      {/* <label>How long have you stayed at {usernameFromProps}'s?</label>
+      <br></br> */}
       {/* <p>Start date: </p>
       <input type="date" name="startDate" onChange={handleChange} />
       <br></br>
       <p>End date: </p>
       <input type="date" name="endDate" onChange={handleChange} />
       <br></br> */}
-      <p>Add your review here:</p>
-      <input
-        type="text"
-        name="title"
-        placeholder="Add a title"
-        onChange={handleChange}
-      />
+      <label>Add your review of {usernameFromProps} here:</label>
       <br></br>
       <input
         type="text"
@@ -73,9 +67,7 @@ export default function AddReview(props) {
         onChange={handleChange}
       />
       <br></br>
-      <label>
-        How would you rate {usernameFromProps}? Give a score from 1 to 5.
-      </label>
+      <label>Rate {usernameFromProps} with a score from 1 to 5:</label>
       <br></br>
       <input type="number" name="score" onChange={handleChange} />
       <br></br>
