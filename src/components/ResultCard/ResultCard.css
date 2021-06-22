@@ -1,6 +1,7 @@
 .result-card {
-  max-width: 250px;
-  border: 1px solid black;
+  width: 240px;
+  height: 300px;
+  border: 2px dotted black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,5 +18,19 @@
 }
 
 .result-card button {
-  margin: 15px;
+}
+
+.result-card-image {
+  height: 150px;
+}
+
+.result-card-content {
+  height: 50px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.center {
+  display: grid;
+  place-items: center;
 }

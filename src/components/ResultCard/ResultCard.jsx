@@ -9,21 +9,27 @@ function ResultCard(props) {
   return (
     <div className="result-card">
       <div key={index}>
-        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-          <img src={item.imagesGallery[0]} alt={item.title} />
-        </Link>
-
-        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-          <h4>{item.title}</h4>
-        </Link>
-
-        <p>
-          {item.city}, {item.country}
-        </p>
+        <div className="result-card-image center">
+          <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+            <img src={item.imagesGallery[0]} alt={item.title} />
+          </Link>
+        </div>
+        <div className="result-card-content center">
+          <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+            <h4>{item.title}</h4>
+          </Link>
+        </div>
+        <div className="result-card-content center">
+          <p>
+            {item.city}, {item.country}
+          </p>
+        </div>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-        <button className="button darkcyan">{props.children}</button>
-      </Link>
+      <div className="result-card-content center">
+        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+          <button className="button darkcyan">{props.children}</button>
+        </Link>
+      </div>
     </div>
   );
 }
