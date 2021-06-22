@@ -9,7 +9,7 @@ import {
   FaHeartBroken,
 } from "react-icons/fa";
 import { MdSmokingRooms } from "react-icons/md";
-import { BiMapPin, BiHomeHeart, BiBed } from "react-icons/bi";
+import { BiCheck, BiMapPin, BiHomeHeart, BiBed } from "react-icons/bi";
 import { FiShare } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -145,6 +145,22 @@ export default function SingleListing(props) {
                 </div>
               </>
             ) : null}
+            {isOwner ? (
+              <div>
+                <Link
+                  to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}
+                  className="btn sandybrown"
+                >
+                  Edit
+                </Link>
+                <Link
+                  to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}
+                  className="btn red"
+                >
+                  Delete
+                </Link>
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -184,107 +200,144 @@ export default function SingleListing(props) {
         </div>
       </div>
 
-      <div className="owner-card">
-        <h4>Meet the owner</h4>
-        <div>
-          <img src={owner.profilePic} height="100px" />
-          <div className="owner-card-info">
-            {owner.firstName ? (
-              <p>
-                {owner.firstName} ({owner.username})
-              </p>
-            ) : (
-              <p>{owner.username}</p>
-            )}
-            <Link to={`${PATHS.USER}/${owner.username}`} className="btn orange">
-              See profile
-            </Link>
-          </div>
-        </div>
-      </div>
+      <div className="listing-content">
+        <div className="listing-content-left">
+          <div className="listing-info-container">
+            <div className="section-header">
+              <h2>About the place</h2>
+            </div>
 
-      <div>
-        <div>
-          Available for:{" "}
-          {lengthOfStay.map((item) => (
-            <p>{item}</p>
-          ))}
-        </div>
-      </div>
+            <div className="section-content">
+              <h3>
+                What {owner.firstName ? owner.firstName : owner.username} says
+                about their place?
+              </h3>
+              <div className="description">{generalDescription}</div>
+            </div>
+            <div className="section-content">
+              <h3>House rules:</h3>
+              <div className="icons-container">
+                <div>
+                  <MdSmokingRooms
+                    size={BigIconSize}
+                    style={{ color: smokersWelcome ? "yellowgreen" : "salmon" }}
+                  />
+                </div>
+                <div>
+                  <FaBaby
+                    size={BigIconSize}
+                    style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
+                  />
+                </div>
+                <div>
+                  <FaDog
+                    size={BigIconSize}
+                    style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
+                  />
+                </div>
+                <div>
+                  <FaUmbrellaBeach
+                    size={BigIconSize}
+                    style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="section-content">
+              <h3>Perfect for:</h3>
+              <div className="info-labels">
+                {ambienceLabels.map((item, index) => (
+                  <span key={index} className="ambience-label darkcyan">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
 
-      <div>
-        <h2>About the flat</h2>
-        <div className="icons-container">
-          <div>
-            <MdSmokingRooms
-              size={BigIconSize}
-              style={{ color: smokersWelcome ? "yellowgreen" : "salmon" }}
-            />
-          </div>
-          <div>
-            <FaBaby
-              size={BigIconSize}
-              style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
-            />
-          </div>
-          <div>
-            <FaDog
-              size={BigIconSize}
-              style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
-            />
-          </div>
-          <div>
-            <FaUmbrellaBeach
-              size={BigIconSize}
-              style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
-            />
-          </div>
-        </div>
-        <div>
-          Kitchen:{" "}
-          {kitchenEquipment.map((item) => (
-            <p>{item}</p>
-          ))}
-        </div>
-        <div>
-          Bathroom:{" "}
-          {bathroomEquipment.map((item) => (
-            <p>{item}</p>
-          ))}
-        </div>
-        <div>
-          Home office set-up:{" "}
-          {workSetup.map((item) => (
-            <p>{item}</p>
-          ))}
-        </div>
-        <div>
-          <p></p>Accessibility:
-          <div>
-            {accessibility.map((item) => (
-              <p>{item}</p>
-            ))}
-          </div>
-        </div>
-        <div>
-          <h3>What ({owner.username}) says about their place:</h3>
-          <div>{generalDescription}</div>
-        </div>
-      </div>
+            <div className="section-header">
+              <h2>About the area</h2>
+            </div>
 
-      <div>
-        <h2>About the area</h2>
-        <div>
-          <h3>Perfect for:</h3>
-          <div>
-            {ambienceLabels.map((item) => (
-              <p>{item}</p>
-            ))}
+            <div className="section-content">
+              <h3>How is the neighborhood?</h3>
+              <div className="description">{extraRemarks}</div>
+            </div>
           </div>
         </div>
-        <div>
-          <h3>What {owner.username} says about the neighborhood:</h3>
-          <div>{extraRemarks}</div>
+        <div className="listing-content-right">
+          <div className="owner-card">
+            <h4>Meet the owner</h4>
+            <div>
+              <img src={owner.profilePic} height="100px" />
+              <div className="owner-card-info">
+                {owner.firstName ? (
+                  <p>
+                    {owner.firstName} ({owner.username})
+                  </p>
+                ) : (
+                  <p>{owner.username}</p>
+                )}
+                <Link
+                  to={`${PATHS.USER}/${owner.username}`}
+                  className="btn orange"
+                >
+                  See profile
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="listing-content-checklist">
+            <div className="section-info">
+              <h4>Availablility:</h4>
+              {lengthOfStay.map((item) => (
+                <div className="info-labels">
+                  <BiCheck className="listing-icon" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="section-info">
+              <h4>Kitchen:</h4>
+              {kitchenEquipment.map((item) => (
+                <div className="info-labels">
+                  <BiCheck className="listing-icon" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="section-info">
+              <h4>Bathroom:</h4>
+              {bathroomEquipment.map((item) => (
+                <div className="info-labels">
+                  <BiCheck className="listing-icon" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="section-info">
+              <h4>Home office set-up:</h4>
+              {workSetup.map((item) => (
+                <div className="info-labels">
+                  <BiCheck className="listing-icon" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="section-info">
+              <h4>Accessibility:</h4>
+              {accessibility.map((item) => (
+                <div className="info-labels">
+                  <BiCheck className="listing-icon" />
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -299,23 +352,6 @@ export default function SingleListing(props) {
           ></img>
         ))}
       </div>
-
-      {isOwner ? (
-        <div>
-          <Link
-            to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}
-            className="btn orange"
-          >
-            Edit
-          </Link>
-          <Link
-            to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}
-            className="btn red"
-          >
-            Delete
-          </Link>
-        </div>
-      ) : null}
     </div>
   );
 }

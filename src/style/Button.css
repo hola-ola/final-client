@@ -2,6 +2,7 @@
   min-width: 70px;
   padding: 7px;
   border-radius: 15px;
+  margin: 0 3px;
   color: white;
   text-decoration: none;
   text-align: center;
@@ -65,4 +66,12 @@
 
 .coral {
   background-color: coral;
+}
+
+.green {
+  background-color: #d4e09b;
+}
+
+.silver {
+  background-color: lightgray;
 }

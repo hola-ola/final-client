@@ -15,6 +15,10 @@ h3 {
   margin: 0;
 }
 
+.listing-header h1 {
+  width: 60vw;
+}
+
 .listing-title {
   display: flex;
   justify-content: space-between;
@@ -47,6 +51,50 @@ h3 {
   padding: 0 10px;
 }
 
+/* LISTING CONTENT  */
+.listing-content {
+  display: flex;
+}
+
+.listing-content-left {
+  width: 60vw;
+}
+
+.listing-content-right {
+  width: 30vw;
+}
+
+/* SECTION */
+
+.section-header {
+  width: 60vw;
+  border-bottom: 2px dotted black;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  letter-spacing: 1px;
+  font-size: 18px;
+}
+
+.section-content {
+  padding-top: 20px;
+}
+
+.section-content h3 {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: left;
+}
+
+.section-info h4 {
+  padding: 15px 0;
+  margin: 0;
+}
+
+.description {
+  margin: 10px 0;
+  line-height: 1.4em;
+}
+
 /* OWNER CARD */
 .owner-card {
   width: 220px;
@@ -76,6 +124,25 @@ h3 {
   flex-direction: column;
 }
 
+/* LISTING INFO CONTAINER */
+
+.listing-info-container {
+  /* background-color: lightgoldenrodyellow; */
+  width: 60vw;
+  padding: 20px 0;
+}
+
+.info-labels {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.info-labels p {
+  margin: 0;
+  padding-right: 15px;
+}
+
 /* ICONS */
 
 .listing-icon {
@@ -85,8 +152,9 @@ h3 {
 /* ICONS CONTAINER */
 .icons-container {
   display: flex;
-  justify-content: space-between;
   width: 300px;
+  justify-content: space-between;
+
   margin: auto;
 }
 
@@ -98,4 +166,12 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* LABELS */
+.ambience-label {
+  padding: 7px;
+  text-align: center;
+  margin: 10px 5px;
+  color: white;
 }

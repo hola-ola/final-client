@@ -13,6 +13,7 @@ import "../../style/Button.css";
 
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
+  const [filteredResults, setFilteredResults] = useState({});
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   const params = new URLSearchParams(props.location.search);
@@ -41,14 +42,54 @@ export default function SearchPage(props) {
       </h2>
       <div>
         <div className="filters-container">
-          <Dropdown title="Duration" items={AMENITIES.LENGTH_OF_STAY} />
-          <Dropdown title="Type" items={AMENITIES.LISTING_TYPE} />
-          <Dropdown title="Guests" items={AMENITIES.SLEEPS} />
-          <Dropdown title="Bathroom" items={AMENITIES.BATHROOM_EQUIPMENT} />
-          <Dropdown title="Kitchen" items={AMENITIES.KITCHEN_EQUIPMENT} />
-          <Dropdown title="Work setup" items={AMENITIES.WORK_SETUP} />
-          <Dropdown title="Accessibility" items={AMENITIES.ACCESSIBILITY} />
-          <Dropdown title="Perfect for" items={AMENITIES.AMBIENCE} />
+          <Dropdown
+            title="Duration"
+            modelKey="lengthOfStay"
+            items={AMENITIES.LENGTH_OF_STAY}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Type"
+            modelKey="type"
+            items={AMENITIES.LISTING_TYPE}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Guests"
+            modelKey="numberOfSleepingSpots"
+            items={AMENITIES.SLEEPS}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Bathroom"
+            modelKey="bathroomEquipment"
+            items={AMENITIES.BATHROOM_EQUIPMENT}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Kitchen"
+            modelKey="kitchenEquipment"
+            items={AMENITIES.KITCHEN_EQUIPMENT}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Work setup"
+            modelKey="workSetup"
+            items={AMENITIES.WORK_SETUP}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Accessibility"
+            modelKey="accessibility"
+            items={AMENITIES.ACCESSIBILITY}
+            setFilteredResults={setFilteredResults}
+          />
+          <Dropdown
+            title="Perfect for"
+            modelKey="ambienceLabels"
+            items={AMENITIES.AMBIENCE}
+            setFilteredResults={setFilteredResults}
+          />
         </div>
         {q && results.length === 0 ? (
           <div className="noresults-container">

@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import onClickOutside from "react-onclickoutside";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { BiSquare, BiCheckSquare } from "react-icons/bi";
 import "./Dropdown.css";
+const defunc = () => {};
 
-function Dropdown({ title, items, multiSelect = true }) {
+function Dropdown({
+  title,
+  modelKey,
+  items,
+  multiSelect = true,
+  setFilteredResults = defunc,
+}) {
   const [open, setOpen] = useState(false);
   const [selection, setSelection] = useState([]);
   const toggle = () => setOpen(!open);
@@ -22,11 +29,16 @@ function Dropdown({ title, items, multiSelect = true }) {
       selectionAfterRemoval = selectionAfterRemoval.filter(
         (current) => current !== item
       );
-      setSelection([...selectionAfterRemoval]);
+      setSelection([selectionAfterRemoval]);
     }
   }
 
-  console.log(selection);
+  useEffect(() => {
+    setFilteredResults((prev) => ({
+      ...prev,
+      [modelKey]: selection.flat(Infinity),
+    }));
+  }, [selection]);
 
   function isItemInSelection(item) {
     if (selection.some((current) => current === item)) {
