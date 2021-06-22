@@ -14,7 +14,6 @@ import "../../style/Button.css";
 export default function SearchPage(props) {
   const [results, setResults] = useState([]);
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-  const [filterDropdown, setFilterDropdown] = useState(false);
 
   const params = new URLSearchParams(props.location.search);
   const q = params.get("q");

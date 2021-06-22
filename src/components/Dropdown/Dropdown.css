@@ -8,7 +8,7 @@
   border-radius: 15px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .dd-list {
@@ -21,15 +21,26 @@
 
 .dd-item {
   display: flex;
+  align-items: center;
   padding: 5px;
-}
-
-.dd-item-text {
-  text-align: left;
+  font-size: 1em;
 }
 
 .dd-item button {
   border: none;
   background-color: inherit;
   font-size: 1em;
+  width: 120px;
+  overflow: hidden;
+  white-space: wrap;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.yellow {
+  background-color: lightgoldenrodyellow;
+}
+
+.none {
+  background-color: none;
 }

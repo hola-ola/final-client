@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import onClickOutside from "react-onclickoutside";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { BiCheck, BiSquare, BiCheckSquare } from "react-icons/bi";
+import { BiSquare, BiCheckSquare } from "react-icons/bi";
 import "./Dropdown.css";
 
 function Dropdown({ title, items, multiSelect = true }) {
@@ -26,14 +26,14 @@ function Dropdown({ title, items, multiSelect = true }) {
     }
   }
 
+  console.log(selection);
+
   function isItemInSelection(item) {
     if (selection.some((current) => current === item)) {
       return true;
     }
     return false;
   }
-
-  console.log(selection);
 
   return (
     <div className="dd-container">
@@ -51,11 +51,15 @@ function Dropdown({ title, items, multiSelect = true }) {
       {open && (
         <ul className="dd-list">
           {items.map((item, index) => (
-            <li key={index} className="dd-item">
-              {isItemInSelection(item) ? <BiCheckSquare /> : <BiSquare />}
-
+            <li
+              key={index}
+              className={`dd-item ${
+                isItemInSelection(item) ? "yellow" : "none"
+              }`}
+            >
+              {/* {isItemInSelection(item) ? <BiCheckSquare /> : <BiSquare />} */}
               <button type="button" onClick={() => handleOnClick(item)}>
-                <span className="dd-item-text">{item}</span>
+                {item}
               </button>
             </li>
           ))}
