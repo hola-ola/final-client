@@ -1,12 +1,11 @@
 .result-card {
   max-width: 250px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 10px;
+  margin: 20px 50px;
   padding: 10px;
   line-height: 5px;
 }

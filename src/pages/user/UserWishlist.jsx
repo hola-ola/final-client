@@ -4,6 +4,7 @@ import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service";
 import ResultCardWishlist from "../../components/ResultCard/ResultCardWishlist";
+import "../../style/Button.css";
 
 export default function GetWishlistItems(props) {
   const [wishlist, setWishlist] = useState([]);
@@ -51,7 +52,7 @@ export default function GetWishlistItems(props) {
     <div>
       <h1>This is the wishlist of {usernameFromProps}</h1>
       <Link to={`${PATHS.USER}/${usernameFromProps}`}>
-        <button>Back to profile</button>
+        <button className="button sandybrown">Back to profile</button>
       </Link>
       {wishlist.map((item, index) => (
         <ResultCardWishlist
@@ -61,9 +62,7 @@ export default function GetWishlistItems(props) {
           RemoveListing={RemoveListing}
           owner={owner}
         >
-          <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-            <button>View listing</button>
-          </Link>
+          View listing
         </ResultCardWishlist>
       ))}
     </div>
