@@ -70,27 +70,31 @@ export default function HomePage(props) {
             another person or family for a vacation, a quick city break, or a
             longer period of time.
           </p>
-          <div className="destinations-box">
-            {CONTENT.HOW_IT_WORKS.map((item, index) => (
-              <div>
-                {index === 0 ? (
-                  <BiHomeHeart size="50px" />
-                ) : index === 1 ? (
-                  <BiSearchAlt size="50px" />
-                ) : index === 2 ? (
-                  <BiMailSend size="50px" />
-                ) : index === 3 ? (
-                  <IoMdSwap size="50px" />
-                ) : (
-                  <BiWinkSmile size="50px" />
-                )}
-                <HowToCard item={item} key={index} />
-              </div>
-            ))}
+          <div className="how-to-section">
+            <div className="destinations-box">
+              {CONTENT.HOW_IT_WORKS.map((item, index) => (
+                <div className="how-to-box">
+                  {index === 0 ? (
+                    <BiHomeHeart size="50px" />
+                  ) : index === 1 ? (
+                    <BiSearchAlt size="50px" />
+                  ) : index === 2 ? (
+                    <BiMailSend size="50px" />
+                  ) : index === 3 ? (
+                    <IoMdSwap size="50px" />
+                  ) : (
+                    <BiWinkSmile size="50px" />
+                  )}
+                  <HowToCard item={item} key={index} />
+                </div>
+              ))}
+            </div>
+            <div className="btn-container-center">
+              <Link to={`${PATHS.CREATE_LISTING}`} className="btn bigger coral">
+                Create your listing
+              </Link>
+            </div>
           </div>
-          <Link to={`${PATHS.CREATE_LISTING}`} className="btn bigger coral">
-            Create your listing
-          </Link>
         </div>
       </div>
 

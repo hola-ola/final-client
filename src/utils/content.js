@@ -1,7 +1,7 @@
 export const POPULAR_DESTINATIONS = [
   {
     destination: "Berlin",
-    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624136321/hop-flat-swap/hp-berlin_wqhkca.jpg",
+    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624380170/hop-flat-swap/hp-berlin2_xoi5no.jpg",
   },
   {
     destination: "Madrid",
@@ -13,7 +13,7 @@ export const POPULAR_DESTINATIONS = [
   },
   {
     destination: "Dubai",
-    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624136328/hop-flat-swap/hp-dubai_gz4fcu.jpg",
+    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624379769/hop-flat-swap/hp-dubai_yrjwrl.jpg",
   },
   {
     destination: "Canary Islands",

@@ -5,7 +5,7 @@ import "./HowToCard.css";
 export default function HowToCard(props) {
   const { item, key } = props;
   return (
-    <div className="howto-card">
+    <div className="how-to-card">
       <h3>{item.title}</h3>
       <p>{item.description}</p>
     </div>

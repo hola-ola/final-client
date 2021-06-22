@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px 5px;
 }
 
 .dest-card h3 {
-  padding: 10px 0;
+  padding: 15px 0;
+  font-size: 20px;
 }
 
 .image-cropper {
