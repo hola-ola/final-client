@@ -62,6 +62,13 @@ export default function AddReview(props) {
       <br></br>
       <input
         type="text"
+        name="title"
+        placeholder="Add a title"
+        onChange={handleChange}
+      />
+      <br></br>
+      <input
+        type="text"
         name="body"
         placeholder="Write your review"
         onChange={handleChange}

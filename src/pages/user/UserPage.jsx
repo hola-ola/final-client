@@ -304,38 +304,48 @@ export default function UserPage(props) {
               ) : null}
             </div> */}
 
-        <div className="user-wishlist component">
-          {!owner && !user?.wishlist?.length && (
-            <>
-              <p>
-                <h3>User wishlist</h3>
-                {user.username} hasn't added any listings to their wishlist yet
-              </p>
-            </>
-          )}
-          {owner && !user?.wishlist?.length && (
-            <>
-              <h3>Your wishlist</h3>
-              <p>You haven't added any listings to your wishlist yet</p>
-            </>
-          )}
-          <h3>Your wishlist</h3>
+        <div class="wishlist-section">
+          <div>
+            {!owner && !user?.wishlist?.length && (
+              <>
+                <p>
+                  <h3>User wishlist</h3>
+                  {user.username} hasn't added any listings to their wishlist
+                  yet
+                </p>
+              </>
+            )}
+            {owner && !user?.wishlist?.length && (
+              <>
+                <h3>Your wishlist</h3>
+                <p>You haven't added any listings to your wishlist yet</p>
+              </>
+            )}
+            <h3>Your wishlist</h3>
+          </div>
+
+          <div id="wishlist-tiles">
+            {user?.wishlist?.length ? (
+              <>
+                {userWishlist.slice(0, 4).map((item) => (
+                  <ResultCard item={item} key={item._id}>
+                    View listing
+                  </ResultCard>
+                ))}
+              </>
+            ) : null}
+          </div>
+
           <div>
             {user?.wishlist?.length ? (
               <>
-                <div className="component-row">
-                  {userWishlist.slice(0, 4).map((item) => (
-                    <ResultCard item={item} key={item._id}>
-                      View listing
-                    </ResultCard>
-                  ))}
+                <div id="wishlist-button-section">
+                  <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                    <button className="button darkcyan" id="view-wishlist-btn">
+                      View wishlist
+                    </button>
+                  </Link>
                 </div>
-
-                <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
-                  <button className="button darkcyan" id="view-wishlist-btn">
-                    View wishlist
-                  </button>
-                </Link>
               </>
             ) : null}
           </div>
