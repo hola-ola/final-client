@@ -1,0 +1,24 @@
+.one-review {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.one-review img {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.one-review span {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.review-text {
+  margin: 0px 0px 10px 20px;
+  line-height: 10px;
+}

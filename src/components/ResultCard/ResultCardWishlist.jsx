@@ -5,7 +5,7 @@ import "./ResultCard.css";
 import "../../style/Button.css";
 
 function ResultCard(props) {
-  const { item, index } = props;
+  const { item, index, RemoveListing, owner } = props;
   return (
     <div className="result-card">
       <div key={index}>
@@ -21,9 +21,16 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-        <button className="button darkcyan">{props.children}</button>
+      <Link to={`${PATHS.LISTINGS}/${item._id}`} className="btn orange">
+        {props.children}
       </Link>
+      {owner ? (
+        <>
+          <button onClick={() => RemoveListing(item._id)}>
+            Remove from wishlist
+          </button>
+        </>
+      ) : null}
     </div>
   );
 }

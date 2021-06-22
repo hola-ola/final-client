@@ -1,43 +1,33 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import * as PATHS from "../../utils/paths";
+import Score from "../../components/Reviews/Score";
 import "./ShowReview.css";
 
 function ShowReview(props) {
   // console.log("The props: ", props);
-  const { item, index, user } = props;
+  const { item, index, loggedUser, usernameFromProps } = props;
   const [reviewsAuthor, setReviewsAuthor] = React.useState(true);
 
   useEffect(() => {
-    user.username === item.reviewingUser.username
-      ? setReviewsAuthor(true)
-      : setReviewsAuthor(false);
-  }, []);
+    loggedUser !== item.reviewingUser
+      ? setReviewsAuthor(false)
+      : setReviewsAuthor(true);
+    console.log("reviewsAuthor: ", reviewsAuthor);
+  }, usernameFromProps);
 
   return (
-    <div className="one-review">
-      <div key={index}>
-        <h4>{item.title}</h4>
+    <div key={index} className="review">
+      <div className="one-review">
+        <div className="review-pic">
+          <img src={item.reviewingUser.profilePic} />
+        </div>
 
-        {reviewsAuthor ? (
-          <>
-            Review of{" "}
-            <Link to={`${PATHS.USER}/${item.reviewedUser.username}`}>
-              {item.reviewedUser.username}
-            </Link>
-          </>
-        ) : (
-          <>
-            <p>
-              Review by{" "}
-              <Link to={`${PATHS.USER}/${item.reviewingUser.username}`}>
-                {item.reviewingUser.username}
-              </Link>
-            </p>
-          </>
-        )}
-
-        <p>{item.body}</p>
+        <div className="review-text">
+          <p>
+            <Score>{item.score}</Score>
+          </p>
+          <p>"{item.body}"</p>
+          <span>{item.reviewingUser.username}</span>
+        </div>
       </div>
     </div>
   );

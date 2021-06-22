@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as CONSTS from "../../utils/consts";
 import useForm from "../../hooks/useForm.js";
 import * as REVIEW_SERVICE from "../../services/review.service.js";
+import "../../style/Button.css";
 
 export default function AddReview(props) {
   const {
@@ -12,9 +13,7 @@ export default function AddReview(props) {
     GetReceivedReviews,
     toggleAddReview,
   } = props;
-  const [thisUser, setThisUser] = useState(user);
   const usernameFromProps = props.match.params.username;
-  const loggedUser = user._id;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 
   const [
@@ -37,35 +36,29 @@ export default function AddReview(props) {
         // console.log("Server response review: ", response);
         // console.log("Here we set the user to display new review");
 
-        authenticate(thisUser);
+        authenticate(user);
         // console.log("The response: ", response);
         // console.log("Received reviews: ", receivedReviews);
         GetReceivedReviews();
         toggleAddReview(false);
-        // setReceivedReviews([...receivedReviews, response]);
+        setReceivedReviews([...receivedReviews, response]);
       })
       .catch((err) => {
-        console.error(err.response);
+        // console.error(err.response);
       });
   });
 
   return (
     <form onSubmit={onSubmit}>
-      <label>How long have you stayed at {usernameFromProps}'s?</label>
-      <br></br>
-      <p>Start date: </p>
+      {/* <label>How long have you stayed at {usernameFromProps}'s?</label>
+      <br></br> */}
+      {/* <p>Start date: </p>
       <input type="date" name="startDate" onChange={handleChange} />
       <br></br>
       <p>End date: </p>
       <input type="date" name="endDate" onChange={handleChange} />
-      <br></br>
-      <p>Add your review here:</p>
-      <input
-        type="text"
-        name="title"
-        placeholder="Add a title"
-        onChange={handleChange}
-      />
+      <br></br> */}
+      <label>Add your review of {usernameFromProps} here:</label>
       <br></br>
       <input
         type="text"
@@ -74,13 +67,11 @@ export default function AddReview(props) {
         onChange={handleChange}
       />
       <br></br>
-      <label>
-        How would you rate {usernameFromProps}? Give a score from 1 to 5.
-      </label>
+      <label>Rate {usernameFromProps} with a score from 1 to 5:</label>
       <br></br>
       <input type="number" name="score" onChange={handleChange} />
       <br></br>
-      <button>Submit</button>
+      <button className="button sandybrown">Submit</button>
       <br></br>
     </form>
   );

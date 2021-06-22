@@ -3,15 +3,19 @@
   border: 1px solid black;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin: 10px;
   padding: 10px;
+  line-height: 5px;
 }
 
 .result-card img {
   max-width: 200px;
+  border-radius: 10%;
 }
 
 .result-card button {
-  width: 100px;
-  margin: auto;
+  margin: 15px;
 }
