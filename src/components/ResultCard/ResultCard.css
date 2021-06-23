@@ -1,11 +1,7 @@
 .result-card {
-<<<<<<< HEAD
   width: 240px;
   height: 300px;
   border: 2px dotted black;
-=======
-  max-width: 250px;
->>>>>>> ff9818d5425ef8074aee59b083e36d8a89f5b8e0
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +19,6 @@
   border-radius: 10%;
 }
 
-<<<<<<< HEAD
 .result-card button {
 }
 
@@ -40,8 +35,4 @@
 .center {
   display: grid;
   place-items: center;
-=======
-.result-card-btn {
-  margin: 15px;
->>>>>>> ff9818d5425ef8074aee59b083e36d8a89f5b8e0
 }
