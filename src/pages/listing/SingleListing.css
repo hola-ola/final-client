@@ -61,10 +61,23 @@ h3 {
 }
 
 .listing-content-right {
+  /* background-color: gray; */
   width: 30vw;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+.listing-content-checklist {
+  margin: 15px 25px 15px 10px;
 }
 
 /* SECTION */
+
+.section-container {
+  margin-bottom: 50px;
+}
 
 .section-header {
   width: 60vw;
@@ -73,6 +86,19 @@ h3 {
   margin-top: 20px;
   letter-spacing: 1px;
   font-size: 18px;
+}
+
+.section-header-left {
+  border-bottom: 2px dotted black;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+.section-header-left h3 {
+  text-align: left;
+  font-size: 24px;
 }
 
 .section-content {
@@ -154,7 +180,6 @@ h3 {
   display: flex;
   width: 300px;
   justify-content: space-between;
-
   margin: auto;
 }
 

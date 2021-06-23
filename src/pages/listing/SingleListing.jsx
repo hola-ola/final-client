@@ -203,64 +203,87 @@ export default function SingleListing(props) {
       <div className="listing-content">
         <div className="listing-content-left">
           <div className="listing-info-container">
-            <div className="section-header">
-              <h2>About the place</h2>
-            </div>
+            {/* About the place */}
+            <div className="section-container">
+              <div className="section-header">
+                <h2>About the place</h2>
+              </div>
 
-            <div className="section-content">
-              <h3>
-                What {owner.firstName ? owner.firstName : owner.username} says
-                about their place?
-              </h3>
-              <div className="description">{generalDescription}</div>
-            </div>
-            <div className="section-content">
-              <h3>House rules:</h3>
-              <div className="icons-container">
-                <div>
-                  <MdSmokingRooms
-                    size={BigIconSize}
-                    style={{ color: smokersWelcome ? "yellowgreen" : "salmon" }}
-                  />
+              <div className="section-content">
+                <h3>
+                  What {owner.firstName ? owner.firstName : owner.username} says
+                  about their place?
+                </h3>
+                <div className="description">{generalDescription}</div>
+              </div>
+              <div className="section-content">
+                <h3>House rules:</h3>
+                <div className="icons-container">
+                  <div>
+                    <MdSmokingRooms
+                      size={BigIconSize}
+                      style={{
+                        color: smokersWelcome ? "yellowgreen" : "salmon",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <FaBaby
+                      size={BigIconSize}
+                      style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
+                    />
+                  </div>
+                  <div>
+                    <FaDog
+                      size={BigIconSize}
+                      style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
+                    />
+                  </div>
+                  <div>
+                    <FaUmbrellaBeach
+                      size={BigIconSize}
+                      style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
+                    />
+                  </div>
                 </div>
-                <div>
-                  <FaBaby
-                    size={BigIconSize}
-                    style={{ color: kidsWelcome ? "yellowgreen" : "salmon" }}
-                  />
-                </div>
-                <div>
-                  <FaDog
-                    size={BigIconSize}
-                    style={{ color: petsWelcome ? "yellowgreen" : "salmon" }}
-                  />
-                </div>
-                <div>
-                  <FaUmbrellaBeach
-                    size={BigIconSize}
-                    style={{ color: spaceOutside ? "yellowgreen" : "salmon" }}
-                  />
+              </div>
+              <div className="section-content">
+                <h3>Perfect for:</h3>
+                <div className="info-labels">
+                  {ambienceLabels.map((item, index) => (
+                    <span key={index} className="ambience-label darkcyan">
+                      {item}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
-            <div className="section-content">
-              <h3>Perfect for:</h3>
-              <div className="info-labels">
-                {ambienceLabels.map((item, index) => (
-                  <span key={index} className="ambience-label darkcyan">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
+            <div></div>
             <div className="section-header">
               <h2>About the area</h2>
             </div>
-
-            <div className="section-content">
-              <h3>How is the neighborhood?</h3>
-              <div className="description">{extraRemarks}</div>
+            {/* About the hood */}
+            <div className="section-container">
+              <div className="section-content">
+                <h3>How is the neighborhood?</h3>
+                <div className="description">{extraRemarks}</div>
+              </div>
+            </div>
+            {/* Photos */}
+            <div className="section-container">
+              <div className="section-header">
+                <h2>Photos</h2>
+              </div>
+              <div>
+                {imagesGallery.map((photo, index) => (
+                  <img
+                    src={imagesGallery[index]}
+                    alt={title}
+                    width="300px"
+                    key={index}
+                  ></img>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -279,7 +302,7 @@ export default function SingleListing(props) {
                 )}
                 <Link
                   to={`${PATHS.USER}/${owner.username}`}
-                  className="btn orange"
+                  className="btn sandybrown"
                 >
                   See profile
                 </Link>
@@ -288,6 +311,9 @@ export default function SingleListing(props) {
           </div>
 
           <div className="listing-content-checklist">
+            <div className="section-header-left">
+              <h3>Good to know</h3>
+            </div>
             <div className="section-info">
               <h4>Availablility:</h4>
               {lengthOfStay.map((item) => (
@@ -339,18 +365,6 @@ export default function SingleListing(props) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div>
-        <h2>Photos:</h2>
-        {imagesGallery.map((photo, index) => (
-          <img
-            src={imagesGallery[index]}
-            alt={title}
-            width="300px"
-            key={index}
-          ></img>
-        ))}
       </div>
     </div>
   );
