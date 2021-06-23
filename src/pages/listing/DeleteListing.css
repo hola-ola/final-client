@@ -1,0 +1,16 @@
+.delete-wrapper {
+  margin: 25px;
+  width: 50vw;
+  height: 40vh;
+  margin: auto;
+  text-align: center;
+}
+
+.delete-wrapper h2 {
+  text-align: center;
+  padding: 25px;
+}
+
+.delete-wrapper h3 {
+  text-align: center;
+}

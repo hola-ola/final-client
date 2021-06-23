@@ -3,6 +3,8 @@ import * as LISTING_SERVICE from "../../services/listing.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 
+import "./DeleteListing.css";
+
 export default function RemovedListing(props) {
   const listingFromProps = props.match.params.listingId;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
@@ -18,14 +20,15 @@ export default function RemovedListing(props) {
     .catch((err) => console.log("This is the error:", err));
 
   return (
-    <div>
+    <div className="delete-wrapper">
       <h2>Your listing has been removed</h2>
       <button
+        className="button darkcyan"
         onClick={(event) => {
           props.history.push(PATHS.HOMEPAGE);
         }}
       >
-        Go to homepage
+        Back to homepage
       </button>
     </div>
   );
