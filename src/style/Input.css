@@ -5,3 +5,8 @@
   text-align: center;
   outline: none;
 }
+
+.listing-input-field {
+  height: 25px;
+  width: 300px;
+}
