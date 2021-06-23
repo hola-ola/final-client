@@ -48,11 +48,14 @@ const Navbar = (props) => {
           </>
         ) : (
           <>
-            <div>
-              <Link to={PATHS.SIGNUPPAGE} className="btn tan navbar-link">
+            <div className="navbar-links">
+              <Link
+                to={PATHS.SIGNUPPAGE}
+                className="btn sandybrown navbar-link"
+              >
                 Sign up
               </Link>
-              <Link to={PATHS.LOGINPAGE} className="btn tan navbar-link">
+              <Link to={PATHS.LOGINPAGE} className="btn sandybrown navbar-link">
                 Log in
               </Link>
             </div>
