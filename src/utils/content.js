@@ -1,11 +1,11 @@
 export const POPULAR_DESTINATIONS = [
   {
     destination: "Berlin",
-    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624380170/hop-flat-swap/hp-berlin2_xoi5no.jpg",
+    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624487534/hop-flat-swap/hp-berlin_h6l2gc.jpg",
   },
   {
     destination: "Madrid",
-    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624133126/hop-flat-swap/hp-madrid_jv4mhe.jpg",
+    src: "https://res.cloudinary.com/dmvukjvqe/image/upload/v1624487684/hop-flat-swap/hp-madrid_ajzzuz.jpg",
   },
   {
     destination: "The Netherlands",
@@ -25,27 +25,29 @@ export const HOW_IT_WORKS = [
   {
     title: "1. Create your listing",
     description:
-      "Just checking how it looks with a long long long long long long long long long long long  text",
+      "Create your listing and fill out your profile. Don't forget about nice pictures!",
     icon: "BiHomeHeart",
   },
   {
     title: "2. Look for homes",
-    description: "[description]",
+    description:
+      "Look for available listings in destinations that interest you.",
     icon: "BiSearchAlt",
   },
   {
     title: "3. Get in touch",
-    description: "[description]",
+    description:
+      "Send exchange requests and tell other a bit more about your home.",
     icon: "BiMailSend",
   },
   {
     title: "4. Swap your homes",
-    description: "[description]",
+    description: "Organize the details of your exchange.",
     icon: "IoMdSwap",
   },
   {
     title: "5. Live like a local",
-    description: "[description]",
+    description: "All set! Pack your bags and start exploring new places.",
     icon: "BiWinkSmile",
   },
 ];

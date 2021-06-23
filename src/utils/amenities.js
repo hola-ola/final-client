@@ -17,7 +17,7 @@ export const KITCHEN_EQUIPMENT = [
   "Dishwasher",
   "Coffee machine",
   "Coffee maker",
-  "Hot watter kettle",
+  "Hot water kettle",
   "Microwave",
   "Kitchen table",
   "Fridge",

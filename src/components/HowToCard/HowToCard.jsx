@@ -7,7 +7,7 @@ export default function HowToCard(props) {
   return (
     <div className="how-to-card">
       <h3>{item.title}</h3>
-      <p>{item.description}</p>
+      <div>{item.description}</div>
     </div>
   );
 }
