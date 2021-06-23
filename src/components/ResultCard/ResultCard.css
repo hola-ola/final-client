@@ -5,9 +5,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 20px 50px;
-  padding: 10px;
+  margin: 30px 30px;
+  padding: 20px;
   line-height: 5px;
+  border: solid antiquewhite 3px;
+  border-radius: 10%;
 }
 
 .result-card img {

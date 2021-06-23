@@ -5,6 +5,7 @@
   color: white;
   text-decoration: none;
   text-align: center;
+  outline: none;
 }
 
 .button {
@@ -16,6 +17,7 @@
   text-decoration: none;
   border: none;
   font-size: 15px;
+  outline: none;
 }
 
 .bigger {

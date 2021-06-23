@@ -3,6 +3,7 @@ import * as CONSTS from "../../utils/consts";
 import useForm from "../../hooks/useForm.js";
 import * as REVIEW_SERVICE from "../../services/review.service.js";
 import "../../style/Button.css";
+import "./AddReview.css";
 
 export default function AddReview(props) {
   const {
@@ -50,36 +51,32 @@ export default function AddReview(props) {
 
   return (
     <form onSubmit={onSubmit}>
-      {/* <label>How long have you stayed at {usernameFromProps}'s?</label>
-      <br></br> */}
-      {/* <p>Start date: </p>
-      <input type="date" name="startDate" onChange={handleChange} />
-      <br></br>
-      <p>End date: </p>
-      <input type="date" name="endDate" onChange={handleChange} />
-      <br></br> */}
-      <label>Add your review of {usernameFromProps} here:</label>
-      <br></br>
-      <input
-        type="text"
-        name="title"
-        placeholder="Add a title"
-        onChange={handleChange}
-      />
-      <br></br>
-      <input
-        type="text"
-        name="body"
-        placeholder="Write your review"
-        onChange={handleChange}
-      />
-      <br></br>
-      <label>Rate {usernameFromProps} with a score from 1 to 5:</label>
-      <br></br>
-      <input type="number" name="score" onChange={handleChange} />
-      <br></br>
-      <button className="button sandybrown">Submit</button>
-      <br></br>
+      <div className="add-review">
+        <p>You are reviewing {usernameFromProps}</p>
+        <input
+          type="text"
+          name="title"
+          placeholder="Add a title"
+          onChange={handleChange}
+        />
+        <textarea
+          type="text"
+          name="body"
+          placeholder="Write your review"
+          onChange={handleChange}
+        />
+        <p>
+          Score from 1 to 5:{" "}
+          <input
+            id="score"
+            type="number"
+            name="score"
+            onChange={handleChange}
+          />
+        </p>
+
+        <button className="button sandybrown">Submit</button>
+      </div>
     </form>
   );
 }

@@ -150,9 +150,11 @@ export default function UserPage(props) {
               </Link>
             </>
           ) : null}
+        </div>
 
+        <div className="user-forms">
           {displayUpdateProfile && (
-            <>
+            <div className="one-user-form">
               <UpdateProfile
                 user={user}
                 authenticate={authenticate}
@@ -160,29 +162,29 @@ export default function UserPage(props) {
                 refetchUser={RefetchUser}
                 toggleUpdateProfile={toggleUpdateProfile}
               />
-            </>
+            </div>
           )}
           {displayDeleteProfile && (
-            <>
+            <div className="one-user-form">
               <DeleteProfile
                 user={user}
                 authenticate={authenticate}
                 {...props}
                 toggleDeleteProfile={toggleDeleteProfile}
               />
-            </>
+            </div>
           )}
           {displayUpdatePic && (
-            <>
+            <div className="one-user-form">
               <UpdateProfilePic
                 getUser={RefetchUser}
                 user={user}
                 authenticate={authenticate}
               />
-            </>
+            </div>
           )}
           {displayAddReview && (
-            <>
+            <div className="one-user-form">
               <AddReview
                 user={user}
                 authenticate={authenticate}
@@ -192,17 +194,17 @@ export default function UserPage(props) {
                 GetReceivedReviews={GetReceivedReviews}
                 toggleAddReview={toggleAddReview}
               ></AddReview>
-            </>
+            </div>
           )}
           {displaySendMessage && (
-            <>
+            <div className="one-user-form">
               <SendMessage
                 user={user}
                 authenticate={authenticate}
                 {...props}
                 toggleSendMessage={toggleSendMessage}
               ></SendMessage>
-            </>
+            </div>
           )}
         </div>
       </div>
@@ -319,9 +321,11 @@ export default function UserPage(props) {
               <>
                 <h3>Your wishlist</h3>
                 <p>You haven't added any listings to your wishlist yet</p>
+                <Link to={PATHS.HOMEPAGE}>
+                  <button className="button tan">Explore the listings!</button>
+                </Link>
               </>
             )}
-            <h3>Your wishlist</h3>
           </div>
 
           <div id="wishlist-tiles">

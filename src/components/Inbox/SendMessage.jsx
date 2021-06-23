@@ -2,6 +2,7 @@ import * as CONSTS from "../../utils/consts";
 import useForm from "../../hooks/useForm.js";
 import "../../style/Button.css";
 import * as MESSAGE_SERVICE from "../../services/message.service";
+import "./SendMessage.css";
 
 export default function SendMessage(props) {
   const { user, authenticate, toggleSendMessage } = props;
@@ -19,20 +20,16 @@ export default function SendMessage(props) {
 
   const onSubmit = handleSubmit((form) => {
     console.log("Time to send a message!");
-    MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
-      .then((response) => console.log(response), toggleSendMessage(false))
-      .catch((err) => console.log(err));
+    toggleSendMessage(false);
   });
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        name="text"
-        placeholder="Write your message"
-        onChange={handleChange}
-      />
-      <button className="button sandybrown">Send!</button>
+      <div className="send-message">
+        <p>Your are sending a message to {usernameFromProps}</p>
+        <textarea type="text" name="text" onChange={handleChange} />
+        <button className="button sandybrown">Send!</button>
+      </div>
     </form>
   );
 }

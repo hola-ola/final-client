@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
+import "./DeleteProfile.css";
 
 export default function DeleteProfile(props) {
   const { user, authenticate, toggleDeleteProfile } = props;
@@ -21,7 +22,7 @@ export default function DeleteProfile(props) {
   }
 
   return (
-    <div>
+    <div id="delete-profile">
       <h3>Are you sure you want to delete your profile?</h3>
       <p>Once you confirm, your data will be removed forever</p>
       <button className="button tan" onClick={DeleteThisProfile}>
