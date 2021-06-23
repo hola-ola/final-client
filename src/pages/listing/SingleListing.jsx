@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactImagesCarousel from "react-images-carousel";
 import {
   FaBaby,
   FaDog,
@@ -36,7 +37,6 @@ export default function SingleListing(props) {
     user.wishlist.includes(listingFromProps)
       ? setIsOnWishlist(true)
       : setIsOnWishlist(false);
-    // console.log("isOnwishlist? ", isOnwishlist);
   }
 
   function AddToWishlist() {
@@ -274,15 +274,21 @@ export default function SingleListing(props) {
               <div className="section-header">
                 <h2>Photos</h2>
               </div>
-              <div>
-                {imagesGallery.map((photo, index) => (
+              <div className="section-content">
+                {/* {imagesGallery.map((photo, index) => (
                   <img
                     src={imagesGallery[index]}
                     alt={title}
                     width="300px"
                     key={index}
                   ></img>
-                ))}
+                ))} */}
+
+                <ReactImagesCarousel
+                  images={imagesGallery}
+                  sliderBg="#white"
+                  paginationBg="#000000"
+                />
               </div>
             </div>
           </div>

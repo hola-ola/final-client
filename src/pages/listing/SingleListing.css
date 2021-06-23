@@ -200,3 +200,9 @@ h3 {
   margin: 10px 5px;
   color: white;
 }
+
+/* IMAGES */
+
+.images-carousel {
+  height: 100px;
+}
