@@ -16,19 +16,16 @@ function ShowReview(props) {
 
   return (
     <div key={index} className="review">
-      <div className="one-review">
-        <div className="review-pic">
-          <img src={item.reviewingUser.profilePic} />
-        </div>
+      <p>
+        <img src={item.reviewingUser.profilePic} />
+      </p>
 
-        <div className="review-text">
-          <p>
-            <Score>{item.score}</Score>
-          </p>
-          <p>"{item.body}"</p>
-          <span>{item.reviewingUser.username}</span>
-        </div>
-      </div>
+      <p className="review-text">"{item.title}"</p>
+      <Score>{item.score}</Score>
+      <p className="review-text">{item.body}</p>
+      <p>
+        <span>{item.reviewingUser.username}</span>
+      </p>
     </div>
   );
 }

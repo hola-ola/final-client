@@ -3,6 +3,7 @@ import * as USER_SERVICE from "../../services/user.service";
 import * as CONSTS from "../../utils/consts";
 import * as PATHS from "../../utils/paths";
 import useForm from "../../hooks/useForm.js";
+import "./UpdateProfile.css";
 
 function UpdateProfile(props) {
   const { user, authenticate, refetchUser, toggleUpdateProfile } = props;
@@ -44,32 +45,37 @@ function UpdateProfile(props) {
 
   return (
     <form onSubmit={onSubmit}>
-      <div>
-        <label>First name</label>
-        <input
-          name="firstName"
-          placeholder="First name"
-          value={form.firstName}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Last name</label>
-        <input
-          name="lastName"
-          placeholder="Last name"
-          value={form.lastName}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Username</label>
-        <input
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-        />
+      <div className="update-profile">
+        <div>
+          <label>First name</label>
+          <input
+            name="firstName"
+            placeholder="First name"
+            value={form.firstName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label>Last name</label>
+          <input
+            name="lastName"
+            placeholder="Last name"
+            value={form.lastName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label>Username</label>
+          <input
+            name="username"
+            placeholder="Username"
+            value={form.username}
+            onChange={handleChange}
+          />
+        </div>
+
         <div>
           <label>Email</label>
           <input
@@ -79,6 +85,7 @@ function UpdateProfile(props) {
             onChange={handleChange}
           />
         </div>
+
         <div>
           <label>Your motto</label>
           <input
@@ -86,11 +93,14 @@ function UpdateProfile(props) {
             placeholder="Your motto"
             value={form.motto}
             onChange={handleChange}
+            type="textarea"
           />
         </div>
-
+      </div>
+      <div id="update-profile-btn">
         <button className="button tan">Submit</button>
       </div>
+
       {error && (
         <div className="error-block">
           <p>{error.errorMessage}</p>

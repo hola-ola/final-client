@@ -21,12 +21,17 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`} className="btn orange">
-        {props.children}
+      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+        <button className="button darkcyan result-card-btn">
+          {props.children}
+        </button>
       </Link>
       {owner ? (
         <>
-          <button onClick={() => RemoveListing(item._id)}>
+          <button
+            className="button red"
+            onClick={() => RemoveListing(item._id)}
+          >
             Remove from wishlist
           </button>
         </>
