@@ -1,0 +1,6 @@
+.update-user-pic {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

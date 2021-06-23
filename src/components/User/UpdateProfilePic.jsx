@@ -12,8 +12,14 @@ function UpdateProfilePic(props) {
 
   return (
     <form onSubmit={SingleImageSubmit}>
-      <input name="profilePic" onChange={SingleImageChange} type="file"></input>
-      <button className="button tan">Submit</button>
+      <div className="update-user-pic">
+        <input
+          name="profilePic"
+          onChange={SingleImageChange}
+          type="file"
+        ></input>
+        <button className="button tan">Submit</button>
+      </div>
     </form>
   );
 }
