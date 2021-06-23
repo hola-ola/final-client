@@ -1,0 +1,17 @@
+.list-of-reviews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 50px 0px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviews-page h2 {
+  padding-top: 50px;
+  text-align: center;
+}
+
+#given-revs {
+  background-color: antiquewhite;
+}

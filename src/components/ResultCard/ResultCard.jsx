@@ -22,7 +22,9 @@ function ResultCard(props) {
         </p>
       </div>
       <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-        <button className="button darkcyan">{props.children}</button>
+        <button className="button darkcyan result-card-btn">
+          {props.children}
+        </button>
       </Link>
     </div>
   );

@@ -5,6 +5,8 @@ import * as PATHS from "../../utils/paths";
 import * as USER_SERVICE from "../../services/user.service";
 import ResultCardWishlist from "../../components/ResultCard/ResultCardWishlist";
 import "../../style/Button.css";
+import "../user/UserPage.css";
+import "./UserWishlist.css";
 
 export default function GetWishlistItems(props) {
   const [wishlist, setWishlist] = useState([]);
@@ -50,21 +52,41 @@ export default function GetWishlistItems(props) {
 
   return (
     <div>
-      <h1>This is the wishlist of {usernameFromProps}</h1>
-      <Link to={`${PATHS.USER}/${usernameFromProps}`}>
-        <button className="button sandybrown">Back to profile</button>
-      </Link>
-      {wishlist.map((item, index) => (
-        <ResultCardWishlist
-          item={item}
-          key={item._id}
-          index={index}
-          RemoveListing={RemoveListing}
-          owner={owner}
-        >
-          View listing
-        </ResultCardWishlist>
-      ))}
+      <div className="wishlist-top">
+        {owner ? (
+          <>
+            <h3>Your wishlist</h3>
+          </>
+        ) : (
+          <>
+            <h3>The wishlist of {usernameFromProps}</h3>
+          </>
+        )}
+        <div className="user-pic">
+          <img
+            id="profile-pic-wishlist"
+            src={user.profilePic}
+            alt={user.username}
+          ></img>
+        </div>
+        <Link to={`${PATHS.USER}/${usernameFromProps}`}>
+          <button className="button sandybrown">Back to profile</button>
+        </Link>
+      </div>
+
+      <div className="list-of-items">
+        {wishlist.map((item, index) => (
+          <ResultCardWishlist
+            item={item}
+            key={item._id}
+            index={index}
+            RemoveListing={RemoveListing}
+            owner={owner}
+          >
+            View listing
+          </ResultCardWishlist>
+        ))}
+      </div>
     </div>
   );
 }
