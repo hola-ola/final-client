@@ -1,0 +1,27 @@
+.update-profile label {
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.update-profile button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.update-profile input {
+  width: 250px;
+  height: 20px;
+  border: none;
+  background-color: antiquewhite;
+}
+
+#update-profile-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.update-profile div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}

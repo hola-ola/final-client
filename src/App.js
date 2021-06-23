@@ -3,6 +3,7 @@ import { Switch } from "react-router-dom";
 import axios from "axios";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/homepage/HomePage";
 import LogIn from "./pages/auth/LogIn";
 import ProtectedPage from "./pages/ProtectedPage";
@@ -173,6 +174,7 @@ export default function App() {
           authenticate={authenticate}
         /> */}
       </Switch>
+      <Footer />
     </div>
   );
 }
