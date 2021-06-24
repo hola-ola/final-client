@@ -41,22 +41,20 @@ export default function HomePage(props) {
                 className="input-field search-box-input"
                 onChange={handleQueryChange}
               />
-              <Link
-                to={`${PATHS.SEARCH_RESULTS}?q=${query}`}
-                className="btn bigger sandybrown "
-              >
-                Let's swap!
+              <Link to={`${PATHS.SEARCH_RESULTS}?q=${query}`}>
+                <button className="button bigger sandybrown">
+                  Let's swap!
+                </button>
               </Link>
             </div>
           </div>
 
           <div className="notsure-content">
             <h2>Not sure where to go?</h2>
-            <Link
-              to={`${PATHS.SEARCH_RESULTS}`}
-              className="btn bigger sandybrown "
-            >
-              Explore all options
+            <Link to={`${PATHS.SEARCH_RESULTS}`}>
+              <button className="button bigger sandybrown">
+                Explore all options
+              </button>
             </Link>
           </div>
         </div>
@@ -64,12 +62,8 @@ export default function HomePage(props) {
 
       <div className="howitworks-container">
         <div className="content-box">
-          <h2>See how it works</h2>
-          <p>
-            We promise it's as simple as it sounds. You exchange your home with
-            another person or family for a vacation, a quick city break, or a
-            longer period of time.
-          </p>
+          <h2>See how it works?</h2>
+
           <div className="how-to-section">
             <div className="destinations-box">
               {CONTENT.HOW_IT_WORKS.map((item, index) => (
@@ -90,8 +84,10 @@ export default function HomePage(props) {
               ))}
             </div>
             <div className="btn-container-center">
-              <Link to={`${PATHS.CREATE_LISTING}`} className="btn bigger coral">
-                Create your listing
+              <Link to={`${PATHS.CREATE_LISTING}`}>
+                <button className="button bigger coral">
+                  Create your listing
+                </button>
               </Link>
             </div>
           </div>

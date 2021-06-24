@@ -215,7 +215,7 @@ export default function UserPage(props) {
           <div className="component-row">
             {!receivedReviews.length ? (
               <>
-                <p>There are no received reviews</p>
+                <p>No reviews yet</p>
               </>
             ) : (
               <>
@@ -229,6 +229,11 @@ export default function UserPage(props) {
                       usernameFromProps={usernameFromProps}
                     />
                   ))}
+                <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
+                  <button id="view-reviews" className="button darkcyan">
+                    View all reviews
+                  </button>
+                </Link>
               </>
             )}
           </div>
@@ -255,13 +260,7 @@ export default function UserPage(props) {
               )}
             </div> */}
 
-          <div>
-            <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
-              <button id="view-reviews" className="button darkcyan">
-                View all reviews
-              </button>
-            </Link>
-          </div>
+          <div></div>
         </div>
 
         {/*

@@ -29,6 +29,7 @@ function ResultCard(props) {
       {owner ? (
         <>
           <button
+            id="remove-wishlist-btn"
             className="button red"
             onClick={() => RemoveListing(item._id)}
           >

@@ -147,17 +147,11 @@ export default function SingleListing(props) {
             ) : null}
             {isOwner ? (
               <div>
-                <Link
-                  to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}
-                  className="btn sandybrown"
-                >
-                  Edit
+                <Link to={`${PATHS.LISTINGS}/${listingFromProps}/edit`}>
+                  <button className="button sandybrown">Edit</button>
                 </Link>
-                <Link
-                  to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}
-                  className="btn red"
-                >
-                  Delete
+                <Link to={`${PATHS.LISTINGS}/${listingFromProps}/delete`}>
+                  <button className="button red">Delete</button>
                 </Link>
               </div>
             ) : null}
@@ -297,7 +291,7 @@ export default function SingleListing(props) {
           <div className="owner-card">
             <h4>Meet the owner</h4>
             <div>
-              <img src={owner.profilePic} height="100px" />
+              <img src={owner.profilePic} />
               <div className="owner-card-info">
                 {owner.firstName ? (
                   <p>
@@ -306,11 +300,8 @@ export default function SingleListing(props) {
                 ) : (
                   <p>{owner.username}</p>
                 )}
-                <Link
-                  to={`${PATHS.USER}/${owner.username}`}
-                  className="btn sandybrown"
-                >
-                  See profile
+                <Link to={`${PATHS.USER}/${owner.username}`}>
+                  <button className="button sandybrown">See profile</button>
                 </Link>
               </div>
             </div>

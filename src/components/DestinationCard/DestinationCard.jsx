@@ -22,11 +22,8 @@ export default function DestinationCard(props) {
       </div>
 
       <h3>{item.destination}</h3>
-      <Link
-        to={`${PATHS.SEARCH_RESULTS}?q=${item.destination}`}
-        className="btn sandybrown"
-      >
-        See listings
+      <Link to={`${PATHS.SEARCH_RESULTS}?q=${item.destination}`}>
+        <button className="button sandybrown">See listings</button>
       </Link>
     </div>
   );
