@@ -35,7 +35,6 @@ export default function SearchPage(props) {
   }, [q]);
 
   console.log(filteredResults);
-  console.log(results);
   const filteredList = results.filter((item) => {
     let relevant = true;
     for (const key in filteredResults) {
@@ -49,8 +48,6 @@ export default function SearchPage(props) {
     }
     return relevant;
   });
-
-  console.log(filteredList);
 
   return (
     <div className="result-page-wrapper">
