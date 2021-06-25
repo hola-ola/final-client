@@ -19,7 +19,7 @@ import "./UserPage.css";
 import "../../style/Button.css";
 
 export default function UserPage(props) {
-  const [thisUser, setThisUser] = useState({});
+  const [thisUser, setThisUser] = useState(true);
   const [owner, setOwner] = useState(true);
   const [receivedReviews, setReceivedReviews] = useState([]);
   const [givenReviews, setGivenReviews] = useState([]);
