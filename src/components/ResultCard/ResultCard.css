@@ -14,6 +14,10 @@
   border-radius: 10%;
 }
 
+#wishlist-result-card {
+  padding: 40px 20px 40px 20px;
+}
+
 .result-card img {
   max-width: 200px;
   border-radius: 10%;

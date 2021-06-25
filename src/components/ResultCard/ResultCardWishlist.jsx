@@ -7,7 +7,7 @@ import "../../style/Button.css";
 function ResultCard(props) {
   const { item, index, RemoveListing, owner } = props;
   return (
-    <div className="result-card">
+    <div className="result-card" id="wishlist-result-card">
       <div key={index}>
         <Link to={`${PATHS.LISTINGS}/${item._id}`}>
           <img src={item.imagesGallery[0]} alt={item.title} />
