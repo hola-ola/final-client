@@ -312,10 +312,10 @@ export default function UserPage(props) {
 
       <div class="wishlist-section">
         <div>
+          <h3>Wishlist</h3>
           {!owner && !thisUser?.wishlist?.length && (
             <div className="no-wishlist">
               <p>
-                <h3>Wishlist</h3>
                 {thisUser.username} hasn't added any listings to the wishlist
                 yet
               </p>
@@ -323,7 +323,6 @@ export default function UserPage(props) {
           )}
           {owner && !thisUser?.wishlist?.length && (
             <>
-              <h3>Wishlist</h3>
               <p>You haven't added any listings to your wishlist yet</p>
               <Link to={PATHS.SEARCH_RESULTS}>
                 <button id="explore-listings-btn" className="button tan">
