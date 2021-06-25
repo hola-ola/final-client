@@ -54,6 +54,7 @@ export default function UserPage(props) {
   useEffect(() => {
     GetReceivedReviews();
     GetGivenReviews();
+    GetUserListing();
   }, thisUser);
 
   function GetReceivedReviews() {
