@@ -13,6 +13,7 @@ export default function GetWishlistItems(props) {
   const usernameFromProps = props.match.params.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
   const { user } = props;
+  const [thisUser, setThisUser] = useState();
   const [owner, setOwner] = useState(true);
 
   function SetTheOwner() {
@@ -24,6 +25,7 @@ export default function GetWishlistItems(props) {
       .then((response) => {
         // console.log("Response from the server: ", response);
         setWishlist(response.data.user.wishlist);
+        setThisUser(response.data.user);
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
@@ -65,8 +67,8 @@ export default function GetWishlistItems(props) {
         <div className="user-pic">
           <img
             id="profile-pic-wishlist"
-            src={user.profilePic}
-            alt={user.username}
+            src={thisUser.profilePic}
+            alt={thisUser.username}
           ></img>
         </div>
         <Link to={`${PATHS.USER}/${usernameFromProps}`}>

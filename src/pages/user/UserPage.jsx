@@ -19,7 +19,7 @@ import "./UserPage.css";
 import "../../style/Button.css";
 
 export default function UserPage(props) {
-  const [user, setUser] = useState({});
+  const [thisUser, setThisUser] = useState({});
   const [owner, setOwner] = useState(true);
   const [receivedReviews, setReceivedReviews] = useState([]);
   const [givenReviews, setGivenReviews] = useState([]);
@@ -28,7 +28,7 @@ export default function UserPage(props) {
   const usernameFromProps = props.match.params.username;
   const loggedUser = props.user.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
-  const userWishlist = user.wishlist;
+  const userWishlist = thisUser.wishlist;
 
   const [displayUpdateProfile, toggleUpdateProfile] = useToggle(false);
   const [displayDeleteProfile, toggleDeleteProfile] = useToggle(false);
@@ -39,7 +39,7 @@ export default function UserPage(props) {
   function RefetchUser() {
     USER_SERVICE.GET_USER(usernameFromProps, accessToken)
       .then((response) => {
-        setUser(response.data.user);
+        setThisUser(response.data.user);
         usernameFromProps !== loggedUser ? setOwner(false) : setOwner(true);
       })
       .catch((err) => {
@@ -54,7 +54,7 @@ export default function UserPage(props) {
   useEffect(() => {
     GetReceivedReviews();
     GetGivenReviews();
-  }, user);
+  }, thisUser);
 
   function GetReceivedReviews() {
     REVIEW_SERVICE.RECEIVED_REVIEWS(usernameFromProps, accessToken)
@@ -76,41 +76,41 @@ export default function UserPage(props) {
       });
   }
 
-  // function GetUserListing() {
-  //   LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
-  //     .then((response) => {
-  //       setUserListing(response.data.listing);
-  //     })
-  //     .catch((err) => {
-  //       console.error("The error is: ", err.response);
-  //     });
-  // }
+  function GetUserListing() {
+    LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
+      .then((response) => {
+        setUserListing(response.data.listing);
+      })
+      .catch((err) => {
+        console.error("The error is: ", err.response);
+      });
+  }
 
-  // function contactUser() {
-  //   MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
-  //     .then((response) => console.log(response))
-  //     .catch((err) => console.log(err));
-  // }
+  function contactUser() {
+    MESSAGE_SERVICE.CONTACT_USER(thisUser._id, accessToken)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="user-page">
       <div className="component">
         <div className="user-pic">
-          <img src={user.profilePic} alt={user.username}></img>
+          <img src={thisUser.profilePic} alt={thisUser.username}></img>
         </div>
 
         <div className="user-data">
-          {user.firstName || user.lastName ? (
+          {thisUser.firstName || thisUser.lastName ? (
             <p>
-              {user.firstName} {user.lastName} | {user.username}{" "}
+              {thisUser.firstName} {thisUser.lastName} | {thisUser.username}{" "}
             </p>
           ) : (
-            <p>{user.username}</p>
+            <p>{thisUser.username}</p>
           )}
 
-          {user.motto ? (
+          {thisUser.motto ? (
             <p id="motto">
-              My motto: <span>{user.motto}</span>
+              My motto: <span>{thisUser.motto}</span>
             </p>
           ) : null}
         </div>
@@ -142,14 +142,14 @@ export default function UserPage(props) {
             </>
           )}
 
-          {user.userListing?.length ? (
+          {thisUser.userListing?.length ? (
             <>
               <Link to={`${PATHS.LISTINGS}/${userListing._id}`}>
                 <button className="button sandybrown">View listing</button>
               </Link>
             </>
           ) : null}
-          {owner && !user.userListing?.length ? (
+          {owner && !thisUser.userListing?.length ? (
             <>
               <Link to={`${PATHS.CREATE_LISTING}`}>
                 <button className="button darkcyan">Create listing</button>
@@ -162,7 +162,7 @@ export default function UserPage(props) {
           {displayUpdateProfile && (
             <div className="one-user-form">
               <UpdateProfile
-                user={user}
+                user={thisUser}
                 authenticate={authenticate}
                 {...props}
                 refetchUser={RefetchUser}
@@ -173,7 +173,7 @@ export default function UserPage(props) {
           {displayDeleteProfile && (
             <div className="one-user-form">
               <DeleteProfile
-                user={user}
+                user={thisUser}
                 authenticate={authenticate}
                 {...props}
                 toggleDeleteProfile={toggleDeleteProfile}
@@ -184,7 +184,7 @@ export default function UserPage(props) {
             <div className="one-user-form">
               <UpdateProfilePic
                 getUser={RefetchUser}
-                user={user}
+                user={thisUser}
                 authenticate={authenticate}
               />
             </div>
@@ -192,7 +192,7 @@ export default function UserPage(props) {
           {displayAddReview && (
             <div className="one-user-form">
               <AddReview
-                user={user}
+                user={thisUser}
                 authenticate={authenticate}
                 {...props}
                 setReceivedReviews={setReceivedReviews}
@@ -205,7 +205,7 @@ export default function UserPage(props) {
           {displaySendMessage && (
             <div className="one-user-form">
               <SendMessage
-                user={user}
+                user={thisUser}
                 authenticate={authenticate}
                 {...props}
                 toggleSendMessage={toggleSendMessage}
@@ -230,7 +230,7 @@ export default function UserPage(props) {
                     item={item}
                     key={item._id}
                     loggedUser={loggedUser}
-                    usernameFromProps={usernameFromProps}
+                    thisUser={thisUser}
                   />
                 ))}
             </div>
@@ -311,19 +311,20 @@ export default function UserPage(props) {
 
       <div class="wishlist-section">
         <div>
-          {!owner && !user?.wishlist?.length && (
+          {!owner && !thisUser?.wishlist?.length && (
             <div className="no-wishlist">
               <p>
                 <h3>Wishlist</h3>
-                {user.username} hasn't added any listings to the wishlist yet
+                {thisUser.username} hasn't added any listings to the wishlist
+                yet
               </p>
             </div>
           )}
-          {owner && !user?.wishlist?.length && (
+          {owner && !thisUser?.wishlist?.length && (
             <>
               <h3>Wishlist</h3>
               <p>You haven't added any listings to your wishlist yet</p>
-              <Link to={PATHS.HOMEPAGE}>
+              <Link to={PATHS.SEARCH_RESULTS}>
                 <button id="explore-listings-btn" className="button tan">
                   Explore the listings!
                 </button>
@@ -333,7 +334,7 @@ export default function UserPage(props) {
         </div>
 
         <div id="wishlist-tiles">
-          {user?.wishlist?.length ? (
+          {thisUser?.wishlist?.length ? (
             <>
               {userWishlist.slice(0, 4).map((item) => (
                 <ResultCard item={item} key={item._id}>
@@ -345,10 +346,10 @@ export default function UserPage(props) {
         </div>
 
         <div>
-          {user?.wishlist?.length ? (
+          {thisUser?.wishlist?.length ? (
             <>
               <div id="wishlist-button-section">
-                <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                <Link to={`${PATHS.USER}/${thisUser.username}/wishlist`}>
                   <button className="button darkcyan" id="view-wishlist-btn">
                     View wishlist
                   </button>
