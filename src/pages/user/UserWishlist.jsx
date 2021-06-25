@@ -13,11 +13,18 @@ export default function GetWishlistItems(props) {
   const usernameFromProps = props.match.params.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
   const { user } = props;
-  const [thisUser, setThisUser] = useState();
+  const [thisUser, setThisUser] = useState(true);
   const [owner, setOwner] = useState(true);
 
-  function SetTheOwner() {
-    usernameFromProps !== user.username ? setOwner(false) : setOwner(true);
+  function RefetchUser() {
+    USER_SERVICE.GET_USER(usernameFromProps, accessToken)
+      .then((response) => {
+        setThisUser(response.data.user);
+        usernameFromProps !== user.username ? setOwner(false) : setOwner(true);
+      })
+      .catch((err) => {
+        console.error("This is the error: ", err);
+      });
   }
 
   function GetUserWishlistItems() {
@@ -25,7 +32,10 @@ export default function GetWishlistItems(props) {
       .then((response) => {
         // console.log("Response from the server: ", response);
         setWishlist(response.data.user.wishlist);
+        console.log(response.data.user);
         setThisUser(response.data.user);
+        console.log("thisUser", thisUser);
+        RefetchUser();
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
@@ -37,7 +47,6 @@ export default function GetWishlistItems(props) {
     // console.log("key: ", key);
     USER_SERVICE.WISHLIST_DELETE(key, usernameFromProps, accessToken)
       .then((response) => {
-        // console.log("Remove from wishlist - step 4", response);
         GetUserWishlistItems();
         // console.log("HERE ", response.data.user.wishlist);
         setWishlist(response.data.user.wishlist);
@@ -49,8 +58,7 @@ export default function GetWishlistItems(props) {
 
   useEffect(() => {
     GetUserWishlistItems();
-    SetTheOwner();
-  }, user.wishlist);
+  }, [props.match.params.username]);
 
   return (
     <div>

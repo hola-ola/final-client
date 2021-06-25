@@ -7,7 +7,7 @@ import "../../style/Button.css";
 function ResultCard(props) {
   const { item, index, RemoveListing, owner } = props;
   return (
-    <div className="result-card">
+    <div className="result-card" id="wishlist-result-card">
       <div key={index}>
         <Link to={`${PATHS.LISTINGS}/${item._id}`}>
           <img src={item.imagesGallery[0]} alt={item.title} />
@@ -21,22 +21,25 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-        <button className="button darkcyan result-card-btn">
-          {props.children}
-        </button>
-      </Link>
-      {owner ? (
-        <>
-          <button
-            id="remove-wishlist-btn"
-            className="button red"
-            onClick={() => RemoveListing(item._id)}
-          >
-            Remove from wishlist
+
+      <div id="wishlist-item-btns">
+        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+          <button className="button darkcyan result-card-btn">
+            {props.children}
           </button>
-        </>
-      ) : null}
+        </Link>
+        {owner ? (
+          <>
+            <button
+              id="remove-wishlist-btn"
+              className="button red"
+              onClick={() => RemoveListing(item._id)}
+            >
+              Remove from wishlist
+            </button>
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }
