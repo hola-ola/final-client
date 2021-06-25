@@ -8,10 +8,14 @@
   align-items: center;
   text-align: center;
   margin: 30px 30px;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   line-height: 5px;
   border: solid antiquewhite 3px;
   border-radius: 10%;
+}
+
+#wishlist-result-card {
+  padding: 40px 20px 40px 20px;
 }
 
 .result-card img {
@@ -36,4 +40,8 @@
 
 #remove-wishlist-btn {
   margin-top: 20px;
+}
+
+#wishlist-item-btns {
+  margin-top: 30px;
 }
