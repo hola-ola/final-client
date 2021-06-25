@@ -21,22 +21,25 @@ function ResultCard(props) {
           {item.city}, {item.country}
         </p>
       </div>
-      <Link to={`${PATHS.LISTINGS}/${item._id}`}>
-        <button className="button darkcyan result-card-btn">
-          {props.children}
-        </button>
-      </Link>
-      {owner ? (
-        <>
-          <button
-            id="remove-wishlist-btn"
-            className="button red"
-            onClick={() => RemoveListing(item._id)}
-          >
-            Remove from wishlist
+
+      <div id="wishlist-item-btns">
+        <Link to={`${PATHS.LISTINGS}/${item._id}`}>
+          <button className="button darkcyan result-card-btn">
+            {props.children}
           </button>
-        </>
-      ) : null}
+        </Link>
+        {owner ? (
+          <>
+            <button
+              id="remove-wishlist-btn"
+              className="button red"
+              onClick={() => RemoveListing(item._id)}
+            >
+              Remove from wishlist
+            </button>
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }
