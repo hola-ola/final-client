@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as CONSTS from "../../utils/consts";
 import useForm from "../../hooks/useForm.js";
 import * as REVIEW_SERVICE from "../../services/review.service.js";
@@ -35,11 +35,7 @@ export default function AddReview(props) {
     )
       .then((response) => {
         // console.log("Server response review: ", response);
-        // console.log("Here we set the user to display new review");
-
         authenticate(user);
-        // console.log("The response: ", response);
-        // console.log("Received reviews: ", receivedReviews);
         GetReceivedReviews();
         toggleAddReview(false);
         setReceivedReviews([...receivedReviews, response]);

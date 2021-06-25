@@ -1,18 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Score from "../../components/Reviews/Score";
 import "./ShowReview.css";
 
 function ShowReview(props) {
   // console.log("The props: ", props);
-  const { item, index, loggedUser, usernameFromProps } = props;
-  const [reviewsAuthor, setReviewsAuthor] = React.useState(true);
-
-  useEffect(() => {
-    loggedUser !== item.reviewingUser
-      ? setReviewsAuthor(false)
-      : setReviewsAuthor(true);
-    console.log("reviewsAuthor: ", reviewsAuthor);
-  }, usernameFromProps);
+  const { item, index } = props;
 
   return (
     <div key={index} className="review">

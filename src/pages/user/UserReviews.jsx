@@ -7,12 +7,14 @@ import ShowReview from "../../components/Reviews/ShowReview";
 import "./UserReviews.css";
 
 export default function GetAllReviews(props) {
+  console.log("props:", props);
   const [receivedReviews, setReceivedReviews] = useState([]);
-  const [givenReviews, setGivenReviews] = useState([]);
+  // const [givenReviews, setGivenReviews] = useState([]);
   const usernameFromProps = props.match.params.username;
   const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
   const { user } = props;
   const [owner, setOwner] = useState(true);
+  const [thisUser, setThisUser] = useState(true);
 
   function SetTheOwner() {
     usernameFromProps !== user.username ? setOwner(false) : setOwner(true);
@@ -22,24 +24,26 @@ export default function GetAllReviews(props) {
     REVIEW_SERVICE.RECEIVED_REVIEWS(usernameFromProps, accessToken)
       .then((response) => {
         setReceivedReviews(response);
+        console.log("response", response);
+        setThisUser(response[0].reviewedUser);
       })
       .catch((err) => {
         console.error("The error is: ", err.response);
       });
   }
 
-  function GetGivenReviews() {
-    REVIEW_SERVICE.GIVEN_REVIEWS(usernameFromProps, accessToken)
-      .then((response) => {
-        setGivenReviews(response);
-      })
-      .catch((err) => {
-        console.error("The error is: ", err.response);
-      });
-  }
+  // function GetGivenReviews() {
+  //   REVIEW_SERVICE.GIVEN_REVIEWS(usernameFromProps, accessToken)
+  //     .then((response) => {
+  //       setGivenReviews(response);
+  //     })
+  //     .catch((err) => {
+  //       console.error("The error is: ", err.response);
+  //     });
+  // }
 
   useEffect(() => {
-    GetGivenReviews();
+    // GetGivenReviews();
     GetReceivedReviews();
     SetTheOwner();
   }, []);
@@ -53,14 +57,14 @@ export default function GetAllReviews(props) {
           </>
         ) : (
           <>
-            <h3>The reviews of/by {usernameFromProps}</h3>
+            <h3>Reviews of {usernameFromProps}</h3>
           </>
         )}
         <div className="user-pic">
           <img
             id="profile-pic-wishlist"
-            src={user.profilePic}
-            alt={user.username}
+            src={thisUser.profilePic}
+            alt={thisUser.username}
           ></img>
         </div>
 
@@ -70,18 +74,8 @@ export default function GetAllReviews(props) {
       </div>
 
       <div>
-        <h2>Received reviews</h2>
         <div className="list-of-reviews">
           {receivedReviews.map((item, index) => (
-            <ShowReview item={item} key={index} user={user} />
-          ))}
-        </div>
-      </div>
-
-      <div id="given-revs">
-        <h2>Given reviews</h2>
-        <div className="list-of-reviews">
-          {givenReviews.map((item, index) => (
             <ShowReview item={item} key={index} user={user} />
           ))}
         </div>
