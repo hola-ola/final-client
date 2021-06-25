@@ -28,15 +28,17 @@ const Footer = () => {
       </div>
 
       <div className="footer-part" id="footer-text">
-        <Link to={PATHS.SEARCH_RESULTS}>
-          <p>Explore the listings</p>
-        </Link>
-        <Link to={PATHS.SIGNUPPAGE}>
-          <p>Join the community</p>
-        </Link>
-        <Link to={PATHS.LOGINPAGE}>
-          <p>Login for new adventure</p>
-        </Link>
+        <div>
+          <Link to={PATHS.SEARCH_RESULTS}>
+            <p>Explore the listings</p>
+          </Link>
+          <Link to={PATHS.SIGNUPPAGE}>
+            <p>Join the community</p>
+          </Link>
+          <Link to={PATHS.LOGINPAGE}>
+            <p>Login for new adventure</p>
+          </Link>
+        </div>
       </div>
 
       <div className="footer-part">
