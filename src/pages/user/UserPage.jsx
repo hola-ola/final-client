@@ -224,16 +224,14 @@ export default function UserPage(props) {
         ) : (
           <>
             <div className="component-row">
-              {receivedReviews
-                .slice(Math.max(receivedReviews.length - 4, 1))
-                .map((item) => (
-                  <ShowReview
-                    item={item}
-                    key={item._id}
-                    loggedUser={loggedUser}
-                    thisUser={thisUser}
-                  />
-                ))}
+              {receivedReviews.slice(0, 4).map((item) => (
+                <ShowReview
+                  item={item}
+                  key={item._id}
+                  loggedUser={loggedUser}
+                  thisUser={thisUser}
+                />
+              ))}
             </div>
             <div>
               <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
