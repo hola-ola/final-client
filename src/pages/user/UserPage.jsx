@@ -49,7 +49,6 @@ export default function UserPage(props) {
 
   useEffect(() => {
     RefetchUser();
-    GetUserListing();
   }, [props.match.params.username]);
 
   useEffect(() => {
@@ -77,15 +76,15 @@ export default function UserPage(props) {
       });
   }
 
-  function GetUserListing() {
-    LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
-      .then((response) => {
-        setUserListing(response.data.listing);
-      })
-      .catch((err) => {
-        console.error("The error is: ", err.response);
-      });
-  }
+  // function GetUserListing() {
+  //   LISTING_SERVICE.VIEW_USER_LISTING(usernameFromProps, accessToken)
+  //     .then((response) => {
+  //       setUserListing(response.data.listing);
+  //     })
+  //     .catch((err) => {
+  //       console.error("The error is: ", err.response);
+  //     });
+  // }
 
   // function contactUser() {
   //   MESSAGE_SERVICE.CONTACT_USER(user._id, accessToken)
@@ -101,12 +100,19 @@ export default function UserPage(props) {
         </div>
 
         <div className="user-data">
-          <p>
-            {user.firstName} {user.lastName} | {user.username}{" "}
-          </p>
-          <p id="motto">
-            My motto: <span>{user.motto}</span>
-          </p>
+          {user.firstName || user.lastName ? (
+            <p>
+              {user.firstName} {user.lastName} | {user.username}{" "}
+            </p>
+          ) : (
+            <p>{user.username}</p>
+          )}
+
+          {user.motto ? (
+            <p id="motto">
+              My motto: <span>{user.motto}</span>
+            </p>
+          ) : null}
         </div>
 
         <div className="user-buttons">
@@ -208,37 +214,38 @@ export default function UserPage(props) {
           )}
         </div>
       </div>
-      <div>
-        <div className="reviews component">
-          <h3>Received reviews</h3>
+      <div className="reviews-section">
+        <h3>Reviews</h3>
+        {!receivedReviews.length ? (
+          <>
+            <p className="no-reviews">No reviews yet</p>
+          </>
+        ) : (
+          <>
+            <div className="component-row">
+              {receivedReviews
+                .slice(Math.max(receivedReviews.length - 4, 1))
+                .map((item) => (
+                  <ShowReview
+                    item={item}
+                    key={item._id}
+                    loggedUser={loggedUser}
+                    usernameFromProps={usernameFromProps}
+                  />
+                ))}
+            </div>
+            <div>
+              <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
+                <button id="view-reviews-btn" className="button darkcyan">
+                  View all reviews
+                </button>
+              </Link>
+            </div>
+          </>
+        )}
+      </div>
 
-          <div className="component-row">
-            {!receivedReviews.length ? (
-              <>
-                <p>No reviews yet</p>
-              </>
-            ) : (
-              <>
-                {receivedReviews
-                  .slice(Math.max(receivedReviews.length - 4, 1))
-                  .map((item) => (
-                    <ShowReview
-                      item={item}
-                      key={item._id}
-                      loggedUser={loggedUser}
-                      usernameFromProps={usernameFromProps}
-                    />
-                  ))}
-                <Link to={`${PATHS.USER}/${usernameFromProps}/reviews`}>
-                  <button id="view-reviews" className="button darkcyan">
-                    View all reviews
-                  </button>
-                </Link>
-              </>
-            )}
-          </div>
-
-          {/* <h3>Given reviews</h3>
+      {/* <h3>Given reviews</h3>
             <div className="reviews-row">
               {!givenReviews.length ? (
                 <>
@@ -260,10 +267,7 @@ export default function UserPage(props) {
               )}
             </div> */}
 
-          <div></div>
-        </div>
-
-        {/*
+      {/*
             <div className="listing">
               {!owner && !user?.userListing?.length ? (
                 <>
@@ -305,53 +309,53 @@ export default function UserPage(props) {
               ) : null}
             </div> */}
 
-        <div class="wishlist-section">
-          <div>
-            {!owner && !user?.wishlist?.length && (
-              <>
-                <p>
-                  <h3>User wishlist</h3>
-                  {user.username} hasn't added any listings to their wishlist
-                  yet
-                </p>
-              </>
-            )}
-            {owner && !user?.wishlist?.length && (
-              <>
-                <h3>Your wishlist</h3>
-                <p>You haven't added any listings to your wishlist yet</p>
-                <Link to={PATHS.HOMEPAGE}>
-                  <button className="button tan">Explore the listings!</button>
+      <div class="wishlist-section">
+        <div>
+          {!owner && !user?.wishlist?.length && (
+            <div className="no-wishlist">
+              <p>
+                <h3>Wishlist</h3>
+                {user.username} hasn't added any listings to the wishlist yet
+              </p>
+            </div>
+          )}
+          {owner && !user?.wishlist?.length && (
+            <>
+              <h3>Wishlist</h3>
+              <p>You haven't added any listings to your wishlist yet</p>
+              <Link to={PATHS.HOMEPAGE}>
+                <button id="explore-listings-btn" className="button tan">
+                  Explore the listings!
+                </button>
+              </Link>
+            </>
+          )}
+        </div>
+
+        <div id="wishlist-tiles">
+          {user?.wishlist?.length ? (
+            <>
+              {userWishlist.slice(0, 4).map((item) => (
+                <ResultCard item={item} key={item._id}>
+                  View listing
+                </ResultCard>
+              ))}
+            </>
+          ) : null}
+        </div>
+
+        <div>
+          {user?.wishlist?.length ? (
+            <>
+              <div id="wishlist-button-section">
+                <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
+                  <button className="button darkcyan" id="view-wishlist-btn">
+                    View wishlist
+                  </button>
                 </Link>
-              </>
-            )}
-          </div>
-
-          <div id="wishlist-tiles">
-            {user?.wishlist?.length ? (
-              <>
-                {userWishlist.slice(0, 4).map((item) => (
-                  <ResultCard item={item} key={item._id}>
-                    View listing
-                  </ResultCard>
-                ))}
-              </>
-            ) : null}
-          </div>
-
-          <div>
-            {user?.wishlist?.length ? (
-              <>
-                <div id="wishlist-button-section">
-                  <Link to={`${PATHS.USER}/${user.username}/wishlist`}>
-                    <button className="button darkcyan" id="view-wishlist-btn">
-                      View wishlist
-                    </button>
-                  </Link>
-                </div>
-              </>
-            ) : null}
-          </div>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>
