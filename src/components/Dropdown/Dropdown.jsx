@@ -34,17 +34,23 @@ function Dropdown({
   }
 
   useEffect(() => {
-    setFilteredResults((prev) => ({
-      ...prev,
-      [modelKey]: selection.flat(Infinity),
-    }));
+    //prev = previous value of the state
+    setFilteredResults((prev) => {
+      if (selection.flat(Infinity).length) {
+        return {
+          ...prev,
+          [modelKey]: selection.flat(Infinity),
+        };
+      }
+
+      const object = { ...prev };
+      delete object[modelKey];
+      return object;
+    });
   }, [selection]);
 
   function isItemInSelection(item) {
-    if (selection.some((current) => current === item)) {
-      return true;
-    }
-    return false;
+    return selection.some((current) => current === item);
   }
 
   return (
