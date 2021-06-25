@@ -34,6 +34,24 @@ export default function SearchPage(props) {
       .catch((err) => console.log(err));
   }, [q]);
 
+  console.log(filteredResults);
+  console.log(results);
+  const filteredList = results.filter((item) => {
+    let relevant = true;
+    for (const key in filteredResults) {
+      const value = filteredResults[key];
+      const exists = value.some((result) => {
+        return item[key].includes(result);
+      });
+      if (!exists) {
+        relevant = false;
+      }
+    }
+    return relevant;
+  });
+
+  console.log(filteredList);
+
   return (
     <div className="result-page-wrapper">
       <h2>
