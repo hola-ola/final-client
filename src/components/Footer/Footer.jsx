@@ -42,11 +42,11 @@ const Footer = () => {
       <div className="footer-part">
         <p>
           Created by{" "}
-          <a href="https://www.linkedin.com/in/apietraszek/">
+          <a href="https://www.linkedin.com/in/apietraszek/" target="_blank">
             <b>Aleksandra</b>
           </a>{" "}
           &{" "}
-          <a href="https://www.linkedin.com/in/aporada/">
+          <a href="https://www.linkedin.com/in/aporada/" target="_blank">
             <b>Aleksandra</b>
           </a>
         </p>
