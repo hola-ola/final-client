@@ -34,7 +34,6 @@ export default function SearchPage(props) {
       .catch((err) => console.log(err));
   }, [q]);
 
-  console.log(filteredResults);
   const filteredList = results.filter((item) => {
     let relevant = true;
     for (const key in filteredResults) {

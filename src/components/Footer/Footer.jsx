@@ -40,7 +40,16 @@ const Footer = () => {
       </div>
 
       <div className="footer-part">
-        <p>Created by Aleksandra & Aleksandra</p>
+        <p>
+          Created by{" "}
+          <a href="https://www.linkedin.com/in/apietraszek/">
+            <b>Aleksandra</b>
+          </a>{" "}
+          &{" "}
+          <a href="https://www.linkedin.com/in/aporada/">
+            <b>Aleksandra</b>
+          </a>
+        </p>
         <a href="https://github.com/hola-ola" target="_blank">
           <button className="button darkcyan">View Github</button>
         </a>
